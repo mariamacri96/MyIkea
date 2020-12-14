@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import team2.storehouse.data.dao.UserDao;
 import team2.storehouse.data.entities.User;
 import team2.storehouse.data.service.UserService;
+import team2.storehouse.exceptions.UserNotFoundException;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -24,5 +25,10 @@ public class UserServiceImpl implements UserService {    // in theory we better 
     @Override
     public List<User> getUsers() {
         return userDao.findAll();
+    }
+
+    @Override
+    public User getUser(String username) {
+        return userDao.findByUsername(username).orElseThrow(() -> new UserNotFoundException(username));
     }
 }

@@ -21,9 +21,11 @@ public class Vendor {
     @Column(name = "VAT_NUMBER")
     private String VATNumber;
 
+    @Basic(optional = false)
     @Column(name = "EMAIL")
     private String email;
 
+    @Basic(optional = false)
     @Column(name = "PHONE")
     private Long phone;
 

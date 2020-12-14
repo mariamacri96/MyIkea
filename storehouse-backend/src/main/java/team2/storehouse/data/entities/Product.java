@@ -38,7 +38,7 @@ public class Product {
     @Column(name = "STOCK")
     private int stock;
 
-    @OneToOne(optional = false)
+    @OneToOne(optional = false)    // maybe one to many??
     @JoinColumn(name = "PLACE", referencedColumnName = "ID")
     private Place place;
 
