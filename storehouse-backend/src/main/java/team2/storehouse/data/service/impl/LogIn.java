@@ -16,10 +16,10 @@ public class LogIn {
     private UserService userservice;
 
 
-    public UserDto createAccount(UserDto profileDto) {
+  /* public UserDto createAccount(UserDto profileDto) {
         UserDto userDto = userservice.getUserByEmail(profileDto.getEmail());
         return userservice.addUser(profileDto);
-    }
+    }*/
 
     public UserDto verify(String username, String password) {   // can be just a method of userService
         UserDto userDto = userservice.getUser(username);
