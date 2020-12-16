@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import team2.storehouse.data.dao.ProductDao;
 import team2.storehouse.data.dto.ProductDto;
 import team2.storehouse.data.dto.UserDto;
+import team2.storehouse.data.entities.Place;
 import team2.storehouse.data.entities.Product;
 import team2.storehouse.data.entities.User;
 import team2.storehouse.data.service.ProductService;
@@ -22,10 +23,11 @@ public class ProductServiceImpl implements ProductService {
     ModelMapper modelMapper;
 
     @Override
-    public ProductDto addProduct(ProductDto productDto) {
+    public ProductDto addProduct(ProductDto productDto, Place place, int quantity) {
         Product product = modelMapper.map(productDto,Product.class);
+        product.setPlace(place);
+        product.setStock(quantity);
         return modelMapper.map(productDao.save(product),ProductDto.class);
-
     }
 
     @Override

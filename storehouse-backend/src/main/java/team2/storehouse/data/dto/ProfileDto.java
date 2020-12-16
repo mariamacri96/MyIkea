@@ -8,34 +8,25 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class ProfileDto implements Serializable {
+public class ProfileDto implements Serializable {    // really needed?
 
     public enum Gender {
         MALE, FEMALE
     }
 
-
-
     private Long id;
-
 
     private String name;
 
-
     private String surname;
-
 
     private Profile.Gender gender;
 
-
     private String fiscalCode;
-
 
     private String address;
 
-
     private LocalDate birthdate;
-
 
     private Long phone;
 
@@ -112,7 +103,5 @@ public class ProfileDto implements Serializable {
     public void setPhone(Long phone) {
         this.phone = phone;
     }
-
-
 
 }

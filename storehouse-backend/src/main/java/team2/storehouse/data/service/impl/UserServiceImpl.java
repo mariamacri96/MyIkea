@@ -3,8 +3,11 @@ package team2.storehouse.data.service.impl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import team2.storehouse.data.dao.ShoppingCartDao;
 import team2.storehouse.data.dao.UserDao;
 import team2.storehouse.data.dto.UserDto;
+import team2.storehouse.data.entities.Profile;
+import team2.storehouse.data.entities.ShoppingCart;
 import team2.storehouse.data.entities.User;
 import team2.storehouse.data.service.UserService;
 import team2.storehouse.exceptions.UserAlredyExistException;
@@ -16,22 +19,25 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class UserServiceImpl implements UserService {    // in theory we better use DTO, maybe later
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
 
     @Autowired
+    private ShoppingCartDao shoppingCartDao;
+
+    @Autowired
     private ModelMapper modelMapper;
 
-    @Transactional// add it in methods that write in the database
+    @Transactional      // add it in methods that write in the database
     @Override
-    public UserDto addUser(UserDto userDto) {
+    public UserDto addUser(UserDto userDto, Profile profile, User.Type type) {
         User user = modelMapper.map(userDto, User.class);
-        User user1 =  userDao.save(user);
-        UserDto userDto1 = modelMapper.map(user, UserDto.class);
-        return userDto1 ;
-
+        user.setProfile(profile);
+        user.setType(type);
+        user.setShoppingCart(shoppingCartDao.save(new ShoppingCart()));
+        return modelMapper.map(userDao.save(user), UserDto.class);
     }
 
     @Override

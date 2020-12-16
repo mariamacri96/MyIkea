@@ -1,5 +1,8 @@
 package team2.storehouse.data.dto;
 
+import team2.storehouse.data.entities.Subcategory;
+import team2.storehouse.data.entities.Vendor;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import java.io.Serializable;
@@ -9,15 +12,15 @@ public class ProductDto implements Serializable {
 
     private Long id;
 
-
     private String name;
-
 
     private String brand;
 
-
     private double price;
 
+    private Subcategory subcategory;
+
+    private Vendor vendor;
 
     public Long getId() {
         return id;
@@ -51,16 +54,19 @@ public class ProductDto implements Serializable {
         this.price = price;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ProductDto that = (ProductDto) o;
-        return id.equals(that.id);
+    public Subcategory getSubcategory() {
+        return subcategory;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
+    public void setSubcategory(Subcategory subcategory) {
+        this.subcategory = subcategory;
+    }
+
+    public Vendor getVendor() {
+        return vendor;
+    }
+
+    public void setVendor(Vendor vendor) {
+        this.vendor = vendor;
     }
 }
