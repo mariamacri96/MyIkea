@@ -23,7 +23,7 @@ public class LogIn {
 
     public UserDto verify(String username, String password) {   // can be just a method of userService
         UserDto userDto = userservice.getUser(username);
-        if(userDto.getPassword() != password) {
+        if(!userDto.getPassword().equals(password)) {
             throw new WrongPasswordException(username);
         }
         return userDto;
