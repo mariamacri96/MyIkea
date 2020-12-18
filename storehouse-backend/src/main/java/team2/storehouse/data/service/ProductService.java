@@ -9,4 +9,6 @@ import java.util.List;
 public interface ProductService {
     ProductDto addProduct(ProductDto product, Place place, int quantity);
     List<ProductDto> getProducts();
+    ProductDto findProductById(Long id);
+    ProductDto findProductByName(String name);
 }

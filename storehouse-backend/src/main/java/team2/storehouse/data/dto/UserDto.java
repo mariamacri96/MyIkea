@@ -50,4 +50,13 @@ public class UserDto implements Serializable {
     public int hashCode() {
         return Objects.hash(email, password);
     }
+
+    @Override
+    public String toString() {
+        return "UserDto{" +
+                "username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

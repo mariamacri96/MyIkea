@@ -10,6 +10,7 @@ import team2.storehouse.data.entities.Place;
 import team2.storehouse.data.entities.Product;
 import team2.storehouse.data.entities.User;
 import team2.storehouse.data.service.ProductService;
+import team2.storehouse.exceptions.UserNotFoundException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,5 +38,19 @@ public class ProductServiceImpl implements ProductService {
                 .map(product -> modelMapper
                         .map(product, ProductDto.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public ProductDto findProductById(Long id) {
+        Product product= productDao.findById(id).orElseThrow(() -> new UserNotFoundException(id.toString()));
+        ProductDto productDto =modelMapper.map(product, ProductDto.class);
+        return productDto;
+    }
+
+    @Override
+    public ProductDto findProductByName(String name) {
+        Product product= productDao.findProductByName(name).orElseThrow(() -> new UserNotFoundException(name));
+        ProductDto productDto =modelMapper.map(product, ProductDto.class);
+        return productDto;
     }
 }
