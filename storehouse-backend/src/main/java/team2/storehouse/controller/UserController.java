@@ -23,7 +23,7 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/users/registration")     // in testing..
-    @CrossOrigin(origins = "http://localhost:8080")
+    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<UserDto> createAccount(@RequestBody UserDto userDto,
                                                  @RequestBody ProfileDto profileDto,
                                                  @RequestBody User.Type type){ ;
@@ -31,14 +31,14 @@ public class UserController {
     }
 
     @GetMapping("/users/login")    // works
-    @CrossOrigin(origins = "http://localhost:8080")
-    public ResponseEntity<UserDto> login(@RequestParam(name = "username") String username,
-                                         @RequestParam(name = "password") String password){
+    @CrossOrigin(origins = "http://localhost:4200")
+    public ResponseEntity<UserDto> login(@RequestParam(name="username", defaultValue = "marcoBellizzi") String username,
+                                         @RequestParam(name="password",defaultValue = "password123") String password){
         return ResponseEntity.ok(logInService.verify(username,password));
     }
 
     @GetMapping("/users")    // works
-    @CrossOrigin(origins = "http://localhost:8080")
+    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<List<UserDto>> all(){
         return ResponseEntity.ok(userService.getUsers());
     }
