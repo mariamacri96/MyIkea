@@ -11,7 +11,7 @@ import team2.storehouse.data.service.ProductService;
 import java.util.List;
 
 @Controller
-@RequestMapping("piece")
+@RequestMapping("product")
 public class ProductController {
 
     @Autowired

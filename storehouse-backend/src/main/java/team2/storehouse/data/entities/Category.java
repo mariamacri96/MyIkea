@@ -15,10 +15,10 @@ public class Category {
 
     @Column(name = "NAME")
     private String name;
-
+/*
     @OneToMany(mappedBy = "category")
     private List<Subcategory> subcategories = new ArrayList<Subcategory>();
-
+*/
     public Long getId() {
         return id;
     }
@@ -26,7 +26,7 @@ public class Category {
     public void setId(Long id) {
         this.id = id;
     }
-
+/*
     public List<Subcategory> getSubcategories() {
         return subcategories;
     }
@@ -34,7 +34,7 @@ public class Category {
     public void setSubcategories(List<Subcategory> subcategories) {
         this.subcategories = subcategories;
     }
-
+*/
     public String getName() {
         return name;
     }
@@ -48,11 +48,11 @@ public class Category {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Category category = (Category) o;
-        return Objects.equals(id, category.id) && Objects.equals(name, category.name) && Objects.equals(subcategories, category.subcategories);
+        return Objects.equals(id, category.id) && Objects.equals(name, category.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, subcategories);
+        return Objects.hash(id, name);
     }
 }

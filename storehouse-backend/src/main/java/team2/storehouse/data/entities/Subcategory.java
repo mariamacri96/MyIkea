@@ -15,10 +15,10 @@ public class Subcategory {
     @Basic(optional = false)
     @Column(name = "NAME")
     private String name;
-
+/*
     @OneToMany(mappedBy = "subcategory")
     private List<Product> products;
-
+*/
     @ManyToOne(optional = false)
     @JoinColumn(name = "CATEGORY", referencedColumnName = "ID")
     private Category category;
@@ -38,7 +38,7 @@ public class Subcategory {
     public void setName(String name) {
         this.name = name;
     }
-
+/*
     public List<Product> getProducts() {
         return products;
     }
@@ -46,7 +46,7 @@ public class Subcategory {
     public void setProducts(List<Product> products) {
         this.products = products;
     }
-
+*/
     public Category getCategory() {
         return category;
     }
@@ -60,11 +60,11 @@ public class Subcategory {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Subcategory that = (Subcategory) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(products, that.products) && Objects.equals(category, that.category);
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name)&& Objects.equals(category, that.category);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, products, category);
+        return Objects.hash(id, name, category);
     }
 }
