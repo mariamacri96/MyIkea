@@ -42,18 +42,13 @@ public class Product {
     @JoinColumn(name = "PLACE", referencedColumnName = "ID")
     private Place place;
 
-    @Column(name = "SUBCATEGORY")
-    private String subcategory;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "SUBCATEGORY", referencedColumnName = "ID")
+    private Subcategory subcategory;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "VENDOR", referencedColumnName = "ID")
     private Vendor vendor;
-
-    @ManyToMany(mappedBy = "products")
-    private List<ShoppingCart> shoppingCarts = new ArrayList<ShoppingCart>();
-
-    @ManyToMany(mappedBy = "products")
-    private List<Command> commands = new ArrayList<Command>();
 
     public Long getId() {
         return id;
@@ -127,11 +122,11 @@ public class Product {
         this.place = place;
     }
 
-    public String getSubcategory() {
+    public Subcategory getSubcategory() {
         return subcategory;
     }
 
-    public void setSubcategory(String subcategory) {
+    public void setSubcategory(Subcategory subcategory) {
         this.subcategory = subcategory;
     }
 
@@ -143,32 +138,33 @@ public class Product {
         this.vendor = vendor;
     }
 
-    public List<ShoppingCart> getShoppingCarts() {
-        return shoppingCarts;
-    }
-
-    public void setShoppingCarts(List<ShoppingCart> shoppingCarts) {
-        this.shoppingCarts = shoppingCarts;
-    }
-
-    public List<Command> getOrders() {
-        return commands;
-    }
-
-    public void setOrders(List<Command> commands) {
-        this.commands = commands;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Double.compare(product.price, price) == 0 && stock == product.stock && Objects.equals(id, product.id) && Objects.equals(name, product.name) && Objects.equals(brand, product.brand) && Objects.equals(color, product.color) && Objects.equals(size, product.size) && Objects.equals(photo, product.photo) && Objects.equals(place, product.place) && Objects.equals(subcategory, product.subcategory) && Objects.equals(vendor, product.vendor) && Objects.equals(shoppingCarts, product.shoppingCarts) && Objects.equals(commands, product.commands);
+        return Double.compare(product.price, price) == 0 && stock == product.stock && Objects.equals(id, product.id) && Objects.equals(name, product.name) && Objects.equals(brand, product.brand) && Objects.equals(color, product.color) && Objects.equals(size, product.size) && Objects.equals(photo, product.photo) && Objects.equals(place, product.place) && Objects.equals(subcategory, product.subcategory) && Objects.equals(vendor, product.vendor);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, brand, price, color, size, photo, stock, place, subcategory, vendor, shoppingCarts, commands);
+        return Objects.hash(id, name, brand, price, color, size, photo, stock, place, subcategory, vendor);
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", brand='" + brand + '\'' +
+                ", price=" + price +
+                ", color='" + color + '\'' +
+                ", size='" + size + '\'' +
+                ", photo='" + photo + '\'' +
+                ", stock=" + stock +
+                ", place=" + place +
+                ", subcategory=" + subcategory +
+                ", vendor=" + vendor +
+                '}';
     }
 }

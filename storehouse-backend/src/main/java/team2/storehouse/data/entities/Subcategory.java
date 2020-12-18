@@ -1,7 +1,6 @@
 package team2.storehouse.data.entities;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -15,10 +14,7 @@ public class Subcategory {
     @Basic(optional = false)
     @Column(name = "NAME")
     private String name;
-/*
-    @OneToMany(mappedBy = "subcategory")
-    private List<Product> products;
-*/
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "CATEGORY", referencedColumnName = "ID")
     private Category category;
@@ -38,15 +34,7 @@ public class Subcategory {
     public void setName(String name) {
         this.name = name;
     }
-/*
-    public List<Product> getProducts() {
-        return products;
-    }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-*/
     public Category getCategory() {
         return category;
     }
@@ -66,5 +54,14 @@ public class Subcategory {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, category);
+    }
+
+    @Override
+    public String toString() {
+        return "Subcategory{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", category=" + category +
+                '}';
     }
 }

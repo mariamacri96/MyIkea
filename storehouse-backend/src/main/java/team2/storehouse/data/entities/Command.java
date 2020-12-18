@@ -29,14 +29,6 @@ public class Command {    // I don't know why if I try to rename it Order it wil
     @OneToOne(mappedBy = "command")
     private Bill bill;
 
-    @ManyToMany
-    @JoinTable(     // the quantity must be handled
-            name = "ORDERED",
-            joinColumns = @JoinColumn(name = "COMMAND", referencedColumnName = "ID"),
-            inverseJoinColumns = @JoinColumn(name = "PRODUCT", referencedColumnName = "ID")
-    )
-    private List<Product> products = new ArrayList<Product>();
-
     public Long getId() {
         return id;
     }
@@ -69,24 +61,16 @@ public class Command {    // I don't know why if I try to rename it Order it wil
         this.bill = bill;
     }
 
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Command command = (Command) o;
-        return Objects.equals(id, command.id) && state == command.state && Objects.equals(user, command.user) && Objects.equals(bill, command.bill) && Objects.equals(products, command.products);
+        return Objects.equals(id, command.id) && state == command.state && Objects.equals(user, command.user) && Objects.equals(bill, command.bill);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, state, user, bill, products);
+        return Objects.hash(id, state, user, bill);
     }
 }

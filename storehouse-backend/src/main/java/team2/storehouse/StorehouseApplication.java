@@ -1,6 +1,5 @@
 package team2.storehouse;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -17,7 +16,6 @@ import java.time.LocalDate;
 public class StorehouseApplication {
 
 	public static void main(String[] args) {
-	//	SpringApplication.run(StorehouseApplication.class, args);
 
 		ConfigurableApplicationContext context = SpringApplication.run(StorehouseApplication.class,args);
 		UserService userService = context.getBean(UserService.class);
@@ -27,7 +25,7 @@ public class StorehouseApplication {
 		ShelfDao shelfDao = context.getBean(ShelfDao.class);
 		PlaceDao placeDao = context.getBean(PlaceDao.class);
 		CategoryDao categoryDao = context.getBean(CategoryDao.class);
-		SubCategoryDao subcategoryDao = context.getBean(SubCategoryDao.class);
+		SubcategoryDao subcategoryDao = context.getBean(SubcategoryDao.class);
 		VendorDao vendorDao = context.getBean(VendorDao.class);
 
 		UserDto marco = new UserDto();
@@ -47,6 +45,8 @@ public class StorehouseApplication {
 
 		UserDto saved = userService.addUser(marco, profile, User.Type.EMPLOYEE);
 
+
+
 		ProductDto product = new ProductDto();
 		product.setName("wood table 1");
 		product.setBrand("wood_company");
@@ -58,38 +58,26 @@ public class StorehouseApplication {
 
 		Category category = new Category();
 		category.setName("carpentry");
+		category = categoryDao.save(category);
+
 		Subcategory subcategory = new Subcategory();
 		subcategory.setName("wood table");
-		subcategory.setCategory(categoryDao.save(category));
-		product.setSubcategory(subcategoryDao.save(subcategory));
+		subcategory.setCategory(category);
+		subcategory = subcategoryDao.save(subcategory);
+
+		System.out.println(subcategory);
+
+		product.setSubcategoryName(subcategory.getName());
 
 		Vendor vendor = new Vendor();
 		vendor.setName("wood_company s.r.l.");
 		vendor.setVATNumber("VATNUMBER123");
 		vendor.setEmail("woodcompany@gmail.com");
 		vendor.setPhone(33954841L);
-		product.setVendor(vendorDao.save(vendor));
+		product.setVendorId(vendorDao.save(vendor).getId());
 
 		ProductDto savedProd = productService.addProduct(product, place, 5);
 	}
 }
 
-/*
-	ConfigurableApplicationContext context= SpringApplication.run(StorehouseApplication.class,args);
-	UserService userService= context.getBean(UserService.class);
-	userService.addUser(createUser(1));
-	userService.addUser(createUser(2));
-
-}
-
-	public static UserDto createUser(int i){
-		ModelMapper modelMapper= new ModelMapper();
-		User user =new User();
-
-		user.setEmail("maria@"+1);
-		user.setPassword("capa"+ i);
-		return modelMapper.map(user, UserDto.class);
-	}
-}
-*/
 

@@ -15,10 +15,7 @@ public class Category {
 
     @Column(name = "NAME")
     private String name;
-/*
-    @OneToMany(mappedBy = "category")
-    private List<Subcategory> subcategories = new ArrayList<Subcategory>();
-*/
+
     public Long getId() {
         return id;
     }
@@ -26,15 +23,7 @@ public class Category {
     public void setId(Long id) {
         this.id = id;
     }
-/*
-    public List<Subcategory> getSubcategories() {
-        return subcategories;
-    }
 
-    public void setSubcategories(List<Subcategory> subcategories) {
-        this.subcategories = subcategories;
-    }
-*/
     public String getName() {
         return name;
     }
@@ -54,5 +43,13 @@ public class Category {
     @Override
     public int hashCode() {
         return Objects.hash(id, name);
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

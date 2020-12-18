@@ -28,10 +28,7 @@ public class Vendor {
     @Basic(optional = false)
     @Column(name = "PHONE")
     private Long phone;
-/*
-    @OneToMany(mappedBy = "vendor")
-    private List<Product> products = new ArrayList<Product>();
-*/
+
     public Long getId() {
         return id;
     }
@@ -71,15 +68,7 @@ public class Vendor {
     public void setPhone(Long phone) {
         this.phone = phone;
     }
-/*
-    public List<Product> getProducts() {
-        return products;
-    }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-*/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -91,5 +80,16 @@ public class Vendor {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, VATNumber, email, phone);
+    }
+
+    @Override
+    public String toString() {
+        return "Vendor{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", VATNumber='" + VATNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", phone=" + phone +
+                '}';
     }
 }

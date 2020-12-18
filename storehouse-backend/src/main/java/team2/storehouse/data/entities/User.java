@@ -42,9 +42,6 @@ public class User {
     @JoinColumn(name = "SHOPPING_CART", referencedColumnName = "ID")
     private ShoppingCart shoppingCart;
 
-    @OneToMany(mappedBy = "user")
-    private List<Command> commands = new ArrayList<Command>();
-
     public Long getId() {
         return id;
     }
@@ -101,25 +98,17 @@ public class User {
         this.shoppingCart = shoppingCart;
     }
 
-    public List<Command> getOrders() {
-        return commands;
-    }
-
-    public void setOrders(List<Command> commands) {
-        this.commands = commands;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && type == user.type && Objects.equals(profile, user.profile) && Objects.equals(shoppingCart, user.shoppingCart) && Objects.equals(commands, user.commands);
+        return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && type == user.type && Objects.equals(profile, user.profile) && Objects.equals(shoppingCart, user.shoppingCart);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, email, password, type, profile, shoppingCart, commands);
+        return Objects.hash(id, username, email, password, type, profile, shoppingCart);
     }
 
     @Override
@@ -130,9 +119,8 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", type=" + type +
-          //      ", profile=" + profile +
-          //      ", shoppingCart=" + shoppingCart +
-          //      ", commands=" + commands +
+                ", profile=" + profile +
+                ", shoppingCart=" + shoppingCart +
                 '}';
     }
 }

@@ -1,12 +1,6 @@
 package team2.storehouse.data.dto;
 
-import team2.storehouse.data.entities.Subcategory;
-import team2.storehouse.data.entities.Vendor;
-
-import javax.persistence.Basic;
-import javax.persistence.Column;
 import java.io.Serializable;
-import java.util.Objects;
 
 public class ProductDto implements Serializable {
 
@@ -18,9 +12,9 @@ public class ProductDto implements Serializable {
 
     private double price;
 
-   private Subcategory subcategory;
+    private String subcategoryName;
 
-    private Vendor vendor;
+    private Long vendorId;
 
     public Long getId() {
         return id;
@@ -54,19 +48,31 @@ public class ProductDto implements Serializable {
         this.price = price;
     }
 
-    public Subcategory getSubcategory() {
-        return subcategory;
+    public String getSubcategoryName() {
+        return subcategoryName;
     }
 
-    public void setSubcategory(Subcategory subcategory) {
-        this.subcategory = subcategory;
+    public void setSubcategoryName(String subcategoryName) {
+        this.subcategoryName = subcategoryName;
     }
 
-    public Vendor getVendor() {
-        return vendor;
+    public Long getVendorId() {
+        return vendorId;
     }
 
-    public void setVendor(Vendor vendor) {
-        this.vendor = vendor;
+    public void setVendorId(Long vendorId) {
+        this.vendorId = vendorId;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductDto{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", brand='" + brand + '\'' +
+                ", price=" + price +
+                ", subcategoryName='" + subcategoryName + '\'' +
+                ", vendorId=" + vendorId +
+                '}';
     }
 }

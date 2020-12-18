@@ -45,6 +45,9 @@ public class Profile {
     @Column(name = "PHONE")
     private Long phone;
 
+    @Column(name = "PHOTO")
+    private String photo;
+
     @OneToOne(mappedBy = "profile")
     private User user;
 
@@ -120,16 +123,40 @@ public class Profile {
         this.user = user;
     }
 
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Profile profile = (Profile) o;
-        return Objects.equals(id, profile.id) && Objects.equals(name, profile.name) && Objects.equals(surname, profile.surname) && gender == profile.gender && Objects.equals(fiscalCode, profile.fiscalCode) && Objects.equals(address, profile.address) && Objects.equals(birthdate, profile.birthdate) && Objects.equals(phone, profile.phone) && Objects.equals(user, profile.user);
+        return Objects.equals(id, profile.id) && Objects.equals(name, profile.name) && Objects.equals(surname, profile.surname) && gender == profile.gender && Objects.equals(fiscalCode, profile.fiscalCode) && Objects.equals(address, profile.address) && Objects.equals(birthdate, profile.birthdate) && Objects.equals(phone, profile.phone) && Objects.equals(photo, profile.photo) && Objects.equals(user, profile.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, surname, gender, fiscalCode, address, birthdate, phone, user);
+        return Objects.hash(id, name, surname, gender, fiscalCode, address, birthdate, phone, photo, user);
+    }
+
+    @Override
+    public String toString() {
+        return "Profile{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", gender=" + gender +
+                ", fiscalCode='" + fiscalCode + '\'' +
+                ", address='" + address + '\'' +
+                ", birthdate=" + birthdate +
+                ", phone=" + phone +
+                ", photo='" + photo + '\'' +
+                ", user=" + user +
+                '}';
     }
 }
