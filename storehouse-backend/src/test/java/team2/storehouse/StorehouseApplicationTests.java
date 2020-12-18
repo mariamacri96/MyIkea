@@ -3,11 +3,13 @@ package team2.storehouse;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import team2.storehouse.data.dao.*;
 import team2.storehouse.data.dto.ProductDto;
+import team2.storehouse.data.dto.ProfileDto;
 import team2.storehouse.data.dto.UserDto;
 import team2.storehouse.data.entities.*;
 import team2.storehouse.data.service.ProductService;
@@ -19,9 +21,6 @@ import java.time.LocalDate;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class StorehouseApplicationTests {
-
-	@Autowired
-	ProfileDao profileDao;
 
 	@Autowired
 	ShelfDao shelfDao;
@@ -47,7 +46,6 @@ public class StorehouseApplicationTests {
 
 	@Autowired
 	ProductService productService;
-
 	@Test
 	public void testUser() {
 		UserDto marco = new UserDto();
@@ -55,7 +53,7 @@ public class StorehouseApplicationTests {
 		marco.setEmail("marco@gmail.com");
 		marco.setPassword("password123");
 
-		Profile profile = new Profile();
+		ProfileDto profile = new ProfileDto();
 		profile.setName("Marco");
 		profile.setSurname("Bellizzi");
 		profile.setAddress("Cosenza, via ... ");
@@ -63,11 +61,9 @@ public class StorehouseApplicationTests {
 		profile.setFiscalCode("codiceFiscale");
 		profile.setGender(Profile.Gender.MALE);
 		profile.setPhone(3284686896L);
-		profileDao.save(profile);
 
 		UserDto saved = userService.addUser(marco, profile, User.Type.EMPLOYEE);
 
-		Assert.assertTrue(profileDao.findAll().size() > 0);
 		Assert.assertTrue(userService.getUsers().size() > 0);
 
 		UserDto logged = logIn.verify("marcoBellizzi", "password123");

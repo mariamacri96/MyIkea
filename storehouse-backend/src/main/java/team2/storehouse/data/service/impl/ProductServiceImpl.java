@@ -12,6 +12,7 @@ import team2.storehouse.data.service.ProductService;
 import team2.storehouse.exceptions.GenericException;
 import team2.storehouse.exceptions.UserNotFoundException;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,6 +31,7 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     ModelMapper modelMapper;
 
+    @Transactional
     @Override
     public ProductDto addProduct(ProductDto productDto, Place place, int quantity) {
         Product product = modelMapper.map(productDto,Product.class);

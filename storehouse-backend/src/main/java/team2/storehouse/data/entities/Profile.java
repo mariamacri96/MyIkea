@@ -48,9 +48,6 @@ public class Profile {
     @Column(name = "PHOTO")
     private String photo;
 
-    @OneToOne(mappedBy = "profile")
-    private User user;
-
     public Long getId() {
         return id;
     }
@@ -115,14 +112,6 @@ public class Profile {
         this.phone = phone;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public String getPhoto() {
         return photo;
     }
@@ -136,12 +125,12 @@ public class Profile {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Profile profile = (Profile) o;
-        return Objects.equals(id, profile.id) && Objects.equals(name, profile.name) && Objects.equals(surname, profile.surname) && gender == profile.gender && Objects.equals(fiscalCode, profile.fiscalCode) && Objects.equals(address, profile.address) && Objects.equals(birthdate, profile.birthdate) && Objects.equals(phone, profile.phone) && Objects.equals(photo, profile.photo) && Objects.equals(user, profile.user);
+        return Objects.equals(id, profile.id) && Objects.equals(name, profile.name) && Objects.equals(surname, profile.surname) && gender == profile.gender && Objects.equals(fiscalCode, profile.fiscalCode) && Objects.equals(address, profile.address) && Objects.equals(birthdate, profile.birthdate) && Objects.equals(phone, profile.phone) && Objects.equals(photo, profile.photo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, surname, gender, fiscalCode, address, birthdate, phone, photo, user);
+        return Objects.hash(id, name, surname, gender, fiscalCode, address, birthdate, phone, photo);
     }
 
     @Override
@@ -156,7 +145,6 @@ public class Profile {
                 ", birthdate=" + birthdate +
                 ", phone=" + phone +
                 ", photo='" + photo + '\'' +
-                ", user=" + user +
                 '}';
     }
 }

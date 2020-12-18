@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import team2.storehouse.data.dto.ProfileDto;
 import team2.storehouse.data.dto.UserDto;
+import team2.storehouse.data.entities.User;
 import team2.storehouse.data.service.UserService;
 import team2.storehouse.data.service.impl.LogIn;
 
@@ -20,26 +22,25 @@ public class UserController {
     @Autowired
     UserService userService;
 
-   /* @PostMapping("/registration/account")
-    public ResponseEntity<UserDto> createAccount(@RequestBody UserDto profileDto){
-        UserDto userDto=logInService.createAccount(profileDto) ;
-        return ResponseEntity.ok(userDto);
-
-    }*/
-
-    @GetMapping("/users/login")
+    @PostMapping("/users/registration")     // in testing..
     @CrossOrigin(origins = "http://localhost:8080")
-    public ResponseEntity<UserDto> login(@RequestParam(name = "username") String username, @RequestParam(name = "password") String password){
-        UserDto userDto= logInService.verify(username,password);
-        return ResponseEntity.ok(userDto);
+    public ResponseEntity<UserDto> createAccount(@RequestBody UserDto userDto,
+                                                 @RequestBody ProfileDto profileDto,
+                                                 @RequestBody User.Type type){ ;
+        return ResponseEntity.ok(userService.addUser(userDto, profileDto, type));
     }
 
+    @GetMapping("/users/login")    // works
+    @CrossOrigin(origins = "http://localhost:8080")
+    public ResponseEntity<UserDto> login(@RequestParam(name = "username") String username,
+                                         @RequestParam(name = "password") String password){
+        return ResponseEntity.ok(logInService.verify(username,password));
+    }
 
-    @GetMapping("/users")
+    @GetMapping("/users")    // works
     @CrossOrigin(origins = "http://localhost:8080")
     public ResponseEntity<List<UserDto>> all(){
-        List<UserDto> users= userService.getUsers();
-        return ResponseEntity.ok(users);
+        return ResponseEntity.ok(userService.getUsers());
     }
 
 }

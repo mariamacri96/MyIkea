@@ -3,8 +3,10 @@ package team2.storehouse.data.service.impl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import team2.storehouse.data.dao.ProfileDao;
 import team2.storehouse.data.dao.ShoppingCartDao;
 import team2.storehouse.data.dao.UserDao;
+import team2.storehouse.data.dto.ProfileDto;
 import team2.storehouse.data.dto.UserDto;
 import team2.storehouse.data.entities.Profile;
 import team2.storehouse.data.entities.ShoppingCart;
@@ -25,16 +27,19 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Autowired
+    private ProfileDao profileDao;
+
+    @Autowired
     private ShoppingCartDao shoppingCartDao;
 
     @Autowired
     private ModelMapper modelMapper;
 
-    @Transactional      // add it in methods that write in the database
+    @Transactional
     @Override
-    public UserDto addUser(UserDto userDto, Profile profile, User.Type type) {
+    public UserDto addUser(UserDto userDto, ProfileDto profileDto, User.Type type) {
         User user = modelMapper.map(userDto, User.class);
-        user.setProfile(profile);
+        user.setProfile(profileDao.save(modelMapper.map(profileDto, Profile.class)));
         user.setType(type);
         user.setShoppingCart(shoppingCartDao.save(new ShoppingCart()));
         return modelMapper.map(userDao.save(user), UserDto.class);

@@ -1,10 +1,13 @@
 package team2.storehouse;
 
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import team2.storehouse.data.dao.*;
 import team2.storehouse.data.dto.ProductDto;
+import team2.storehouse.data.dto.ProfileDto;
 import team2.storehouse.data.dto.UserDto;
 import team2.storehouse.data.entities.*;
 import team2.storehouse.data.service.ProductService;
@@ -16,8 +19,8 @@ import java.time.LocalDate;
 public class StorehouseApplication {
 
 	public static void main(String[] args) {
-
 		ConfigurableApplicationContext context = SpringApplication.run(StorehouseApplication.class,args);
+
 		UserService userService = context.getBean(UserService.class);
 		ProductService productService = context.getBean(ProductService.class);
 
@@ -33,7 +36,7 @@ public class StorehouseApplication {
 		marco.setEmail("marco@gmail.com");
 		marco.setPassword("password123");
 
-		Profile profile = new Profile();
+		ProfileDto profile = new ProfileDto();
 		profile.setName("Marco");
 		profile.setSurname("Bellizzi");
 		profile.setAddress("Cosenza, via ... ");
@@ -41,11 +44,8 @@ public class StorehouseApplication {
 		profile.setFiscalCode("codiceFiscale");
 		profile.setGender(Profile.Gender.MALE);
 		profile.setPhone(3284686896L);
-		profileDao.save(profile);
 
-		UserDto saved = userService.addUser(marco, profile, User.Type.EMPLOYEE);
-
-
+		UserDto savedUser = userService.addUser(marco, profile, User.Type.EMPLOYEE);
 
 		ProductDto product = new ProductDto();
 		product.setName("wood table 1");
@@ -64,9 +64,6 @@ public class StorehouseApplication {
 		subcategory.setName("wood table");
 		subcategory.setCategory(category);
 		subcategory = subcategoryDao.save(subcategory);
-
-		System.out.println(subcategory);
-
 		product.setSubcategoryName(subcategory.getName());
 
 		Vendor vendor = new Vendor();
