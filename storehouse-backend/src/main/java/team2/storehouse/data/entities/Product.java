@@ -42,9 +42,8 @@ public class Product {
     @JoinColumn(name = "PLACE", referencedColumnName = "ID")
     private Place place;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "SUBCATEGORY", referencedColumnName = "ID")
-    private Subcategory subcategory;
+    @Column(name = "SUBCATEGORY")
+    private String subcategory;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "VENDOR", referencedColumnName = "ID")
@@ -128,11 +127,11 @@ public class Product {
         this.place = place;
     }
 
-    public Subcategory getSubcategory() {
+    public String getSubcategory() {
         return subcategory;
     }
 
-    public void setSubcategory(Subcategory subcategory) {
+    public void setSubcategory(String subcategory) {
         this.subcategory = subcategory;
     }
 

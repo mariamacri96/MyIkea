@@ -18,7 +18,7 @@ public class ProductDto implements Serializable {
 
     private double price;
 
-    private Subcategory subcategory;
+   private Subcategory subcategory;
 
     private Vendor vendor;
 
