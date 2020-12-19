@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import team2.storehouse.data.dto.AccountDto;
 import team2.storehouse.data.dto.ProfileDto;
 import team2.storehouse.data.dto.UserDto;
 import team2.storehouse.data.entities.User;
@@ -22,12 +23,10 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @PostMapping("/users/registration")     // in testing..
+    @PostMapping("/users/test")
     @CrossOrigin(origins = "http://localhost:8080")
-    public ResponseEntity<UserDto> createAccount(@RequestBody UserDto userDto,
-                                                 @RequestBody ProfileDto profileDto,
-                                                 @RequestBody User.Type type){ ;
-        return ResponseEntity.ok(userService.addUser(userDto, profileDto, type));
+    public ResponseEntity<AccountDto> createAccount(@RequestBody AccountDto accountDto){
+        return ResponseEntity.ok(accountDto);
     }
 
     @GetMapping("/users/login")    // works
