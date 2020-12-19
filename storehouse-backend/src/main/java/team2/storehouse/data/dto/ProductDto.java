@@ -14,6 +14,8 @@ public class ProductDto implements Serializable {
 
     private String size;
 
+    private int stock;
+
     private String subcategoryName;
 
     private Long vendorId;
@@ -56,6 +58,14 @@ public class ProductDto implements Serializable {
 
     public void setSize(String size) {
         this.size = size;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
     public String getSubcategoryName() {

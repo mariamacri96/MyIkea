@@ -8,6 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface ProductDao extends JpaRepository<Product, Long> {
-
     Optional<Product> findProductByName(String name);
 }
