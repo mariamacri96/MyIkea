@@ -4,25 +4,19 @@ import java.io.Serializable;
 
 public class ProductDto implements Serializable {
 
-    private Long id;
-
     private String name;
 
     private String brand;
 
     private double price;
 
+    private String color;
+
+    private String size;
+
     private String subcategoryName;
 
     private Long vendorId;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -48,6 +42,22 @@ public class ProductDto implements Serializable {
         this.price = price;
     }
 
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
     public String getSubcategoryName() {
         return subcategoryName;
     }
@@ -62,17 +72,5 @@ public class ProductDto implements Serializable {
 
     public void setVendorId(Long vendorId) {
         this.vendorId = vendorId;
-    }
-
-    @Override
-    public String toString() {
-        return "ProductDto{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", brand='" + brand + '\'' +
-                ", price=" + price +
-                ", subcategoryName='" + subcategoryName + '\'' +
-                ", vendorId=" + vendorId +
-                '}';
     }
 }

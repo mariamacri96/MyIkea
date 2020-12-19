@@ -1,7 +1,5 @@
 package team2.storehouse;
 
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -47,6 +45,8 @@ public class StorehouseApplication {
 
 		UserDto savedUser = userService.addUser(marco, profile, User.Type.EMPLOYEE);
 
+
+
 		ProductDto product = new ProductDto();
 		product.setName("wood table 1");
 		product.setBrand("wood_company");
@@ -73,7 +73,7 @@ public class StorehouseApplication {
 		vendor.setPhone(33954841L);
 		product.setVendorId(vendorDao.save(vendor).getId());
 
-		ProductDto savedProd = productService.addProduct(product, place, 5);
+		ProductDto savedProd = productService.addProduct(product, place.getId(), 5);
 	}
 }
 

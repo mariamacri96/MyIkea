@@ -23,9 +23,13 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @PostMapping("/users/test")
-    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping("/users/registration")
+    @CrossOrigin(origins = "http://localhost:4200")    // works
     public ResponseEntity<AccountDto> createAccount(@RequestBody AccountDto accountDto){
+        UserDto userDto = accountDto.getUserDto();
+        ProfileDto profileDto = accountDto.getProfileDto();
+        String type = accountDto.getType();
+        userService.addUser(userDto, profileDto, type.equals("EMPLOYEE") ? User.Type.EMPLOYEE : User.Type.CLIENT);
         return ResponseEntity.ok(accountDto);
     }
 

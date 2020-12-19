@@ -95,7 +95,7 @@ public class StorehouseApplicationTests {
 		vendor.setPhone(33954841L);
 		product.setVendorId(vendorDao.save(vendor).getId());
 
-		ProductDto saved = productService.addProduct(product, place, 5);
+		ProductDto saved = productService.addProduct(product, place.getId(), 5);
 
 		Assert.assertTrue(productService.getProducts().size() > 0);
 
