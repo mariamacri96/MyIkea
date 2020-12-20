@@ -37,16 +37,15 @@ public class ProductServiceImpl implements ProductService {
 
     @Transactional
     @Override
-    public ProductDto addProduct(ProductDto productDto, Long placeId, int quantity) {
-        Product product = modelMapper.map(productDto, Product.class);
+    public ProductDto addProduct(ProductDto productDto, Long placeId) {
+        Product product = modelMapper.map(productDto,Product.class);
         Subcategory subcategory = subcategoryDao.findByName(productDto.getSubcategoryName()).orElseThrow(() -> new RuntimeException("subcategory " + productDto.getSubcategoryName() + " not found"));
         product.setSubcategory(subcategory);
         Vendor vendor = vendorDao.findById(productDto.getVendorId()).orElseThrow(() -> new RuntimeException("vendor " + productDto.getVendorId() + " not found"));
         product.setVendor(vendor);
         Place place = placeDao.findById(placeId).orElseThrow(() -> new RuntimeException("place " + placeId + "not found"));
         product.setPlace(place);
-        product.setStock(quantity);
-        return modelMapper.map(productDao.save(product), ProductDto.class);
+        return modelMapper.map(productDao.save(product),ProductDto.class);
     }
 
     @Override
@@ -73,6 +72,35 @@ public class ProductServiceImpl implements ProductService {
         Product product = productDao.findProductByName(name).orElseThrow(() -> new UserNotFoundException(name));
         ProductDto productDto = modelMapper.map(product, ProductDto.class);
         return productDto;
+    }
+
+    @Override
+    public ProductDto update(Long id, ProductDto productDto) {
+        Product product = productDao.findById(id).orElseThrow(() -> new UserNotFoundException(id.toString()));
+        product.setName(productDto.getName());
+        product.setPrice(productDto.getPrice());
+        product.setStock(productDto.getStock());
+        product.setBrand(productDto.getBrand());
+        product.setColor(productDto.getColor());
+        product.setSize(productDto.getSize());
+        Vendor vendor = vendorDao.findById(productDto.getVendorId()).orElseThrow(() -> new RuntimeException("vendor " + productDto.getVendorId() + " not found"));
+        product.setVendor(vendor);
+        Subcategory subcategory = subcategoryDao.findByName(productDto.getSubcategoryName()).orElseThrow(() -> new RuntimeException("category " + productDto.getSubcategoryName() + " not found"));
+        product.setSubcategory(subcategory);
+        return modelMapper.map(productDao.save(product), ProductDto.class);
+    }
+
+    @Override
+    public ProductDto updateQuantity(Long id, int quantity) {
+        Product product = productDao.findById(id).orElseThrow(() -> new UserNotFoundException(id.toString()));
+        if(product.getStock() + quantity < 0) {
+            throw new RuntimeException("the stock for the product " + product.getName() + " is not enough");
+        }
+        if(product.getStock() + quantity > 50) {
+            throw new RuntimeException("there is no enough space");
+        }
+        product.setStock(product.getStock() + quantity);
+        return modelMapper.map(productDao.save(product), ProductDto.class);
     }
 
     @Override

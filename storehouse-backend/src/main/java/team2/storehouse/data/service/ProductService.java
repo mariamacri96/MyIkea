@@ -8,10 +8,12 @@ import team2.storehouse.data.entities.Product;
 import java.util.List;
 
 public interface ProductService {
-    ProductDto addProduct(ProductDto product, Long placeId, int quantity);
+    ProductDto addProduct(ProductDto product, Long placeId);
     List<ProductDto> getProducts();
     ProductDto findProductById(Long id);
     ProductDto findProductByName(String name);
+    ProductDto update(Long id, ProductDto productDto);
+    ProductDto updateQuantity(Long id, int quantity);
     void delete(Long id);
     void delete (ProductDto productDto);
 }

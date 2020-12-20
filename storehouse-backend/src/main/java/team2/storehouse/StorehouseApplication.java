@@ -46,11 +46,11 @@ public class StorehouseApplication {
 		UserDto savedUser = userService.addUser(marco, profile, User.Type.EMPLOYEE);
 
 
-
 		ProductDto product = new ProductDto();
 		product.setName("wood table 1");
 		product.setBrand("wood_company");
 		product.setPrice(150.00);
+		product.setStock(5);
 
 		Place place = new Place();
 		place.setShelf(shelfDao.save(new Shelf()));
@@ -73,9 +73,7 @@ public class StorehouseApplication {
 		vendor.setPhone(33954841L);
 		product.setVendorId(vendorDao.save(vendor).getId());
 
-		ProductDto savedProd = productService.addProduct(product, place.getId(), 5);
-		//productService.delete((long) 1);
-
+		ProductDto savedProd = productService.addProduct(product, place.getId());
 	}
 }
 

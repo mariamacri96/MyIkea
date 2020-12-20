@@ -18,13 +18,14 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
-    @GetMapping("/products")   // works
+    @GetMapping("/products")
     @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<List<ProductDto>> all() {
         List<ProductDto> products = productService.getProducts();
         return ResponseEntity.ok(products);
     }
 
+    @PostMapping("/product/creation")
     @GetMapping("/products/{id}")   // works
     @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<ProductDto> getProductById(@PathVariable Long id) {
@@ -34,9 +35,8 @@ public class ProductController {
     @PostMapping("/product/creation")   // works
     @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto,
-                                                    @RequestParam(name = "placeId", defaultValue = "1") Long placeId,
-                                                    @RequestParam(name = "quantity", defaultValue = "1") int quantity) {
-        productService.addProduct(productDto, placeId, quantity);
+                                                    @RequestParam(name="placeId", defaultValue = "1") Long placeId) {
+        productService.addProduct(productDto, placeId);
         return ResponseEntity.ok(productDto);
     }
     @DeleteMapping("/products/{id}")
@@ -44,7 +44,18 @@ public class ProductController {
         productService.delete(id);
         return HttpStatus.OK;
 
+    @PutMapping("/product/update/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public ResponseEntity<ProductDto> update(@PathVariable("id") Long id,
+                                             @RequestBody ProductDto productDto) {
+        return ResponseEntity.ok(productService.update(id, productDto));
     }
 
+    @PutMapping("/product/updatequantity/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public ResponseEntity<ProductDto> updateQuantity(@PathVariable("id") Long id,
+                                                     @RequestParam(name="quantity", defaultValue = "0") int quantity) {
+        return ResponseEntity.ok(productService.updateQuantity(id, quantity));
+    }
 
 }

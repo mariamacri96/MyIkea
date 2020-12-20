@@ -3,7 +3,6 @@ package team2.storehouse;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -78,6 +77,7 @@ public class StorehouseApplicationTests {
 		product.setName("wood table 1");
 		product.setBrand("wood_company");
 		product.setPrice(150.00);
+		product.setStock(5);
 
 		Place place = new Place();
 		place.setShelf(shelfDao.save(new Shelf()));
@@ -97,7 +97,7 @@ public class StorehouseApplicationTests {
 		vendor.setPhone(33954841L);
 		product.setVendorId(vendorDao.save(vendor).getId());
 
-		ProductDto saved = productService.addProduct(product, place.getId(), 5);
+		ProductDto saved = productService.addProduct(product, place.getId());
 
 		Assert.assertTrue(productService.getProducts().size() > 0);
 
