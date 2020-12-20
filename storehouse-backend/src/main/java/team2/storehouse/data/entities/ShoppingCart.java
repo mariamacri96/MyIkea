@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "SHOPPPING_CART")
+@Table(name = "SHOPPING_CART")
 public class ShoppingCart {  // Carrello
 
     @Id

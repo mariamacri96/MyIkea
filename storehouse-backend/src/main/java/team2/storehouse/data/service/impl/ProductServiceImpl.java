@@ -2,6 +2,7 @@ package team2.storehouse.data.service.impl;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import team2.storehouse.data.dao.PlaceDao;
 import team2.storehouse.data.dao.ProductDao;
@@ -54,8 +55,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductDto> getProducts() {
-        List<Product> products =  productDao.findAll();
-        return  products.stream()
+
+
+        List<Product> products = productDao.findAll();
+        return products.stream()
                 .map(product -> modelMapper
                         .map(product, ProductDto.class))
                 .collect(Collectors.toList());
@@ -63,15 +66,16 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDto findProductById(Long id) {
-        Product product= productDao.findById(id).orElseThrow(() -> new UserNotFoundException(id.toString()));
-        ProductDto productDto =modelMapper.map(product, ProductDto.class);
+        Product product = productDao.findById(id).orElseThrow(() -> new UserNotFoundException(id.toString()));
+        ProductDto productDto = modelMapper.map(product, ProductDto.class);
         return productDto;
     }
 
     @Override
     public ProductDto findProductByName(String name) {
-        Product product= productDao.findProductByName(name).orElseThrow(() -> new UserNotFoundException(name));
-        ProductDto productDto =modelMapper.map(product, ProductDto.class);
+
+        Product product = productDao.findProductByName(name).orElseThrow(() -> new UserNotFoundException(name));
+        ProductDto productDto = modelMapper.map(product, ProductDto.class);
         return productDto;
     }
 
@@ -103,4 +107,19 @@ public class ProductServiceImpl implements ProductService {
         product.setStock(product.getStock() + quantity);
         return modelMapper.map(productDao.save(product), ProductDto.class);
     }
+
+    @Override
+    public void delete(Long id) {
+        productDao.deleteById(id);
+    }
+
+
+    @Override
+    public void delete(ProductDto productDto) {
+        Product product = modelMapper.map(productDto, Product.class);
+        productDao.delete(product);
+
+    }
+
+
 }

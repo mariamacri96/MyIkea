@@ -1,5 +1,6 @@
 package team2.storehouse.data.service;
 
+import org.springframework.data.jpa.domain.Specification;
 import team2.storehouse.data.dto.ProductDto;
 import team2.storehouse.data.entities.Place;
 import team2.storehouse.data.entities.Product;
@@ -13,4 +14,6 @@ public interface ProductService {
     ProductDto findProductByName(String name);
     ProductDto update(Long id, ProductDto productDto);
     ProductDto updateQuantity(Long id, int quantity);
+    void delete(Long id);
+    void delete (ProductDto productDto);
 }
