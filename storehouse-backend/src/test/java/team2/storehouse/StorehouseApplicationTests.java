@@ -37,7 +37,8 @@ public class StorehouseApplicationTests {
 	@Autowired
 	VendorDao vendorDao;
 
-
+	@Autowired
+	ProductDao productDao;
 	@Autowired
 	UserService userService;
 
@@ -48,6 +49,7 @@ public class StorehouseApplicationTests {
 	ProductService productService;
 	@Test
 	public void testUser() {
+
 		UserDto marco = new UserDto();
 		marco.setUsername("marcoBellizzi");
 		marco.setEmail("marco@gmail.com");
@@ -98,6 +100,10 @@ public class StorehouseApplicationTests {
 		ProductDto saved = productService.addProduct(product, place.getId(), 5);
 
 		Assert.assertTrue(productService.getProducts().size() > 0);
+
+		//productDao.hasName("wood table 1");
+		productDao.filterBySubCategory("wood table");
+		productService.delete((long) 1);
 
 	}
 

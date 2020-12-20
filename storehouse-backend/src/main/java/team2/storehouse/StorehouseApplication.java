@@ -74,6 +74,8 @@ public class StorehouseApplication {
 		product.setVendorId(vendorDao.save(vendor).getId());
 
 		ProductDto savedProd = productService.addProduct(product, place.getId(), 5);
+		//productService.delete((long) 1);
+
 	}
 }
 
