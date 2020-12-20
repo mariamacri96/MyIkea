@@ -36,6 +36,9 @@ public class StorehouseApplicationTests {
 	@Autowired
 	VendorDao vendorDao;
 
+	@Autowired
+	ProductDao productDao;
+
 
 	@Autowired
 	UserService userService;
@@ -45,6 +48,12 @@ public class StorehouseApplicationTests {
 
 	@Autowired
 	ProductService productService;
+
+	@Test
+	public void test() {
+
+	}
+
 	@Test
 	public void testUser() {
 		UserDto marco = new UserDto();

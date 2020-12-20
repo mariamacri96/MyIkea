@@ -14,6 +14,7 @@ import team2.storehouse.exceptions.UserNotFoundException;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,11 +39,15 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDto addProduct(ProductDto productDto, Long placeId) {
         Product product = modelMapper.map(productDto,Product.class);
+        product.setId(null);  // wondering why it's required
         Subcategory subcategory = subcategoryDao.findByName(productDto.getSubcategoryName()).orElseThrow(() -> new RuntimeException("subcategory " + productDto.getSubcategoryName() + " not found"));
         product.setSubcategory(subcategory);
         Vendor vendor = vendorDao.findById(productDto.getVendorId()).orElseThrow(() -> new RuntimeException("vendor " + productDto.getVendorId() + " not found"));
         product.setVendor(vendor);
         Place place = placeDao.findById(placeId).orElseThrow(() -> new RuntimeException("place " + placeId + "not found"));
+        if(productDao.findByPlace(place).isPresent()) {
+            throw new RuntimeException("the place " + place.getId() + " is not empty");
+        }
         product.setPlace(place);
         return modelMapper.map(productDao.save(product),ProductDto.class);
     }
