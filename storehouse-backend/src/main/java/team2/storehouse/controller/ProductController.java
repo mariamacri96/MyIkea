@@ -25,7 +25,7 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
-    @PostMapping("/product/creation")
+
     @GetMapping("/products/{id}")   // works
     @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<ProductDto> getProductById(@PathVariable Long id) {
@@ -39,10 +39,12 @@ public class ProductController {
         productService.addProduct(productDto, placeId);
         return ResponseEntity.ok(productDto);
     }
+
     @DeleteMapping("/products/{id}")
-    public HttpStatus delete (@PathVariable Long id, @RequestBody ProductDto productDto){
+    public HttpStatus delete (@PathVariable Long id, @RequestBody ProductDto productDto) {
         productService.delete(id);
         return HttpStatus.OK;
+    }
 
     @PutMapping("/product/update/{id}")
     @CrossOrigin(origins = "http://localhost:4200")
