@@ -24,7 +24,7 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/users/registration")
-    @CrossOrigin(origins = "http://localhost:4200")    // works
+    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<AccountDto> createAccount(@RequestBody AccountDto accountDto){
         UserDto userDto = accountDto.getUserDto();
         ProfileDto profileDto = accountDto.getProfileDto();
@@ -33,14 +33,14 @@ public class UserController {
         return ResponseEntity.ok(accountDto);
     }
 
-    @GetMapping("/users/login")    // works
+    @GetMapping("/users/login")
     @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<UserDto> login(@RequestParam(name="username", defaultValue = "marcoBellizzi") String username,
                                          @RequestParam(name="password",defaultValue = "password123") String password){
         return ResponseEntity.ok(logInService.verify(username,password));
     }
 
-    @GetMapping("/users")    // works
+    @GetMapping("/users")
     @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<List<UserDto>> all(){
         return ResponseEntity.ok(userService.getUsers());

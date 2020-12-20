@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class ProductDto implements Serializable {
 
+    private Long id;
+
     private String name;
 
     private String brand;
@@ -19,6 +21,14 @@ public class ProductDto implements Serializable {
     private String subcategoryName;
 
     private Long vendorId;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -84,5 +94,18 @@ public class ProductDto implements Serializable {
         this.vendorId = vendorId;
     }
 
-
+    @Override
+    public String toString() {
+        return "ProductDto{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", brand='" + brand + '\'' +
+                ", price=" + price +
+                ", color='" + color + '\'' +
+                ", size='" + size + '\'' +
+                ", stock=" + stock +
+                ", subcategoryName='" + subcategoryName + '\'' +
+                ", vendorId=" + vendorId +
+                '}';
+    }
 }

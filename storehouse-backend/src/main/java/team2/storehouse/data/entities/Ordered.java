@@ -7,24 +7,25 @@ import java.util.Objects;
 @Table(name = "ORDERED")
 public class Ordered {
 
-    @EmbeddedId
-    private OrderedId id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne(optional = false)
-    @MapsId("productId")
+    @JoinColumn(name = "PRODUCT", referencedColumnName = "ID")
     private Product product;
 
     @ManyToOne(optional = false)
-    @MapsId("commandId")
+    @JoinColumn(name = "COMMAND", referencedColumnName = "ID")
     private Command command;
 
     private int quantity;
 
-    public OrderedId getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(OrderedId id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -63,15 +64,5 @@ public class Ordered {
     @Override
     public int hashCode() {
         return Objects.hash(id, product, command, quantity);
-    }
-
-    @Override
-    public String toString() {
-        return "Ordered{" +
-                "id=" + id +
-                ", product=" + product +
-                ", command=" + command +
-                ", quantity=" + quantity +
-                '}';
     }
 }

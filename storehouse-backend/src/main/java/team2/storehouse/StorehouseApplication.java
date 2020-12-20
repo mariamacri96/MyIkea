@@ -95,6 +95,8 @@ public class StorehouseApplication {
 		table.setName("wood table medium");
 		table.setBrand("ikea");
 		table.setPrice(150.00);
+		table.setColor("black");
+		table.setSize("100x120cm");
 		table.setStock(5);
 		table.setSubcategoryName("wood table");
 		table.setVendorId(Long.valueOf(1));
@@ -103,6 +105,8 @@ public class StorehouseApplication {
 		chair.setName("wood chair medium");
 		chair.setBrand("ikea");
 		chair.setPrice(20.00);
+		chair.setColor("black");
+		chair.setSize("50x60cm");
 		chair.setStock(10);
 		chair.setSubcategoryName("wood chair");
 		chair.setVendorId(Long.valueOf(1));

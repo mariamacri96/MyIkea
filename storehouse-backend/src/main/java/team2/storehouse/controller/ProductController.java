@@ -26,13 +26,13 @@ public class ProductController {
     }
 
 
-    @GetMapping("/products/{id}")   // works
+    @GetMapping("/products/{id}")
     @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<ProductDto> getProductById(@PathVariable Long id) {
         return ResponseEntity.ok(productService.findProductById(id));
     }
 
-    @PostMapping("/product/creation")   // works
+    @PostMapping("/product/creation")   // the id comes?
     @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto,
                                                     @RequestParam(name="placeId", defaultValue = "1") Long placeId) {

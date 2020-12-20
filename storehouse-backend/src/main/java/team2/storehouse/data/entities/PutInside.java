@@ -7,24 +7,25 @@ import java.util.Objects;
 @Table(name = "PUT_INSIDE")
 public class PutInside {
 
-    @EmbeddedId
-    private PutInsideId id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne(optional = false)
-    @MapsId("productId")
+    @JoinColumn(name = "PRODUCT", referencedColumnName = "ID")
     private Product product;
 
     @ManyToOne(optional = false)
-    @MapsId("shoppingCartId")
+    @JoinColumn(name = "SHOPPINGCART", referencedColumnName = "ID")
     private ShoppingCart shoppingCart;
 
     private int quantity;
 
-    public PutInsideId getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(PutInsideId id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -63,5 +64,15 @@ public class PutInside {
     @Override
     public int hashCode() {
         return Objects.hash(id, product, shoppingCart, quantity);
+    }
+
+    @Override
+    public String toString() {
+        return "PutInside{" +
+                "id=" + id +
+                ", product=" + product +
+                ", shoppingCart=" + shoppingCart +
+                ", quantity=" + quantity +
+                '}';
     }
 }

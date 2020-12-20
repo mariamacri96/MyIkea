@@ -40,7 +40,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDto addProduct(ProductDto productDto, Long placeId) {
         Product product = modelMapper.map(productDto,Product.class);
-        product.setId(null);  // wondering why it's required
         Subcategory subcategory = subcategoryDao.findByName(productDto.getSubcategoryName()).orElseThrow(() -> new RuntimeException("subcategory " + productDto.getSubcategoryName() + " not found"));
         product.setSubcategory(subcategory);
         Vendor vendor = vendorDao.findById(productDto.getVendorId()).orElseThrow(() -> new RuntimeException("vendor " + productDto.getVendorId() + " not found"));
