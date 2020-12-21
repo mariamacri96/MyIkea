@@ -73,4 +73,14 @@ public class Command {    // I don't know why if I try to rename it Order it wil
     public int hashCode() {
         return Objects.hash(id, state, user, bill);
     }
+
+    @Override
+    public String toString() {
+        return "Command{" +
+                "id=" + id +
+                ", state=" + state +
+                ", user=" + user +
+                ", bill=" + bill +
+                '}';
+    }
 }

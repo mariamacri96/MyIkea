@@ -1,9 +1,10 @@
 package team2.storehouse.data.dto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShoppingCartDto {
+public class ShoppingCartDto implements Serializable {
 
     List<ElementDto> elements = new ArrayList<>();
 

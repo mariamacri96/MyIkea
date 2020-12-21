@@ -84,6 +84,11 @@ public class StorehouseApplication {
 		woodChair.setCategory(carpentry);
 		woodChair = subcategoryDao.save(woodChair);
 
+		Subcategory woodWardrobe = new Subcategory();
+		woodWardrobe.setName("wood wardrobe");
+		woodWardrobe.setCategory(carpentry);
+		woodWardrobe = subcategoryDao.save(woodWardrobe);
+
 		Vendor ikea = new Vendor();
 		ikea.setName("ikea s.r.l.");
 		ikea.setVATNumber("VATNUMBER123");
@@ -98,8 +103,8 @@ public class StorehouseApplication {
 		table.setColor("black");
 		table.setSize("100x120cm");
 		table.setStock(5);
-		table.setSubcategoryName("wood table");
-		table.setVendorId(Long.valueOf(1));
+		table.setSubcategory(subcategoryDao.findByName("wood table").orElseThrow(() -> new RuntimeException("subcategory not found")));
+		table.setVendor(vendorDao.findById(Long.valueOf(1)).orElseThrow(() -> new RuntimeException("vendor not found")));
 
 		ProductDto chair = new ProductDto();
 		chair.setName("wood chair medium");
@@ -108,11 +113,23 @@ public class StorehouseApplication {
 		chair.setColor("black");
 		chair.setSize("50x60cm");
 		chair.setStock(10);
-		chair.setSubcategoryName("wood chair");
-		chair.setVendorId(Long.valueOf(1));
+		chair.setSubcategory(subcategoryDao.findByName("wood chair").orElseThrow(() -> new RuntimeException("subcategory not found")));
+		chair.setVendor(vendorDao.findById(Long.valueOf(1)).orElseThrow(() -> new RuntimeException("vendor not found")));
+
+		ProductDto wardrobe = new ProductDto();
+		wardrobe.setName("wardrobe");
+		wardrobe.setBrand("ikea");
+		wardrobe.setPrice(200.00);
+		wardrobe.setColor("white");
+		wardrobe.setSize("2000x1000cm");
+		wardrobe.setStock(3);
+		wardrobe.setSubcategory(subcategoryDao.findByName("wood wardrobe").orElseThrow(() -> new RuntimeException("subcategory not found")));
+		wardrobe.setVendor(vendorDao.findById(Long.valueOf(1)).orElseThrow(() -> new RuntimeException("vendor not found")));
+
 
 		productService.addProduct(table, Long.valueOf(1));
 		productService.addProduct(chair, Long.valueOf(2));
+		productService.addProduct(wardrobe, Long.valueOf(3));
 
 		System.err.println("Storehouse initialized");
 

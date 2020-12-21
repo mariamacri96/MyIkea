@@ -1,5 +1,8 @@
 package team2.storehouse.data.dto;
 
+import team2.storehouse.data.entities.Subcategory;
+import team2.storehouse.data.entities.Vendor;
+
 import java.io.Serializable;
 
 public class ProductDto implements Serializable {
@@ -18,9 +21,9 @@ public class ProductDto implements Serializable {
 
     private int stock;
 
-    private String subcategoryName;
+    private Subcategory subcategory;
 
-    private Long vendorId;
+    private Vendor vendor;
 
     public Long getId() {
         return id;
@@ -78,20 +81,20 @@ public class ProductDto implements Serializable {
         this.stock = stock;
     }
 
-    public String getSubcategoryName() {
-        return subcategoryName;
+    public Subcategory getSubcategory() {
+        return subcategory;
     }
 
-    public void setSubcategoryName(String subcategoryName) {
-        this.subcategoryName = subcategoryName;
+    public void setSubcategory(Subcategory subcategory) {
+        this.subcategory = subcategory;
     }
 
-    public Long getVendorId() {
-        return vendorId;
+    public Vendor getVendor() {
+        return vendor;
     }
 
-    public void setVendorId(Long vendorId) {
-        this.vendorId = vendorId;
+    public void setVendor(Vendor vendor) {
+        this.vendor = vendor;
     }
 
     @Override
@@ -104,8 +107,8 @@ public class ProductDto implements Serializable {
                 ", color='" + color + '\'' +
                 ", size='" + size + '\'' +
                 ", stock=" + stock +
-                ", subcategoryName='" + subcategoryName + '\'' +
-                ", vendorId=" + vendorId +
+                ", subcategory='" + subcategory + '\'' +
+                ", vendor=" + vendor +
                 '}';
     }
 }

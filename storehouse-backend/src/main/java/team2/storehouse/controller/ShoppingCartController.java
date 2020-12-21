@@ -14,6 +14,12 @@ public class ShoppingCartController {
     @Autowired
     ShoppingCartService shoppingCartService;
 
+    @GetMapping("/shoppingcart/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public ResponseEntity<ShoppingCartDto> getShoppingCart(@PathVariable("id") Long userId) {
+        return ResponseEntity.ok(shoppingCartService.getShoppingCart(userId));
+    }
+
     @PostMapping("/shoppingcart/add")
     @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<ShoppingCartDto> addProductInShoppingCart(@RequestParam(name = "userId") Long userId,

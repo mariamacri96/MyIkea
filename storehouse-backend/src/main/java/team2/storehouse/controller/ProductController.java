@@ -32,7 +32,7 @@ public class ProductController {
         return ResponseEntity.ok(productService.findProductById(id));
     }
 
-    @PostMapping("/product/creation")   // the id comes?
+    @PostMapping("/product/creation")
     @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto,
                                                     @RequestParam(name="placeId", defaultValue = "1") Long placeId) {

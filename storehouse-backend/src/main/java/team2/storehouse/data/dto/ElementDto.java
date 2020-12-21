@@ -10,6 +10,9 @@ public class ElementDto implements Serializable {
 
     int quantity;
 
+    public ElementDto() {
+    }
+
     public ElementDto(Product product, int quantity) {
         this.product = product;
         this.quantity = quantity;

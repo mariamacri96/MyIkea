@@ -65,4 +65,14 @@ public class Ordered {
     public int hashCode() {
         return Objects.hash(id, product, command, quantity);
     }
+
+    @Override
+    public String toString() {
+        return "Ordered{" +
+                "id=" + id +
+                ", product=" + product +
+                ", command=" + command +
+                ", quantity=" + quantity +
+                '}';
+    }
 }
