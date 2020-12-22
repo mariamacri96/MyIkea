@@ -1,11 +1,16 @@
 package team2.storehouse.data.service;
 
+import team2.storehouse.data.dto.ProfileDto;
+import team2.storehouse.data.dto.UserDto;
+import team2.storehouse.data.entities.Profile;
 import team2.storehouse.data.entities.User;
 
 import java.util.List;
 
 public interface UserService {
-    User addUser(User user);
-    User getUser(String username);
-    List<User> getUsers();
+    UserDto addUser(UserDto userDto, ProfileDto profile, User.Type type);
+    UserDto getUser(String username);
+    UserDto verify(String username, String password);
+    List<UserDto> getUsers();
+
 }

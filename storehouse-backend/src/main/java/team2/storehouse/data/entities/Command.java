@@ -10,7 +10,11 @@ import java.util.Objects;
 public class Command {    // I don't know why if I try to rename it Order it will throws some exceptions
 
     public enum State {
-        TRANSMITTED, IN_PROCESSING, CLOSED      // maybe?? I don't know
+        NOT_TRANSMITTED, // when the client or the employee creates the command
+        TRANSMITTED,     // when the client sends the command to the employee
+        IN_PROCESSING,   // when the employee see it and starts processing it
+        CONFIRMED,       // when the client or the employee confirm the command
+        CLOSED           // when the client pays (bill emission)
     }
 
     @Id
@@ -25,17 +29,6 @@ public class Command {    // I don't know why if I try to rename it Order it wil
     @ManyToOne(optional = false)
     @JoinColumn(name = "USER", referencedColumnName = "ID")
     private User user;
-
-    @OneToOne(mappedBy = "command")
-    private Bill bill;
-
-    @ManyToMany
-    @JoinTable(     // the quantity must be handled
-            name = "ORDERED",
-            joinColumns = @JoinColumn(name = "COMMAND", referencedColumnName = "ID"),
-            inverseJoinColumns = @JoinColumn(name = "PRODUCT", referencedColumnName = "ID")
-    )
-    private List<Product> products = new ArrayList<Product>();
 
     public Long getId() {
         return id;
@@ -61,32 +54,25 @@ public class Command {    // I don't know why if I try to rename it Order it wil
         this.user = user;
     }
 
-    public Bill getBill() {
-        return bill;
-    }
-
-    public void setBill(Bill bill) {
-        this.bill = bill;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Command command = (Command) o;
-        return Objects.equals(id, command.id) && state == command.state && Objects.equals(user, command.user) && Objects.equals(bill, command.bill) && Objects.equals(products, command.products);
+        return Objects.equals(id, command.id) && state == command.state && Objects.equals(user, command.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, state, user, bill, products);
+        return Objects.hash(id, state, user);
+    }
+
+    @Override
+    public String toString() {
+        return "Command{" +
+                "id=" + id +
+                ", state=" + state +
+                ", user=" + user +
+                '}';
     }
 }
