@@ -1,5 +1,6 @@
 package team2.storehouse.data.dto;
 
+import team2.storehouse.data.entities.Place;
 import team2.storehouse.data.entities.Subcategory;
 import team2.storehouse.data.entities.Vendor;
 
@@ -24,6 +25,8 @@ public class ProductDto implements Serializable {
     private Subcategory subcategory;
 
     private Vendor vendor;
+
+    private Place place;
 
     public Long getId() {
         return id;
@@ -97,6 +100,14 @@ public class ProductDto implements Serializable {
         this.vendor = vendor;
     }
 
+    public Place getPlace() {
+        return place;
+    }
+
+    public void setPlace(Place place) {
+        this.place = place;
+    }
+
     @Override
     public String toString() {
         return "ProductDto{" +
@@ -107,8 +118,9 @@ public class ProductDto implements Serializable {
                 ", color='" + color + '\'' +
                 ", size='" + size + '\'' +
                 ", stock=" + stock +
-                ", subcategory='" + subcategory + '\'' +
+                ", subcategory=" + subcategory +
                 ", vendor=" + vendor +
+                ", place=" + place +
                 '}';
     }
 }

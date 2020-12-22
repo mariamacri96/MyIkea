@@ -103,6 +103,7 @@ public class StorehouseApplication {
 		table.setColor("black");
 		table.setSize("100x120cm");
 		table.setStock(5);
+		table.setPlace(placeDao.findById(1L).orElseThrow());
 		table.setSubcategory(subcategoryDao.findByName("wood table").orElseThrow(() -> new RuntimeException("subcategory not found")));
 		table.setVendor(vendorDao.findById(Long.valueOf(1)).orElseThrow(() -> new RuntimeException("vendor not found")));
 
@@ -113,6 +114,7 @@ public class StorehouseApplication {
 		chair.setColor("black");
 		chair.setSize("50x60cm");
 		chair.setStock(10);
+		chair.setPlace(placeDao.findById(2L).orElseThrow());
 		chair.setSubcategory(subcategoryDao.findByName("wood chair").orElseThrow(() -> new RuntimeException("subcategory not found")));
 		chair.setVendor(vendorDao.findById(Long.valueOf(1)).orElseThrow(() -> new RuntimeException("vendor not found")));
 
@@ -123,13 +125,14 @@ public class StorehouseApplication {
 		wardrobe.setColor("white");
 		wardrobe.setSize("2000x1000cm");
 		wardrobe.setStock(3);
+		wardrobe.setPlace(placeDao.findById(3L).orElseThrow());
 		wardrobe.setSubcategory(subcategoryDao.findByName("wood wardrobe").orElseThrow(() -> new RuntimeException("subcategory not found")));
 		wardrobe.setVendor(vendorDao.findById(Long.valueOf(1)).orElseThrow(() -> new RuntimeException("vendor not found")));
 
 
-		productService.addProduct(table, Long.valueOf(1));
-		productService.addProduct(chair, Long.valueOf(2));
-		productService.addProduct(wardrobe, Long.valueOf(3));
+		productService.addProduct(table);
+		productService.addProduct(chair);
+		productService.addProduct(wardrobe);
 
 		System.err.println("Storehouse initialized");
 

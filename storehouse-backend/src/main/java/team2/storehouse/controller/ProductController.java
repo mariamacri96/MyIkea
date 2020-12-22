@@ -34,10 +34,8 @@ public class ProductController {
 
     @PostMapping("/product/creation")
     @CrossOrigin(origins = "http://localhost:4200")
-    public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto,
-                                                    @RequestParam(name="placeId", defaultValue = "1") Long placeId) {
-        productService.addProduct(productDto, placeId);
-        return ResponseEntity.ok(productDto);
+    public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto) {
+        return ResponseEntity.ok(productService.addProduct(productDto));
     }
 
     @DeleteMapping("/products/{id}")

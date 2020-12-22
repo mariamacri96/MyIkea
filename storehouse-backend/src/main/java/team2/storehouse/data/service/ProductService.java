@@ -8,7 +8,7 @@ import team2.storehouse.data.entities.Product;
 import java.util.List;
 
 public interface ProductService {
-    ProductDto addProduct(ProductDto product, Long placeId);
+    ProductDto addProduct(ProductDto product);
     List<ProductDto> getProducts();
     ProductDto findProductById(Long id);
     ProductDto findProductByName(String name);

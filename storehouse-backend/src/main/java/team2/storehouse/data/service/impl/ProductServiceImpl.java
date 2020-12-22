@@ -36,13 +36,13 @@ public class ProductServiceImpl implements ProductService {
 
     @Transactional
     @Override
-    public ProductDto addProduct(ProductDto productDto, Long placeId) {
+    public ProductDto addProduct(ProductDto productDto) {
         Product product = modelMapper.map(productDto,Product.class);
-        Place place = placeDao.findById(placeId).orElseThrow(() -> new RuntimeException("place " + placeId + "not found"));
+        Place place = placeDao.findById(product.getPlace().getId()).orElseThrow(() -> new RuntimeException("place " + productDto.getPlace().getId() + "not found"));
+
         if(productDao.findByPlace(place).isPresent()) {
             throw new RuntimeException("the place " + place.getId() + " is not empty");
         }
-        product.setPlace(place);
         return modelMapper.map(productDao.save(product),ProductDto.class);
     }
 
@@ -81,6 +81,7 @@ public class ProductServiceImpl implements ProductService {
         product.setSize(productDto.getSize());
         product.setVendor(productDto.getVendor());
         product.setSubcategory(productDto.getSubcategory());
+        product.setPlace(productDto.getPlace());
         return modelMapper.map(productDao.save(product), ProductDto.class);
     }
 
