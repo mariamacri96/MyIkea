@@ -10,7 +10,7 @@ import java.util.List;
 public interface UserService {
     UserDto addUser(UserDto userDto, ProfileDto profile, User.Type type);
     UserDto getUser(String username);
-    //UserDto getUserByEmail(String email);
+    UserDto verify(String username, String password);
     List<UserDto> getUsers();
 
 }

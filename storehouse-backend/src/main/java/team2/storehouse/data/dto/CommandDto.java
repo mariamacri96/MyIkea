@@ -9,11 +9,21 @@ import java.util.List;
 
 public class CommandDto implements Serializable {
 
+    Long id;
+
     User user;
 
     Command.State state;
 
     List<ElementDto> elements = new ArrayList<>();
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public User getUser() {
         return user;

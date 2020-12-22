@@ -41,9 +41,9 @@ public class ProductController {
     }
 
     @DeleteMapping("/products/{id}")
-    public HttpStatus delete (@PathVariable Long id, @RequestBody ProductDto productDto) {
+    public ResponseEntity delete (@PathVariable Long id, @RequestBody ProductDto productDto) {
         productService.delete(id);
-        return HttpStatus.OK;
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @PutMapping("/product/update/{id}")

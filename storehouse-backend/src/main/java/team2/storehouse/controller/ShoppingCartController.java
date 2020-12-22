@@ -30,7 +30,7 @@ public class ShoppingCartController {
 
     @DeleteMapping("/shoppingcart/delete")
     @CrossOrigin(origins = "http://localhost:4200")
-    public ResponseEntity<ShoppingCartDto> deleteProductInShoppingCart(@RequestParam(name = "userId") Long userId,
+    public ResponseEntity<ShoppingCartDto> deleteProductFromShoppingCart(@RequestParam(name = "userId") Long userId,
                                                                        @RequestParam(name = "productId") Long productId) {
         return ResponseEntity.ok(shoppingCartService.deleteProduct(userId, productId));
     }

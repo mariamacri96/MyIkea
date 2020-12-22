@@ -1,21 +1,12 @@
 package team2.storehouse;
 
-import org.junit.Assert;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import team2.storehouse.data.dao.*;
-import team2.storehouse.data.dto.ProductDto;
-import team2.storehouse.data.dto.ProfileDto;
-import team2.storehouse.data.dto.UserDto;
-import team2.storehouse.data.entities.*;
 import team2.storehouse.data.service.ProductService;
 import team2.storehouse.data.service.UserService;
-import team2.storehouse.data.service.impl.LogIn;
-
-import java.time.LocalDate;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -41,9 +32,6 @@ public class StorehouseApplicationTests {
 
 	@Autowired
 	UserService userService;
-
-	@Autowired
-	LogIn logIn;
 
 	@Autowired
 	ProductService productService;

@@ -9,16 +9,12 @@ import team2.storehouse.data.dto.ProfileDto;
 import team2.storehouse.data.dto.UserDto;
 import team2.storehouse.data.entities.User;
 import team2.storehouse.data.service.UserService;
-import team2.storehouse.data.service.impl.LogIn;
 
 import java.util.List;
 
 @Controller
 @RequestMapping("storehouse")
 public class UserController {
-
-    @Autowired
-    LogIn logInService;
 
     @Autowired
     UserService userService;
@@ -37,7 +33,7 @@ public class UserController {
     @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<UserDto> login(@RequestParam(name="username", defaultValue = "marcoBellizzi") String username,
                                          @RequestParam(name="password",defaultValue = "password123") String password){
-        return ResponseEntity.ok(logInService.verify(username,password));
+        return ResponseEntity.ok(userService.verify(username,password));
     }
 
     @GetMapping("/users")
@@ -45,7 +41,5 @@ public class UserController {
     public ResponseEntity<List<UserDto>> all(){
         return ResponseEntity.ok(userService.getUsers());
     }
-
-
 
 }

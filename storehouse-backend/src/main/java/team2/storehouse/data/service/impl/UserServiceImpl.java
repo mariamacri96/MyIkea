@@ -14,6 +14,7 @@ import team2.storehouse.data.entities.User;
 import team2.storehouse.data.service.UserService;
 import team2.storehouse.exceptions.UserAlredyExistException;
 import team2.storehouse.exceptions.UserNotFoundException;
+import team2.storehouse.exceptions.WrongPasswordException;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -48,38 +49,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDto> getUsers() {
         List<User> users = userDao.findAll();
-        return users.stream()
-                .map(user -> modelMapper
-                        .map(user, UserDto.class))
-                .collect(Collectors.toList());
+        return users.stream().map(user -> modelMapper.map(user, UserDto.class)).collect(Collectors.toList());
     }
 
     @Override
     public UserDto getUser(String username) {
         User user = userDao.findByUsername(username).orElseThrow(() -> new UserNotFoundException(username));
-        UserDto userDto =modelMapper.map(user, UserDto.class);
-        return userDto;
+        return modelMapper.map(user, UserDto.class);
     }
-    /*
+
     @Override
-    public UserDto getUserByEmail(String email) {
-        Optional<User> user = null;
-        if(emailValidator(email))
-        {
-            throw new UserAlredyExistException(email);
+    public UserDto verify(String username, String password) {
+        User user = userDao.findByUsername(username).orElseThrow(() -> new RuntimeException("user " + username + " not found"));
+        if(!user.getPassword().equals(password)) {
+            throw new WrongPasswordException(username);
         }
-
+        return modelMapper.map(user, UserDto.class);
     }
-
-    public boolean emailValidator( String email){
-
-        boolean isPresent = true;
-        Optional<User> user = userDao.findByEmail(email);
-        if(user.isEmpty())
-            isPresent = false;
-
-        return isPresent;
-
-
-    }*/
 }

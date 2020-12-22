@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 public class AccountDto implements Serializable {
 
-    UserDto userDto;
+    private UserDto userDto;
 
-    ProfileDto profileDto;
+    private ProfileDto profileDto;
 
-    String type;
+    private String type;
 
     public UserDto getUserDto() {
         return userDto;
