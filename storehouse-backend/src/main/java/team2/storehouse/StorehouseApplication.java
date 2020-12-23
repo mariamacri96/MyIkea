@@ -69,24 +69,98 @@ public class StorehouseApplication {
 
 		userService.addUser(marco, profileMarco, User.Type.EMPLOYEE);
 		userService.addUser(maria, profileMaria, User.Type.EMPLOYEE);
+		//categories
+		Category winter = new Category();
+		winter.setName("Winter");
+		winter = categoryDao.save(winter);
 
-		Category carpentry = new Category();
-		carpentry.setName("carpentry");
-		carpentry = categoryDao.save(carpentry);
+		Category smartHome = new Category();
+		smartHome.setName("Smart Home");
+		smartHome = categoryDao.save(smartHome);
 
+		Category furniture = new Category();
+		furniture.setName("Furniture");
+		furniture = categoryDao.save(furniture);
+
+		Category beds = new Category();
+		beds.setName("Beds and mattresses");
+		beds = categoryDao.save(beds);
+
+		Category home = new Category();
+		home.setName("Home organization products");
+		home = categoryDao.save(home);
+
+		Category kitchens=new Category();
+		kitchens.setName("Kitchens and appliances");
+		kitchens= categoryDao.save(kitchens);
+
+		Category babies=new Category();
+		babies.setName("Babies and children");
+		babies= categoryDao.save(babies);
+
+		Category textiles=new Category();
+		textiles.setName("Textiles");
+		textiles= categoryDao.save(textiles);
+
+		Category decoration = new Category();
+		decoration.setName("Decoration");
+		decoration = categoryDao.save(decoration);
+
+		Category lighting = new Category();
+		lighting.setName("Lighting");
+		lighting = categoryDao.save(lighting);
+
+		Category tables = new Category();
+		tables.setName("Products for the table");
+		tables = categoryDao.save(tables);
+
+		Category bath = new Category();
+		bath.setName("Bath products");
+		bath = categoryDao.save(bath);
+
+		Category carpetsAndDoormats=new Category();
+		carpetsAndDoormats.setName("Carpets and doormats");
+		carpetsAndDoormats= categoryDao.save(carpetsAndDoormats);
+
+		Category gardenFurniture= new Category();
+		gardenFurniture.setName("Garden Furniture");
+		gardenFurniture= categoryDao.save(gardenFurniture);
+
+		Category potHoldersAndPlants=new Category();
+		potHoldersAndPlants.setName("Pot holders and plants");
+		potHoldersAndPlants= categoryDao.save(potHoldersAndPlants);
+
+
+		Category electronics=new Category();
+		electronics.setName("Electronics");
+		electronics= categoryDao.save(electronics);
+
+		Category travelandLeisureProducts=new Category();
+		travelandLeisureProducts.setName("Travel and leisure products");
+		travelandLeisureProducts= categoryDao.save(travelandLeisureProducts);
+
+		Category animals=new Category();
+		animals.setName("Products for animals");
+		animals= categoryDao.save(animals);
+
+
+
+
+
+		//subcategories
 		Subcategory woodTable = new Subcategory();
 		woodTable.setName("wood table");
-		woodTable.setCategory(carpentry);
+		woodTable.setCategory(furniture);
 		woodTable = subcategoryDao.save(woodTable);
 
 		Subcategory woodChair = new Subcategory();
 		woodChair.setName("wood chair");
-		woodChair.setCategory(carpentry);
+		woodChair.setCategory(furniture);
 		woodChair = subcategoryDao.save(woodChair);
 
 		Subcategory woodWardrobe = new Subcategory();
 		woodWardrobe.setName("wood wardrobe");
-		woodWardrobe.setCategory(carpentry);
+		woodWardrobe.setCategory(furniture);
 		woodWardrobe = subcategoryDao.save(woodWardrobe);
 
 		Vendor ikea = new Vendor();
