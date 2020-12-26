@@ -35,7 +35,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     public List<SubcategoryDto> getSubCategoriesByIdCategory(Long id){
 
-        List<Subcategory> subcategories= (List<Subcategory>) subcategoryDao.findByCategory(id);
+        List<Subcategory> subcategories= subcategoryDao.findAll( SubcategoryDao.findByCategory(id));
         return subcategories.stream()
                 .map(subcategory -> modelMapper
                         .map(subcategory, SubcategoryDto.class))

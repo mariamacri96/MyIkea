@@ -22,14 +22,14 @@ public class CategoryController {
     CategoryService categoryService;
 
 
-    @GetMapping("/categories")
+    @GetMapping("/categories") //work
     @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<List<CategoryDto>> all(){
         return ResponseEntity.ok(categoryService.getCategories());
     }
 
 
-    @GetMapping("/categories/{id}") //testing
+    @GetMapping("/categories/{id}") //work try with localhost:8080/storehouse/categories/3 in postman
     @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<List<SubcategoryDto>> getSubCategoriesByIdCategory(@PathVariable Long id){
         return ResponseEntity.ok(categoryService.getSubCategoriesByIdCategory(id));

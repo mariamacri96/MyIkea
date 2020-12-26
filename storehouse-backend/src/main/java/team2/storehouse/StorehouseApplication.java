@@ -144,14 +144,12 @@ public class StorehouseApplication {
 		animals= categoryDao.save(animals);
 
 
-
-
-
 		//subcategories
 		Subcategory woodTable = new Subcategory();
 		woodTable.setName("wood table");
 		woodTable.setCategory(furniture);
 		woodTable = subcategoryDao.save(woodTable);
+		System.out.println(woodTable);
 
 		Subcategory woodChair = new Subcategory();
 		woodChair.setName("wood chair");
@@ -207,7 +205,8 @@ public class StorehouseApplication {
 		productService.addProduct(table);
 		productService.addProduct(chair);
 		productService.addProduct(wardrobe);
-
+		Long id= (long )1;
+		SubcategoryDao.findByCategory( id);
 		System.err.println("Storehouse initialized");
 
 	}

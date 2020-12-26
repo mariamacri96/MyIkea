@@ -2,6 +2,7 @@ package team2.storehouse.data.dao;
 
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 import team2.storehouse.data.entities.Product;
 import team2.storehouse.data.entities.Subcategory;
@@ -14,15 +15,15 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface SubcategoryDao extends JpaRepository<Subcategory, Long> {
+public interface SubcategoryDao extends JpaRepository<Subcategory, Long> , JpaSpecificationExecutor<Subcategory> {
     Optional<Subcategory> findByName(String name);
 
-    default Specification<Subcategory> findByCategory(Long id) {
+    public static Specification<Subcategory> findByCategory(Long id) {
         return (Root<Subcategory> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) -> {
             root.join("category");
-            CriteriaQuery<?> cq = criteriaQuery.where(criteriaBuilder.or(root.get("category").isNull(),
-                    criteriaBuilder.equal(root.get("category").get("id"), id)));
-            return (Predicate) cq;
+            CriteriaQuery<?> cq = criteriaQuery.where(criteriaBuilder.equal(root.get("category").get("id"), id));
+            return cq.getRestriction();
         };
     }
+
 }

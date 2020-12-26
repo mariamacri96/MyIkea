@@ -1,10 +1,13 @@
 package team2.storehouse;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import team2.storehouse.data.dao.*;
+import team2.storehouse.data.entities.Category;
+import team2.storehouse.data.entities.Subcategory;
 import team2.storehouse.data.service.ProductService;
 import team2.storehouse.data.service.UserService;
 
@@ -35,12 +38,18 @@ public class StorehouseApplicationTests {
 
 	@Autowired
 	ProductService productService;
-/*
+
 	@Test
 	public void test() {
+		Category category = new Category();
+		category.setName("carpentry");
+		Subcategory subcategory = new Subcategory();
+		subcategory.setName("wood table");
+		subcategory.setCategory(categoryDao.save(category));
+
 
 	}
-
+/*
 	@Test
 	public void testUser() {
 
