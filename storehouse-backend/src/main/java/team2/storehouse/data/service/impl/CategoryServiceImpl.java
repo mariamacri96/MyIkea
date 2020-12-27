@@ -11,6 +11,7 @@ import team2.storehouse.data.entities.Category;
 import team2.storehouse.data.entities.Subcategory;
 import team2.storehouse.data.service.CategoryService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 @Service
@@ -33,6 +34,7 @@ public class CategoryServiceImpl implements CategoryService {
                 .collect(Collectors.toList());
     }
 
+    @Override
     public List<SubcategoryDto> getSubCategoriesByIdCategory(Long id){
 
         List<Subcategory> subcategories= subcategoryDao.findAll( SubcategoryDao.findByCategory(id));
@@ -41,5 +43,21 @@ public class CategoryServiceImpl implements CategoryService {
                         .map(subcategory, SubcategoryDto.class))
                 .collect(Collectors.toList());
 
+    }
+
+    @Override
+    public SubcategoryDto getSubcategory(String name) {
+        return modelMapper.map(subcategoryDao.findByName(name).orElseThrow(
+                () -> new RuntimeException("subcategory not found")), SubcategoryDto.class);
+    }
+
+    @Override
+    public List<String> getSubCategoriesName() {
+        List<Subcategory> subcategories= subcategoryDao.findAll();
+        List<String> names = new ArrayList<>();
+        for(Subcategory cat : subcategories) {
+            names.add(cat.getName());
+        }
+        return names;
     }
 }

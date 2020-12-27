@@ -202,9 +202,9 @@ public class StorehouseApplication {
 		wardrobe.setVendor(vendorDao.findById(Long.valueOf(1)).orElseThrow(() -> new RuntimeException("vendor not found")));
 
 
-		productService.addProduct(table);
-		productService.addProduct(chair);
-		productService.addProduct(wardrobe);
+		productService.save(table);
+		productService.save(chair);
+		productService.save(wardrobe);
 		Long id= (long )1;
 		SubcategoryDao.findByCategory( id);
 		System.err.println("Storehouse initialized");

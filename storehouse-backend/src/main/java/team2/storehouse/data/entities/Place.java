@@ -43,4 +43,12 @@ public class Place {
     public int hashCode() {
         return Objects.hash(id, shelf);
     }
+
+    @Override
+    public String toString() {
+        return "Place{" +
+                "id=" + id +
+                ", shelf=" + shelf +
+                '}';
+    }
 }

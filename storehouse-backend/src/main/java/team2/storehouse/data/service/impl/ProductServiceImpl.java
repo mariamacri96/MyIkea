@@ -36,14 +36,56 @@ public class ProductServiceImpl implements ProductService {
 
     @Transactional
     @Override
-    public ProductDto addProduct(ProductDto productDto) {
+    public ProductDto save(ProductDto productDto) {
+        System.out.println(productDto);
+
         Product product = modelMapper.map(productDto,Product.class);
-        Place place = placeDao.findById(product.getPlace().getId()).orElseThrow(() -> new RuntimeException("place " + productDto.getPlace().getId() + "not found"));
+
+        Place place = placeDao.findById(product.getPlace().getId()).orElseThrow(
+                () -> new RuntimeException("place " + productDto.getPlace().getId() + "not found"));
+        Subcategory subcategory = subcategoryDao.findByName(productDto.getSubcategory().getName()).orElseThrow(
+                () -> new RuntimeException("subcategory " + productDto.getSubcategory().getName() + "not found"));
+        Vendor vendor = vendorDao.findByName(productDto.getVendor().getName()).orElseThrow(
+                () -> new RuntimeException("vendor " + productDto.getVendor().getName() + " not found"));
 
         if(productDao.findByPlace(place).isPresent()) {
             throw new RuntimeException("the place " + place.getId() + " is not empty");
         }
+
+        product.setPlace(place);
+        product.setSubcategory(subcategory);
+        product.setVendor(vendor);
+
         return modelMapper.map(productDao.save(product),ProductDto.class);
+    }
+
+    @Override
+    public ProductDto update(ProductDto productDto) {
+        Product product = productDao.findById(productDto.getId()).orElseThrow(
+                () -> new UserNotFoundException(productDto.getId().toString()));
+        Place place = placeDao.findById(product.getPlace().getId()).orElseThrow(
+                () -> new RuntimeException("place " + productDto.getPlace().getId() + "not found"));
+        Subcategory subcategory = subcategoryDao.findByName(productDto.getSubcategory().getName()).orElseThrow(
+                () -> new RuntimeException("subcategory " + productDto.getSubcategory().getName() + "not found"));
+        Vendor vendor = vendorDao.findByName(productDto.getVendor().getName()).orElseThrow(
+                () -> new RuntimeException("vendor " + productDto.getVendor().getName() + " not found"));
+
+        if(productDao.findByPlace(place).isPresent() &&
+                productDao.findByPlace(place).orElseThrow().getId() != productDto.getId()) {
+            throw new RuntimeException("the place " + place.getId() + " is not empty");
+        }
+
+        product.setName(productDto.getName());
+        product.setPrice(productDto.getPrice());
+        product.setStock(productDto.getStock());
+        product.setBrand(productDto.getBrand());
+        product.setColor(productDto.getColor());
+        product.setSize(productDto.getSize());
+        product.setVendor(productDto.getVendor());
+        product.setSubcategory(productDto.getSubcategory());
+        product.setPlace(productDto.getPlace());
+
+        return modelMapper.map(productDao.save(product), ProductDto.class);
     }
 
     @Override
@@ -64,25 +106,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDto findProductByName(String name) {
-
         Product product = productDao.findProductByName(name).orElseThrow(() -> new UserNotFoundException(name));
         ProductDto productDto = modelMapper.map(product, ProductDto.class);
         return productDto;
-    }
-
-    @Override
-    public ProductDto update(Long id, ProductDto productDto) {
-        Product product = productDao.findById(id).orElseThrow(() -> new UserNotFoundException(id.toString()));
-        product.setName(productDto.getName());
-        product.setPrice(productDto.getPrice());
-        product.setStock(productDto.getStock());
-        product.setBrand(productDto.getBrand());
-        product.setColor(productDto.getColor());
-        product.setSize(productDto.getSize());
-        product.setVendor(productDto.getVendor());
-        product.setSubcategory(productDto.getSubcategory());
-        product.setPlace(productDto.getPlace());
-        return modelMapper.map(productDao.save(product), ProductDto.class);
     }
 
     @Override
@@ -101,14 +127,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void delete(Long id) {
         productDao.deleteById(id);
-    }
-
-
-    @Override
-    public void delete(ProductDto productDto) {
-        Product product = modelMapper.map(productDto, Product.class);
-        productDao.delete(product);
-
     }
 
 

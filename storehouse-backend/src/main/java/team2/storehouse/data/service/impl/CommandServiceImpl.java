@@ -73,6 +73,22 @@ public class CommandServiceImpl implements CommandService {
     }
 
     @Override
+    public List<CommandDto> getCommands() {
+        List<CommandDto> commands = new ArrayList<>();
+        for(Command command : commandDao.findAll()) {
+            CommandDto commandDto = new CommandDto();
+            commandDto.setId(command.getId());
+            commandDto.setUser(command.getUser());
+            commandDto.setState(command.getState());
+            for(Ordered ordered : orderedDao.findAllByCommand(command)) {
+                commandDto.getElements().add(new ElementDto(ordered.getProduct(), ordered.getQuantity()));
+            }
+            commands.add(commandDto);
+        }
+        return commands;
+    }
+
+    @Override
     public List<CommandDto> getCommands(Long userId) {
         List<CommandDto> commands = new ArrayList<>();
         for(Command command : commandDao.findAllByUser(userDao.findById(userId).orElseThrow(() -> new RuntimeException("user " + userId + " not found")))) {

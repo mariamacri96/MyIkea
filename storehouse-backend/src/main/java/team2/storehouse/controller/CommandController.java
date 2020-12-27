@@ -37,6 +37,12 @@ public class CommandController {
         return ResponseEntity.ok(commandService.getCommands(userId));
     }
 
+    @GetMapping("/commands")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public ResponseEntity<List<CommandDto>> getCommands() {
+        return ResponseEntity.ok(commandService.getCommands());
+    }
+
     @PutMapping("/command/update")
     @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<CommandDto> updateCommand(@RequestBody CommandDto commandDto) {

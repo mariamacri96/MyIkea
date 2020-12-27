@@ -12,5 +12,6 @@ public interface CommandService {
     CommandDto updateCommand(CommandDto commandDto);
     BillDto confirmCommand(Long commandId);
     List<CommandDto> getCommands(Long userId);
+    List<CommandDto> getCommands();
     void deleteCommand(Long commandId);
 }
