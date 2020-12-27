@@ -144,7 +144,74 @@ public class StorehouseApplication {
 		animals= categoryDao.save(animals);
 
 
-		//subcategories
+
+		//subcategories of  winter
+		Subcategory christmas = new Subcategory();
+		christmas.setName("Christmas decorations");
+		christmas.setCategory(winter);
+		christmas = subcategoryDao.save(christmas);
+
+
+		Subcategory paper = new Subcategory();
+		paper.setName("Paper, gift bags and accessories");
+		paper.setCategory(winter);
+		paper = subcategoryDao.save(paper);
+
+		Subcategory illuminations = new Subcategory();
+		illuminations.setName("Christmas illuminations");
+		illuminations.setCategory(winter);
+		illuminations = subcategoryDao.save(illuminations);
+
+		//subcategory smart home
+
+		Subcategory smartLighting = new Subcategory();
+		smartLighting.setName("Smart Lighting");
+		smartLighting.setCategory(smartHome);
+		smartLighting = subcategoryDao.save(smartLighting);
+
+
+		Subcategory speakers = new Subcategory();
+		speakers.setName("Wi-Fi speakers");
+		speakers.setCategory(smartHome);
+		speakers = subcategoryDao.save(speakers);
+
+		Subcategory remoteControls = new Subcategory();
+		remoteControls.setName("Remote controls for lights and wireless devices");
+		remoteControls.setCategory(smartHome);
+		remoteControls = subcategoryDao.save(remoteControls);
+
+
+		//subcategories of furniture
+		Subcategory sofa = new Subcategory();
+		sofa.setName("Sofas and sofa beds");
+		sofa.setCategory(furniture);
+		sofa = subcategoryDao.save(sofa);
+
+
+		Subcategory armchairs = new Subcategory();
+		armchairs.setName("Armchairs, chaise-longue and footrest");
+		armchairs.setCategory(furniture);
+		armchairs = subcategoryDao.save(armchairs);
+
+		Subcategory tablesDesks = new Subcategory();
+		tablesDesks.setName("Tables and desks");
+		tablesDesks.setCategory(furniture);
+		tablesDesks = subcategoryDao.save(tablesDesks);
+
+		//
+
+
+
+
+
+
+
+
+
+
+
+
+
 		Subcategory woodTable = new Subcategory();
 		woodTable.setName("wood table");
 		woodTable.setCategory(furniture);
