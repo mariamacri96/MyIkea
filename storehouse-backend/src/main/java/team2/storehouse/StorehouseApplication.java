@@ -48,10 +48,10 @@ public class StorehouseApplication {
 		profileMarco.setName("Marco");
 		profileMarco.setSurname("Bellizzi");
 		profileMarco.setAddress("Cosenza, via Adolfo Quintieri n. 44");
-		profileMarco.setBirthdate(LocalDate.of(1996, 10, 24));
+		//profileMarco.setBirthdate(LocalDate.of(1996, 10, 24));
 		profileMarco.setFiscalCode("bllmrc96r24a944n");
-		profileMarco.setGender(Profile.Gender.MALE);
-		profileMarco.setPhone(3284686896L);
+	//	profileMarco.setGender(Profile.Gender.MALE);
+	//	profileMarco.setPhone(3284686896L);
 
 		UserDto maria = new UserDto();
 		maria.setUsername("mariama");
@@ -62,10 +62,10 @@ public class StorehouseApplication {
 		profileMaria.setName("maria");
 		profileMaria.setSurname("macrì");
 		profileMaria.setAddress("via pietro nenni 20");
-		profileMaria.setBirthdate(LocalDate.of(2014, 1, 1));
+		//profileMaria.setBirthdate(LocalDate.of(2014, 1, 1));
 		profileMaria.setFiscalCode("mcrmra96b69f112j");
-		profileMaria.setGender(Profile.Gender.FEMALE);
-		profileMaria.setPhone(3288338284L);
+		//profileMaria.setGender(Profile.Gender.FEMALE);
+		//profileMaria.setPhone(3288338284L);
 
 		userService.addUser(marco, profileMarco, User.Type.EMPLOYEE);
 		userService.addUser(maria, profileMaria, User.Type.EMPLOYEE);
@@ -197,21 +197,7 @@ public class StorehouseApplication {
 		tablesDesks.setName("Tables and desks");
 		tablesDesks.setCategory(furniture);
 		tablesDesks = subcategoryDao.save(tablesDesks);
-
 		//
-
-
-
-
-
-
-
-
-
-
-
-
-
 		Subcategory woodTable = new Subcategory();
 		woodTable.setName("wood table");
 		woodTable.setCategory(furniture);
@@ -240,6 +226,7 @@ public class StorehouseApplication {
 		table.setPrice(150.00);
 		table.setColor("black");
 		table.setSize("100x120cm");
+		table.setPhoto("https://medias.maisonsdumonde.com/image/upload/q_auto,f_auto/w_1000/img/tavolo-per-sala-da-pranzo-in-massello-di-legno-di-sheesham-6-persone-130-cm-1000-7-19-121625_3.jpg");
 		table.setStock(5);
 		table.setPlace(placeDao.findById(1L).orElseThrow());
 		table.setSubcategory(subcategoryDao.findByName("wood table").orElseThrow(() -> new RuntimeException("subcategory not found")));

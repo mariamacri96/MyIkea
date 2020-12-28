@@ -83,6 +83,7 @@ public class ProductServiceImpl implements ProductService {
         product.setVendor(vendor);
         product.setSubcategory(subcategory);
         product.setPlace(place);
+        product.setPhoto(productDto.getPhoto());
 
         return modelMapper.map(productDao.save(product), ProductDto.class);
     }
