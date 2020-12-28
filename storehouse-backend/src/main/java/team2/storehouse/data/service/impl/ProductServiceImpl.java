@@ -80,6 +80,7 @@ public class ProductServiceImpl implements ProductService {
         product.setBrand(productDto.getBrand());
         product.setColor(productDto.getColor());
         product.setSize(productDto.getSize());
+        product.setPhoto(productDto.getPhoto());
         product.setVendor(productDto.getVendor());
         product.setSubcategory(productDto.getSubcategory());
         product.setPlace(productDto.getPlace());
