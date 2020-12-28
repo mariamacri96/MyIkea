@@ -216,7 +216,6 @@ public class StorehouseApplication {
 		woodTable.setName("wood table");
 		woodTable.setCategory(furniture);
 		woodTable = subcategoryDao.save(woodTable);
-		System.out.println(woodTable);
 
 		Subcategory woodChair = new Subcategory();
 		woodChair.setName("wood chair");

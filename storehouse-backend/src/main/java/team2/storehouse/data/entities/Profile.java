@@ -24,7 +24,6 @@ public class Profile {
     @Column(name = "SURNAME")
     private String surname;
 
-    @Basic(optional = false)
     @Enumerated
     @Column(name = "GENDER")
     private Gender gender;
@@ -37,11 +36,9 @@ public class Profile {
     @Column(name = "ADDRESS")
     private String address;
 
-    @Basic(optional = false)
     @Column(name = "BIRTHDATE")
     private LocalDate birthdate;
 
-    @Basic(optional = false)
     @Column(name = "PHONE")
     private Long phone;
 

@@ -37,7 +37,6 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     @Override
     public ProductDto save(ProductDto productDto) {
-        System.out.println(productDto);
 
         Product product = modelMapper.map(productDto,Product.class);
 
