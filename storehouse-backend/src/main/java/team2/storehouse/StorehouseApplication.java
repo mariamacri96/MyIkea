@@ -11,6 +11,8 @@ import team2.storehouse.data.entities.*;
 import team2.storehouse.data.service.ProductService;
 import team2.storehouse.data.service.UserService;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 
 @SpringBootApplication
@@ -219,19 +221,24 @@ public class StorehouseApplication {
 		ikea.setEmail("ikea@gmail.com");
 		ikea.setPhone(3384792366L);
 		ikea = vendorDao.save(ikea);
-
+		File file=new File("src/img/Albert.png");
 		ProductDto table = new ProductDto();
 		table.setName("wood table medium");
 		table.setBrand("ikea");
 		table.setPrice(150.00);
 		table.setColor("black");
 		table.setSize("100x120cm");
-		table.setPhoto("https://medias.maisonsdumonde.com/image/upload/q_auto,f_auto/w_1000/img/tavolo-per-sala-da-pranzo-in-massello-di-legno-di-sheesham-6-persone-130-cm-1000-7-19-121625_3.jpg");
+
+		String photoTable="https://medias.maisonsdumonde.com/image/upload/q_auto,f_auto/w_1000/img/tavolo-per-sala-da-pranzo-in-massello-di-legno-di-sheesham-6-persone-130-cm-1000-7-19-121625_3.jpg";
+		String photoWardrobe= "https://www.ikea.com/it/it/images/products/brimnes-guardaroba-a-3-ante-bianco__0176787_PE329567_S5.jpg";
+		String photoChair="https://www.ikea.com/it/it/images/products/fanbyn-sedia-con-braccioli-bianco__0545007_PE655282_S5.JPG";
+		table.setPhoto(photoTable);
+
 		table.setStock(5);
 		table.setPlace(placeDao.findById(1L).orElseThrow());
 		table.setSubcategory(subcategoryDao.findByName("wood table").orElseThrow(() -> new RuntimeException("subcategory not found")));
 		table.setVendor(vendorDao.findById(Long.valueOf(1)).orElseThrow(() -> new RuntimeException("vendor not found")));
-
+		System.out.println(table);
 		ProductDto chair = new ProductDto();
 		chair.setName("wood chair medium");
 		chair.setBrand("ikea");
@@ -242,6 +249,9 @@ public class StorehouseApplication {
 		chair.setPlace(placeDao.findById(2L).orElseThrow());
 		chair.setSubcategory(subcategoryDao.findByName("wood chair").orElseThrow(() -> new RuntimeException("subcategory not found")));
 		chair.setVendor(vendorDao.findById(Long.valueOf(1)).orElseThrow(() -> new RuntimeException("vendor not found")));
+		chair.setPhoto(photoChair);
+
+
 
 		ProductDto wardrobe = new ProductDto();
 		wardrobe.setName("wardrobe");
@@ -253,6 +263,7 @@ public class StorehouseApplication {
 		wardrobe.setPlace(placeDao.findById(3L).orElseThrow());
 		wardrobe.setSubcategory(subcategoryDao.findByName("wood wardrobe").orElseThrow(() -> new RuntimeException("subcategory not found")));
 		wardrobe.setVendor(vendorDao.findById(Long.valueOf(1)).orElseThrow(() -> new RuntimeException("vendor not found")));
+		wardrobe.setPhoto(photoWardrobe);
 
 
 		productService.save(table);
