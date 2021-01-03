@@ -7,7 +7,9 @@ import team2.storehouse.data.dao.*;
 import team2.storehouse.data.dto.BillDto;
 import team2.storehouse.data.dto.CommandDto;
 import team2.storehouse.data.dto.ElementDto;
+import team2.storehouse.data.dto.ProductDto;
 import team2.storehouse.data.entities.Bill;
+import team2.storehouse.data.entities.User;
 import team2.storehouse.data.entities.Command;
 import team2.storehouse.data.entities.Ordered;
 import team2.storehouse.data.entities.PutInside;
@@ -47,6 +49,25 @@ public class CommandServiceImpl implements CommandService {
         command.setUser(userDao.findById(userId).orElseThrow(() -> new RuntimeException("user " + userId + " not found")));
         command.setState(Command.State.NOT_TRANSMITTED);
         return modelMapper.map(commandDao.save(command), CommandDto.class);
+    }
+    @Override
+    public CommandDto placeCommand(CommandDto commandDto){
+        Command command= modelMapper.map(commandDto,Command.class);
+        command.setState(Command.State.TRANSMITTED);
+        command.setUser(userDao.findByUsername(commandDto.getUser().getUsername()).orElseThrow(() -> new RuntimeException("user "  + " not found")));
+        command=commandDao.save(command);
+        for (ElementDto element: commandDto.getElements()
+             ) {
+            Ordered ordered = new Ordered();
+            ordered.setCommand(command);
+            ordered.setQuantity(element.getQuantity());
+            ordered.setProduct(element.getProduct());
+            orderedDao.save(ordered);
+
+        }
+        commandDto =modelMapper.map(commandDao.save(command), CommandDto.class);
+        commandDto.setElementsfromOrdered(orderedDao.findAllByCommand(command));
+        return commandDto;
     }
 
     @Override
@@ -122,7 +143,13 @@ public class CommandServiceImpl implements CommandService {
         }
         return commandDto;
     }
-
+    public CommandDto confirmCommandPayment(Long commandId) {
+        Command command = commandDao.findById(commandId).orElseThrow(() -> new RuntimeException("command " + commandId + " not found"));
+        command.setState(Command.State.CONFIRMED);
+        CommandDto commandDto = modelMapper.map(commandDao.save(command), CommandDto.class);
+        commandDto.setElementsfromOrdered(orderedDao.findAllByCommand(command));
+        return commandDto;
+    }
     @Override
     public BillDto confirmCommand(Long commandId) {
         Command command = commandDao.findById(commandId).orElseThrow(() -> new RuntimeException("command " + commandId + " not found"));

@@ -9,7 +9,9 @@ import java.util.List;
 public interface CommandService {
     CommandDto createEmptyCommand(Long userId);
     CommandDto createCommandFromShoppingCart(Long userId);
+    CommandDto placeCommand(CommandDto commandDto);
     CommandDto updateCommand(CommandDto commandDto);
+    CommandDto confirmCommandPayment(Long commandId);
     BillDto confirmCommand(Long commandId);
     List<CommandDto> getCommands(Long userId);
     List<CommandDto> getCommands();
