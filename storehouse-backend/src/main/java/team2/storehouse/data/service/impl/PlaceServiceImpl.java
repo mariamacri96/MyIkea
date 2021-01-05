@@ -37,4 +37,9 @@ public class PlaceServiceImpl implements PlaceService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public void delete(Long id) {
+        placeDao.deleteById(id);
+    }
+
 }

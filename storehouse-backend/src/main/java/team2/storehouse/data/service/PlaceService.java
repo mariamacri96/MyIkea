@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface PlaceService {
     PlaceDto getPlace(Long id);
     List<PlaceDto> getPlaces();
+    void delete(Long id);
 }
