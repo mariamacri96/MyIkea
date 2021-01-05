@@ -14,15 +14,15 @@ public class ProfileDto implements Serializable {
 
     private String surname;
 
-    private Profile.Gender gender;
+   // private Profile.Gender gender;
 
     private String fiscalCode;
 
     private String address;
 
-    private LocalDate birthdate;
+    //private LocalDate birthdate;
 
-    private Long phone;
+    //private Long phone;
 
     private String photo;
 
@@ -42,13 +42,6 @@ public class ProfileDto implements Serializable {
         this.surname = surname;
     }
 
-    public Profile.Gender getGender() {
-        return gender;
-    }
-
-    public void setGender(Profile.Gender gender) {
-        this.gender = gender;
-    }
 
     public String getFiscalCode() {
         return fiscalCode;
@@ -66,21 +59,6 @@ public class ProfileDto implements Serializable {
         this.address = address;
     }
 
-    public LocalDate getBirthdate() {
-        return birthdate;
-    }
-
-    public void setBirthdate(LocalDate birthdate) {
-        this.birthdate = birthdate;
-    }
-
-    public Long getPhone() {
-        return phone;
-    }
-
-    public void setPhone(Long phone) {
-        this.phone = phone;
-    }
 
     public String getPhoto() {
         return photo;

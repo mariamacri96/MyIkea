@@ -1,6 +1,7 @@
 package team2.storehouse.data.dto;
 
 import team2.storehouse.data.entities.Command;
+import team2.storehouse.data.entities.Ordered;
 import team2.storehouse.data.entities.User;
 
 import java.io.Serializable;
@@ -47,5 +48,13 @@ public class CommandDto implements Serializable {
 
     public void setElements(List<ElementDto> elements) {
         this.elements = elements;
+    }
+    public void setElementsfromOrdered(List<Ordered> orderedList) {
+        for (Ordered o:orderedList
+             ) {    elements.add(new ElementDto(o.getProduct(),o.getQuantity()));
+
+        }
+
+
     }
 }

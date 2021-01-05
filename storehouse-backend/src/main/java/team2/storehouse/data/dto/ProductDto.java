@@ -4,6 +4,7 @@ import team2.storehouse.data.entities.Place;
 import team2.storehouse.data.entities.Subcategory;
 import team2.storehouse.data.entities.Vendor;
 
+import javax.persistence.Column;
 import java.io.Serializable;
 
 public class ProductDto implements Serializable {
@@ -27,6 +28,16 @@ public class ProductDto implements Serializable {
     private Vendor vendor;
 
     private Place place;
+
+    private String photo;
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
 
     public Long getId() {
         return id;
@@ -121,6 +132,7 @@ public class ProductDto implements Serializable {
                 ", subcategory=" + subcategory +
                 ", vendor=" + vendor +
                 ", place=" + place +
+                ", photo='" + photo + '\'' +
                 '}';
     }
 }
