@@ -6,8 +6,10 @@ import org.springframework.stereotype.Service;
 import team2.storehouse.data.dao.PlaceDao;
 import team2.storehouse.data.dto.PlaceDto;
 import team2.storehouse.data.dto.ProductDto;
+import team2.storehouse.data.dto.ShelfDto;
 import team2.storehouse.data.entities.Place;
 import team2.storehouse.data.entities.Product;
+import team2.storehouse.data.entities.Shelf;
 import team2.storehouse.data.service.PlaceService;
 
 import java.util.List;
@@ -40,6 +42,14 @@ public class PlaceServiceImpl implements PlaceService {
     @Override
     public void delete(Long id) {
         placeDao.deleteById(id);
+    }
+
+    @Override
+    public PlaceDto addPlace(PlaceDto place) {
+        Place place1 = new Place();
+        place1.setShelf(place.getShelf());
+        return modelMapper.map(placeDao.save(place1), PlaceDto.class);
+
     }
 
 }

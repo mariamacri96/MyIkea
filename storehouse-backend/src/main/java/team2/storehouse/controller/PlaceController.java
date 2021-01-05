@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import team2.storehouse.data.dto.PlaceDto;
 import team2.storehouse.data.dto.ProductDto;
+import team2.storehouse.data.dto.ShelfDto;
 import team2.storehouse.data.service.PlaceService;
 
 import java.util.List;
@@ -23,6 +24,12 @@ public class PlaceController {
     public ResponseEntity<List<PlaceDto>> all() {
         List<PlaceDto> places = placeService.getPlaces();
         return ResponseEntity.ok(places);
+    }
+
+    @PostMapping("/places/addPlace")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public ResponseEntity<PlaceDto> createNewPlace(@RequestBody PlaceDto placeDto) {
+        return ResponseEntity.ok(placeService.addPlace(placeDto));
     }
 
     @GetMapping("/place")

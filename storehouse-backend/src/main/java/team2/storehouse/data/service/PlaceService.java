@@ -2,6 +2,7 @@ package team2.storehouse.data.service;
 
 import team2.storehouse.data.dto.PlaceDto;
 import team2.storehouse.data.dto.ProductDto;
+import team2.storehouse.data.dto.ShelfDto;
 import team2.storehouse.data.entities.Place;
 
 import java.util.List;
@@ -11,4 +12,6 @@ public interface PlaceService {
     PlaceDto getPlace(Long id);
     List<PlaceDto> getPlaces();
     void delete(Long id);
+
+    PlaceDto addPlace(PlaceDto place);
 }
