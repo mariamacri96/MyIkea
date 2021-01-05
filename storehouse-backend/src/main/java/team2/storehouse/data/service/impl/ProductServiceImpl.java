@@ -121,12 +121,10 @@ public class ProductServiceImpl implements ProductService {
     public ProductDto updateQuantity(Long id, int quantity) {
         Product product = productDao.findById(id).orElseThrow(() -> new UserNotFoundException(id.toString()));
         if(product.getStock() + quantity < 0) {
-            throw new RuntimeException("the stock for the product " + product.getName() + " is not enough");
+            throw new RuntimeException("the stock for the product " + product.getName() + " cannot be negative");
         }
-        if(product.getStock() + quantity > 50) {
-            throw new RuntimeException("there is no enough space");
-        }
-        product.setStock(product.getStock() + quantity);
+
+        product.setStock(quantity);
         return modelMapper.map(productDao.save(product), ProductDto.class);
     }
 

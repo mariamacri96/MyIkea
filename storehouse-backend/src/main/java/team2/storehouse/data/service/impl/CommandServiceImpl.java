@@ -14,6 +14,7 @@ import team2.storehouse.data.entities.Command;
 import team2.storehouse.data.entities.Ordered;
 import team2.storehouse.data.entities.PutInside;
 import team2.storehouse.data.service.CommandService;
+import team2.storehouse.data.service.ProductService;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -41,6 +42,9 @@ public class CommandServiceImpl implements CommandService {
     BillDao billDao;
 
     @Autowired
+    ProductService productService;
+
+    @Autowired
     ModelMapper modelMapper;
 
     @Override
@@ -63,6 +67,8 @@ public class CommandServiceImpl implements CommandService {
             ordered.setQuantity(element.getQuantity());
             ordered.setProduct(element.getProduct());
             orderedDao.save(ordered);
+
+            productService.updateQuantity(element.getProduct().getId(),element.getProduct().getStock() - element.getQuantity());
 
         }
         commandDto =modelMapper.map(commandDao.save(command), CommandDto.class);
