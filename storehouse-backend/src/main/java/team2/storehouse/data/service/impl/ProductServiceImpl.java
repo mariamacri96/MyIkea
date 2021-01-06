@@ -117,10 +117,9 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDto updateQuantity(Long id, int quantity) {
         Product product = productDao.findById(id).orElseThrow(() -> new UserNotFoundException(id.toString()));
-        if(product.getStock() + quantity < 0) {
+        if(quantity < 0) {
             throw new RuntimeException("the stock for the product " + product.getName() + " cannot be negative");
         }
-
         product.setStock(quantity);
         return modelMapper.map(productDao.save(product), ProductDto.class);
     }

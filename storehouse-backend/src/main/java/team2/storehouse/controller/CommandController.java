@@ -71,4 +71,11 @@ public class CommandController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @GetMapping("/command/close")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public ResponseEntity<CommandDto> close(@RequestParam(name = "commandId") Long commandId) {
+        return ResponseEntity.ok(commandService.closeCommand(commandId));
+    }
+
+
 }
