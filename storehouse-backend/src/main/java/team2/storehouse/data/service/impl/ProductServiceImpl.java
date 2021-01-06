@@ -8,16 +8,14 @@ import team2.storehouse.data.dao.ProductDao;
 import team2.storehouse.data.dao.SubcategoryDao;
 import team2.storehouse.data.dao.VendorDao;
 import team2.storehouse.data.dto.ProductDto;
-import team2.storehouse.data.entities.*;
+import team2.storehouse.data.entities.Place;
+import team2.storehouse.data.entities.Product;
+import team2.storehouse.data.entities.Subcategory;
+import team2.storehouse.data.entities.Vendor;
 import team2.storehouse.data.service.ProductService;
 import team2.storehouse.exceptions.UserNotFoundException;
 
-import javax.imageio.ImageIO;
 import javax.transaction.Transactional;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -60,7 +58,6 @@ public class ProductServiceImpl implements ProductService {
         product.setSubcategory(subcategory);
         product.setVendor(vendor);
         product.setPhoto(productDto.getPhoto());
-        System.out.println("save "+product);
         return modelMapper.map(productDao.save(product),ProductDto.class);
     }
 
@@ -120,13 +117,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDto updateQuantity(Long id, int quantity) {
         Product product = productDao.findById(id).orElseThrow(() -> new UserNotFoundException(id.toString()));
-        if(product.getStock() + quantity < 0) {
-            throw new RuntimeException("the stock for the product " + product.getName() + " is not enough");
+        if(quantity < 0) {
+            throw new RuntimeException("the stock for the product " + product.getName() + " cannot be negative");
         }
-        if(product.getStock() + quantity > 50) {
-            throw new RuntimeException("there is no enough space");
-        }
-        product.setStock(product.getStock() + quantity);
+        product.setStock(quantity);
         return modelMapper.map(productDao.save(product), ProductDto.class);
     }
 

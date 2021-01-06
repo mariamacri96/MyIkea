@@ -16,4 +16,5 @@ public interface CommandService {
     List<CommandDto> getCommands(Long userId);
     List<CommandDto> getCommands();
     void deleteCommand(Long commandId);
+    CommandDto closeCommand(Long commandId);
 }

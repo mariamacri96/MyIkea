@@ -8,12 +8,9 @@ import team2.storehouse.data.dto.BillDto;
 import team2.storehouse.data.dto.CommandDto;
 import team2.storehouse.data.dto.ElementDto;
 import team2.storehouse.data.dto.ProductDto;
-import team2.storehouse.data.entities.Bill;
-import team2.storehouse.data.entities.User;
-import team2.storehouse.data.entities.Command;
-import team2.storehouse.data.entities.Ordered;
-import team2.storehouse.data.entities.PutInside;
+import team2.storehouse.data.entities.*;
 import team2.storehouse.data.service.CommandService;
+import team2.storehouse.data.service.ProductService;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -41,6 +38,9 @@ public class CommandServiceImpl implements CommandService {
     BillDao billDao;
 
     @Autowired
+    ProductService productService;
+
+    @Autowired
     ModelMapper modelMapper;
 
     @Override
@@ -63,6 +63,8 @@ public class CommandServiceImpl implements CommandService {
             ordered.setQuantity(element.getQuantity());
             ordered.setProduct(element.getProduct());
             orderedDao.save(ordered);
+
+            productService.updateQuantity(element.getProduct().getId(),element.getProduct().getStock() - element.getQuantity());
 
         }
         commandDto =modelMapper.map(commandDao.save(command), CommandDto.class);
@@ -176,8 +178,25 @@ public class CommandServiceImpl implements CommandService {
     public void deleteCommand(Long commandId) {
         Command command = commandDao.findById(commandId).orElseThrow(() -> new RuntimeException("command " + commandId + " not found"));
         for(Ordered ordered : orderedDao.findAllByCommand(command)) {
+            if(command.getState() != Command.State.CLOSED) {
+                productService.updateQuantity(ordered.getProduct().getId(), ordered.getProduct().getStock() + ordered.getQuantity());
+            }
             orderedDao.delete(ordered);
         }
         commandDao.delete(command);
+    }
+
+    @Override
+    public CommandDto closeCommand(Long commandId) {
+        Command command = commandDao.findById(commandId).orElseThrow(
+                () -> new RuntimeException("command " + commandId + " not found"));
+        command.setState(Command.State.CLOSED);
+        commandDao.save(command);
+
+        CommandDto commandDto = modelMapper.map(command, CommandDto.class);
+        for(Ordered ordered : orderedDao.findAllByCommand(command)) {
+            commandDto.getElements().add(new ElementDto(ordered.getProduct(), ordered.getQuantity()));
+        }
+        return commandDto;
     }
 }
