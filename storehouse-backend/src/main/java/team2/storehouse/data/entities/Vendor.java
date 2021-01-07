@@ -29,6 +29,55 @@ public class Vendor {
     @Column(name = "PHONE")
     private Long phone;
 
+    @Basic
+    @Column(name="ADDRESS")
+    private String address;
+
+    @Basic
+    @Column(name="CAP")
+    private int cap;
+
+    @Basic
+    @Column(name="CITY")
+    private String city;
+
+    @Basic
+    @Column(name="PROVINCE")
+    private String province;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public int getCap() {
+        return cap;
+    }
+
+    public void setCap(int cap) {
+        this.cap = cap;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+
     public Long getId() {
         return id;
     }

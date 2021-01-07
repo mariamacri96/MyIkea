@@ -22,7 +22,7 @@ public class Product {
     private String brand;
 
     @Basic(optional = false)
-    @Column(name = "PRICE")
+    @Column(name = "PRICE" ,precision=10, scale=2)
     private double price;
 
     @Column(name = "COLOR")
@@ -38,6 +38,7 @@ public class Product {
     @Column(name = "STOCK")
     private int stock;
 
+
     @OneToOne(optional = false)    // maybe one to many??
     @JoinColumn(name = "PLACE", referencedColumnName = "ID")
     private Place place;
@@ -49,6 +50,11 @@ public class Product {
     @ManyToOne(optional = false)
     @JoinColumn(name = "VENDOR", referencedColumnName = "ID")
     private Vendor vendor;
+
+    @ManyToOne
+    @JoinColumn(name="invoice_id",insertable = false, updatable = false)
+    private Invoice invoice;
+
 
     public Long getId() {
         return id;

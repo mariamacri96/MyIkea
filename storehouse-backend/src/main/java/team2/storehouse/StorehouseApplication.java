@@ -11,15 +11,19 @@ import team2.storehouse.data.entities.*;
 import team2.storehouse.data.service.ProductService;
 import team2.storehouse.data.service.UserService;
 
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDate;
+
 @SpringBootApplication
 public class StorehouseApplication {
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(StorehouseApplication.class,args);
-
 		// Service
 		UserService userService = context.getBean(UserService.class);
 		ProductService productService = context.getBean(ProductService.class);
+
 
 		// Dao
 		ShelfDao shelfDao = context.getBean(ShelfDao.class);
@@ -27,6 +31,38 @@ public class StorehouseApplication {
 		CategoryDao categoryDao = context.getBean(CategoryDao.class);
 		SubcategoryDao subcategoryDao = context.getBean(SubcategoryDao.class);
 		VendorDao vendorDao = context.getBean(VendorDao.class);
+
+		InvoiceDao invoiceDao=context.getBean(InvoiceDao.class);
+		Invoice invoice=new Invoice();
+		invoice.setVendorName("Mario Rossi");
+		invoice.setVendorVATNumber("09032310154");
+		invoice.setVendorAddress("Via Romana 56");
+		invoice.setVendorCap(53100);
+		invoice.setVendorCity("Siena");
+		invoice.setVendorProvince("SI");
+
+		invoice.setUserName("Sara Rinaldis");
+		invoice.setUserVATNumber("09032310154");
+		invoice.setUserAddress("Via pietro nenni 20");
+		invoice.setUserCap(89048);
+		invoice.setUserCity("Siderno");
+		invoice.setUserProvince("RC");
+
+
+
+
+		invoice.setStatusPayment(Bill.Status.COMPLETED);
+		invoice.setMethodPayment(Bill.Method.PAYPAL);
+		invoice.setBankName("Banca dal Fucino");
+		invoice.setDate(LocalDate.now());
+		invoice.setIban("IT19F031240321000000231647");
+
+		invoice.setTotal(3200.00);
+		invoice.setTaxes(128.00);
+		invoice.setTotalTaxable(3328);
+		invoice.setNetToPay(3328);
+		invoiceDao.save(invoice);
+
 
 		for(int i=0; i<10; i++) {
 			Shelf shelf = shelfDao.save(new Shelf());
@@ -46,6 +82,7 @@ public class StorehouseApplication {
 		profileMarco.setName("Marco");
 		profileMarco.setSurname("Bellizzi");
 		profileMarco.setAddress("Cosenza, via Adolfo Quintieri n. 44");
+
 	//	profileMarco.setBirthdate(LocalDate.of(1996, 10, 24));
 		profileMarco.setFiscalCode("bllmrc96r24a944n");
 	//	profileMarco.setGender(Profile.Gender.MALE);
@@ -631,6 +668,8 @@ public class StorehouseApplication {
 		productService.save(catHouse);
 
 		System.err.println("Storehouse initialized");
+
+
 
 	}
 }

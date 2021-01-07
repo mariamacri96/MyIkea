@@ -32,9 +32,25 @@ public class Profile {
     @Column(name = "FISCAL_CODE")
     private String fiscalCode;
 
+
+    @Column(name = "VAT_NUMBER")
+    private String VATNumber;
+
     @Basic(optional = false)
     @Column(name = "ADDRESS")
     private String address;
+
+    @Basic
+    @Column(name="CAP")
+    private int cap;
+
+    @Basic
+    @Column(name="CITY")
+    private String city;
+
+    @Basic
+    @Column(name="PROVINCE")
+    private String province;
 
     @Column(name = "BIRTHDATE")
     private LocalDate birthdate;
@@ -115,6 +131,38 @@ public class Profile {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public String getVATNumber() {
+        return VATNumber;
+    }
+
+    public void setVATNumber(String VATNumber) {
+        this.VATNumber = VATNumber;
+    }
+
+    public int getCap() {
+        return cap;
+    }
+
+    public void setCap(int cap) {
+        this.cap = cap;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
     }
 
     @Override
