@@ -19,33 +19,35 @@ import java.util.Set;
 public class InvoiceImpl implements InvoiceService {
     @Autowired
     InvoiceDao invoiceDao;
+
     public static double roundAvoid(double value, int places) {
         double scale = Math.pow(10, places);
         return Math.round(value * scale) / scale;
     }
+
     @Override
     public Invoice fromOrderToInvoice(CommandDto commandDto) {
-        double totalOrder=0.00;
-        double iva=0.22;
-        double taxes=0.0;
+        double totalOrder = 0.00;
+        double iva = 0.22;
+        double taxes = 0.0;
         double totalAmountAndTaxes;
-        Invoice invoice= new Invoice();
+        Invoice invoice = new Invoice();
         invoice.setOrder_id(commandDto.getId());
 
         List<ElementDto> list = commandDto.getElements();
-        Set<Product> products=new HashSet<Product>();
-        for (ElementDto element: list
+        Set<Product> products = new HashSet<Product>();
+        for (ElementDto element : list
         ) {
             products.add(element.getProduct());
-            totalOrder+=element.getQuantity()* element.getProduct().getPrice();
-            for(int i =0; i< element.getQuantity(); i++) {
+            totalOrder += element.getQuantity() * element.getProduct().getPrice();
+            for (int i = 0; i < element.getQuantity(); i++) {
                 taxes += element.getProduct().getPrice() * iva;
             }
         }
 
-        totalAmountAndTaxes=totalOrder+taxes;
+        totalAmountAndTaxes = totalOrder + taxes;
         //invoice where order_id=id
-        Long id= commandDto.getId();
+        Long id = commandDto.getId();
         invoice.setOrder_id(id);
         invoice.setProductList(products);
 
@@ -71,10 +73,10 @@ public class InvoiceImpl implements InvoiceService {
         invoice.setDate(LocalDate.now());
         invoice.setIban("IT19F031240321000000231647");
         //fattura
-        invoice.setTotal(roundAvoid(totalOrder,2));
-        invoice.setTaxes(roundAvoid(taxes,2));
-        invoice.setTotalTaxable(roundAvoid(totalAmountAndTaxes,2));
-        invoice.setNetToPay(roundAvoid(totalAmountAndTaxes,2));
+        invoice.setTotal(roundAvoid(totalOrder, 2));
+        invoice.setTaxes(roundAvoid(taxes, 2));
+        invoice.setTotalTaxable(roundAvoid(totalAmountAndTaxes, 2));
+        invoice.setNetToPay(roundAvoid(totalAmountAndTaxes, 2));
         return invoiceDao.save(invoice);
 
 
