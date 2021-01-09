@@ -44,7 +44,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         Product product = productDao.findById(productId).orElseThrow(() -> new RuntimeException("product " + productId + " not found"));
 
         if(putInsideDao.findByProductAndShoppingCart(product, shoppingCart).isPresent()) {
-            PutInside putInside = putInsideDao.findByProductAndShoppingCart(product, shoppingCart).orElseThrow();
+            PutInside putInside = putInsideDao.findByProductAndShoppingCart(product, shoppingCart).orElseThrow(()->new RuntimeException());
             putInside.setQuantity(putInside.getQuantity() + quantity);
             putInsideDao.save(putInside);
         }

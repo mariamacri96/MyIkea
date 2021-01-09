@@ -15,9 +15,9 @@
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
+		<java.version>13</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>13</java.version>
 	</properties>
 
 	<dependencies>
@@ -36,7 +36,6 @@
 			<scope>test</scope>
 		</dependency>
 
-
 		<dependency>
 			<groupId>org.mariadb.jdbc</groupId>
 			<artifactId>mariadb-java-client</artifactId>
@@ -48,7 +47,12 @@
 			<version>6.16.0</version>
 		</dependency>
 
-
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.4.0</version>
+			<scope>runtime</scope>
+		</dependency>
 		<!-- http://localhost:8080/swagger-ui.html -->
 		<dependency>
 			<groupId>org.springdoc</groupId>

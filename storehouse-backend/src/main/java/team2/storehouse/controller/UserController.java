@@ -1,6 +1,7 @@
 package team2.storehouse.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -24,8 +25,7 @@ public class UserController {
     public ResponseEntity<AccountDto> createAccount(@RequestBody AccountDto accountDto){
         UserDto userDto = accountDto.getUserDto();
         ProfileDto profileDto = accountDto.getProfileDto();
-        String type = accountDto.getType();
-        userService.addUser(userDto, profileDto, type.equals("EMPLOYEE") ? User.Type.EMPLOYEE : User.Type.CLIENT);
+        userService.addUser(userDto, profileDto);
         return ResponseEntity.ok(accountDto);
     }
 
@@ -40,6 +40,20 @@ public class UserController {
     @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<List<UserDto>> all(){
         return ResponseEntity.ok(userService.getUsers());
+    }
+
+    @DeleteMapping("/user/delete")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public ResponseEntity deleteUser (@RequestParam(name = "id") Long id) {
+        System.out.println(id);
+        userService.deleteUser(id);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @PostMapping("/user/update")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto){
+        return ResponseEntity.ok(userService.updateUser(userDto));
     }
 
 }
