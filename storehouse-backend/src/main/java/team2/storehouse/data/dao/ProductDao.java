@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @Repository
 public interface ProductDao extends JpaRepository<Product, Long>, JpaSpecificationExecutor<Product> {
-    class Filter {
+   public class Filter {
         private String name;
         private String brand;
         private String color;
@@ -56,14 +56,16 @@ public interface ProductDao extends JpaRepository<Product, Long>, JpaSpecificati
         return (product, cq, cb) -> cb.equal(product.get("name"), name);
     }
 
-    //cerca in base alla sottocategoria
-    default Specification<Product> filterBySubCategory(String name) {
+
+
+    //cerca tutti i prodotti  in base alla sottocategoria
+    public static Specification<Product> filterBySubCategory(Long id) {
         return (Root<Product> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) -> {
             root.join("subcategory");
 
             CriteriaQuery<?> cq = criteriaQuery.where(criteriaBuilder.or(root.get("subcategory").isNull(),
-                    criteriaBuilder.equal(root.get("subcategory").get("name"), name)));
-            return (Predicate) cq;
+                    criteriaBuilder.equal(root.get("subcategory").get("id"), id)));
+            return cq.getRestriction();
 
 
         };

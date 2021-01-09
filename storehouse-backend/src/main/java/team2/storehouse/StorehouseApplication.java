@@ -14,6 +14,7 @@ import team2.storehouse.data.service.UserService;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 @SpringBootApplication
 public class StorehouseApplication {
@@ -667,8 +668,14 @@ public class StorehouseApplication {
 		catHouse.setVendor(ikea);
 		productService.save(catHouse);
 
-		System.err.println("Storehouse initialized");
 
+		List<ProductDto> winter1 = productService.findProductBySubcategory((long)1);
+
+		System.err.println("Storehouse initialized");
+		for (ProductDto p:winter1
+			 ) {
+			System.out.println(p);
+		}
 
 
 	}
