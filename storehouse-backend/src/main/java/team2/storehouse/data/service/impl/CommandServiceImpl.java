@@ -53,7 +53,7 @@ public class CommandServiceImpl implements CommandService {
     @Override
     public CommandDto placeCommand(CommandDto commandDto){
         Command command= modelMapper.map(commandDto,Command.class);
-        command.setState(Command.State.TRANSMITTED);
+        command.setState(Command.State.CONFIRMED);
         command.setUser(userDao.findByUsername(commandDto.getUser().getUsername()).orElseThrow(() -> new RuntimeException("user "  + " not found")));
         command=commandDao.save(command);
         for (ElementDto element: commandDto.getElements()
@@ -147,7 +147,7 @@ public class CommandServiceImpl implements CommandService {
     }
     public CommandDto confirmCommandPayment(Long commandId) {
         Command command = commandDao.findById(commandId).orElseThrow(() -> new RuntimeException("command " + commandId + " not found"));
-        command.setState(Command.State.CONFIRMED);
+        command.setState(Command.State.CLOSED);
         CommandDto commandDto = modelMapper.map(commandDao.save(command), CommandDto.class);
         commandDto.setElementsfromOrdered(orderedDao.findAllByCommand(command));
         return commandDto;
