@@ -8,8 +8,6 @@ public class AccountDto implements Serializable {
 
     private ProfileDto profileDto;
 
-    private String type;
-
     public UserDto getUserDto() {
         return userDto;
     }
@@ -26,11 +24,4 @@ public class AccountDto implements Serializable {
         this.profileDto = profileDto;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 }

@@ -21,6 +21,7 @@ public class StorehouseApplication {
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(StorehouseApplication.class,args);
+
 		// Service
 		UserService userService = context.getBean(UserService.class);
 		ProductService productService = context.getBean(ProductService.class);
@@ -78,6 +79,7 @@ public class StorehouseApplication {
 		marco.setUsername("marcoBellizzi");
 		marco.setEmail("marcobellizzi96@gmail.com");
 		marco.setPassword("password123");
+ 		marco.setType(User.Type.EMPLOYEE);
 
 		ProfileDto profileMarco = new ProfileDto();
 		profileMarco.setName("Marco");
@@ -89,10 +91,24 @@ public class StorehouseApplication {
 	//	profileMarco.setGender(Profile.Gender.MALE);
 	//	profileMarco.setPhone(3284686896L);
 
+		UserDto chiara = new UserDto();
+		chiara.setUsername("chiaraPass");
+		chiara.setEmail("chiara.passarelli97@gmail.com");
+		chiara.setPassword("password123");
+		chiara.setType(User.Type.EMPLOYEE);
+
+		ProfileDto profileChiara = new ProfileDto();
+		profileChiara.setName("Chiara");
+		profileChiara.setSurname("Passarelli");
+		profileChiara.setAddress("Vibo Valentia, via Don Giuseppe Puglisi 7");
+		//profileMarco.setBirthdate(LocalDate.of(1996, 10, 24));
+		profileChiara.setFiscalCode("psschr97p46g942z");
+
 		UserDto maria = new UserDto();
 		maria.setUsername("mariama");
 		maria.setEmail("maria.macri23@gmail.com");
 		maria.setPassword("ciao123");
+		maria.setType(User.Type.EMPLOYEE);
 
 		ProfileDto profileMaria = new ProfileDto();
 		profileMaria.setName("maria");
@@ -103,10 +119,10 @@ public class StorehouseApplication {
 		//profileMaria.setGender(Profile.Gender.FEMALE);
 		//profileMaria.setPhone(3288338284L);
 
-		userService.addUser(marco, profileMarco, User.Type.EMPLOYEE);
-		userService.addUser(maria, profileMaria, User.Type.EMPLOYEE);
-
-		// categories
+		userService.addUser(marco, profileMarco);
+		userService.addUser(maria, profileMaria);
+		userService.addUser(chiara, profileChiara);
+		//categories
 
 		Category winter = new Category();
 		winter.setName("Winter");

@@ -74,7 +74,7 @@ public class ProductServiceImpl implements ProductService {
                 () -> new RuntimeException("vendor " + productDto.getVendor().getName() + " not found"));
 
         if(productDao.findByPlace(place).isPresent() &&
-                productDao.findByPlace(place).orElseThrow().getId() != productDto.getId()) {
+                productDao.findByPlace(place).orElseThrow(()->new UserNotFoundException("ciao")).getId() != productDto.getId()) {
             throw new RuntimeException("the place " + place.getId() + " is not empty");
         }
 

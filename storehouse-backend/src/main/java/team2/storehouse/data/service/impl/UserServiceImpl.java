@@ -38,10 +38,9 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public UserDto addUser(UserDto userDto, ProfileDto profileDto, User.Type type) {
+    public UserDto addUser(UserDto userDto, ProfileDto profileDto) {
         User user = modelMapper.map(userDto, User.class);
         user.setProfile(profileDao.save(modelMapper.map(profileDto, Profile.class)));
-        user.setType(type);
         user.setShoppingCart(shoppingCartDao.save(new ShoppingCart()));
         return modelMapper.map(userDao.save(user), UserDto.class);
     }
@@ -65,5 +64,20 @@ public class UserServiceImpl implements UserService {
             throw new WrongPasswordException(username);
         }
         return modelMapper.map(user, UserDto.class);
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+       userDao.deleteById(id);
+    }
+
+    @Override
+    public UserDto updateUser(UserDto userDto){
+       User user = userDao.findById(userDto.getId()).orElseThrow(() -> new RuntimeException("user " + userDto.getUsername() + " not found"));
+       user.setEmail(userDto.getEmail());
+       user.setPassword(userDto.getPassword());
+       user.setUsername(userDto.getUsername());
+       user.setType(userDto.getType());
+       return modelMapper.map(userDao.save(user), UserDto.class);
     }
 }

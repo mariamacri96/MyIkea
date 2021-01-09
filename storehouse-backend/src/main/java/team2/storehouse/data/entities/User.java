@@ -10,7 +10,7 @@ import java.util.Objects;
 public class User {
 
     public enum Type {
-        CLIENT, EMPLOYEE
+        ADMIN, CLERK, EMPLOYEE
     }
 
     @Id
