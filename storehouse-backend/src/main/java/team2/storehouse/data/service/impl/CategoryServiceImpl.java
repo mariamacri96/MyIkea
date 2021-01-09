@@ -36,7 +36,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<SubcategoryDto> getSubCategoriesByIdCategory(Long id){
-
+        //use of specification
         List<Subcategory> subcategories= subcategoryDao.findAll( SubcategoryDao.findByCategory(id));
         return subcategories.stream()
                 .map(subcategory -> modelMapper
@@ -60,4 +60,7 @@ public class CategoryServiceImpl implements CategoryService {
         }
         return names;
     }
+
+
+
 }

@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import team2.storehouse.data.dto.ProductDto;
+import team2.storehouse.data.dto.SubcategoryDto;
 import team2.storehouse.data.service.ProductService;
 
 import java.util.List;
@@ -55,5 +56,9 @@ public class ProductController {
                                                      @RequestParam(name="quantity", defaultValue = "0") int quantity) {
         return ResponseEntity.ok(productService.updateQuantity(id, quantity));
     }
-
+    @GetMapping("/subcategories/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public ResponseEntity<List<ProductDto>> getSubCategory(@PathVariable(name = "id") Long id) {
+        return ResponseEntity.ok(productService.findProductBySubcategory(id));
+    }
 }

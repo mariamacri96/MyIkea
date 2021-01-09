@@ -14,5 +14,7 @@ public interface ProductService {
     ProductDto findProductById(Long id);
     ProductDto findProductByName(String name);
     ProductDto updateQuantity(Long id, int quantity);
+    List<ProductDto> findProductBySubcategory(Long id);
+
     void delete(Long id);
 }

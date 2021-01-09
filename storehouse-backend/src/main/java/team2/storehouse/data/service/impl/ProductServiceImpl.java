@@ -8,7 +8,11 @@ import team2.storehouse.data.dao.ProductDao;
 import team2.storehouse.data.dao.SubcategoryDao;
 import team2.storehouse.data.dao.VendorDao;
 import team2.storehouse.data.dto.ProductDto;
-import team2.storehouse.data.entities.*;
+import team2.storehouse.data.dto.SubcategoryDto;
+import team2.storehouse.data.entities.Place;
+import team2.storehouse.data.entities.Product;
+import team2.storehouse.data.entities.Subcategory;
+import team2.storehouse.data.entities.Vendor;
 import team2.storehouse.data.service.ProductService;
 import team2.storehouse.exceptions.UserNotFoundException;
 
@@ -54,7 +58,7 @@ public class ProductServiceImpl implements ProductService {
         product.setPlace(place);
         product.setSubcategory(subcategory);
         product.setVendor(vendor);
-
+        product.setPhoto(productDto.getPhoto());
         return modelMapper.map(productDao.save(product),ProductDto.class);
     }
 
@@ -114,14 +118,21 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDto updateQuantity(Long id, int quantity) {
         Product product = productDao.findById(id).orElseThrow(() -> new UserNotFoundException(id.toString()));
-        if(product.getStock() + quantity < 0) {
-            throw new RuntimeException("the stock for the product " + product.getName() + " is not enough");
+        if(quantity < 0) {
+            throw new RuntimeException("the stock for the product " + product.getName() + " cannot be negative");
         }
-        if(product.getStock() + quantity > 50) {
-            throw new RuntimeException("there is no enough space");
-        }
-        product.setStock(product.getStock() + quantity);
+        product.setStock(quantity);
         return modelMapper.map(productDao.save(product), ProductDto.class);
+    }
+
+    @Override
+    public List<ProductDto> findProductBySubcategory(Long id ) {
+        List<Product> products= productDao.findAll(ProductDao.filterBySubCategory(id));
+        return products.stream()
+                .map(product -> modelMapper
+                        .map(product, ProductDto.class))
+                .collect(Collectors.toList());
+
     }
 
     @Override

@@ -24,6 +24,11 @@ public class CommandController {
     public ResponseEntity<CommandDto> createEmptyCommand(@PathVariable(name = "id") Long userId) {
         return ResponseEntity.ok(commandService.createEmptyCommand(userId));
     }
+    @PostMapping("/command/placeOrder")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public ResponseEntity<CommandDto> placeNewOrder(@RequestBody CommandDto commandDto) {
+        return ResponseEntity.ok(commandService.placeCommand(commandDto));
+    }
 
     @PostMapping("/command/createFromSC/{id}")
     @CrossOrigin(origins = "http://localhost:4200")
@@ -48,7 +53,11 @@ public class CommandController {
     public ResponseEntity<CommandDto> updateCommand(@RequestBody CommandDto commandDto) {
         return ResponseEntity.ok(commandService.updateCommand(commandDto));
     }
-
+    @GetMapping("/command/confirmPayment")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public ResponseEntity<CommandDto> confirmCommandPayment(@RequestParam(name = "commandId") Long commandId) {
+        return ResponseEntity.ok(commandService.confirmCommandPayment(commandId));
+    }
     @PostMapping("/command/confirm")
     @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<BillDto> confirmCommand(@RequestParam(name = "commandId") Long commandId) {
@@ -61,5 +70,12 @@ public class CommandController {
         commandService.deleteCommand(commandId);
         return new ResponseEntity(HttpStatus.OK);
     }
+
+    @GetMapping("/command/close")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public ResponseEntity<CommandDto> close(@RequestParam(name = "commandId") Long commandId) {
+        return ResponseEntity.ok(commandService.closeCommand(commandId));
+    }
+
 
 }
