@@ -8,9 +8,11 @@ import team2.storehouse.data.entities.User;
 import java.util.List;
 
 public interface UserService {
-    UserDto addUser(UserDto userDto, ProfileDto profile, User.Type type);
+    UserDto addUser(UserDto userDto, ProfileDto profile);
     UserDto getUser(String username);
     UserDto verify(String username, String password);
     List<UserDto> getUsers();
+    void deleteUser(Long id);
+    UserDto updateUser(UserDto userDto);
 
 }

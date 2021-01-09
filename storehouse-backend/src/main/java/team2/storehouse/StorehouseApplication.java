@@ -11,6 +11,7 @@ import team2.storehouse.data.entities.*;
 import team2.storehouse.data.service.ProductService;
 import team2.storehouse.data.service.UserService;
 
+import javax.management.RuntimeMBeanException;
 import java.time.LocalDate;
 
 @SpringBootApplication
@@ -43,6 +44,7 @@ public class StorehouseApplication {
 		marco.setUsername("marcoBellizzi");
 		marco.setEmail("marcobellizzi96@gmail.com");
 		marco.setPassword("password123");
+ 		marco.setType(User.Type.EMPLOYEE);
 
 		ProfileDto profileMarco = new ProfileDto();
 		profileMarco.setName("Marco");
@@ -53,10 +55,24 @@ public class StorehouseApplication {
 	//	profileMarco.setGender(Profile.Gender.MALE);
 	//	profileMarco.setPhone(3284686896L);
 
+		UserDto chiara = new UserDto();
+		chiara.setUsername("chiaraPass");
+		chiara.setEmail("chiara.passarelli97@gmail.com");
+		chiara.setPassword("password123");
+		chiara.setType(User.Type.EMPLOYEE);
+
+		ProfileDto profileChiara = new ProfileDto();
+		profileChiara.setName("Chiara");
+		profileChiara.setSurname("Passarelli");
+		profileChiara.setAddress("Vibo Valentia, via Don Giuseppe Puglisi 7");
+		//profileMarco.setBirthdate(LocalDate.of(1996, 10, 24));
+		profileChiara.setFiscalCode("psschr97p46g942z");
+
 		UserDto maria = new UserDto();
 		maria.setUsername("mariama");
 		maria.setEmail("maria.macri23@gmail.com");
 		maria.setPassword("ciao123");
+		maria.setType(User.Type.EMPLOYEE);
 
 		ProfileDto profileMaria = new ProfileDto();
 		profileMaria.setName("maria");
@@ -67,8 +83,9 @@ public class StorehouseApplication {
 		//profileMaria.setGender(Profile.Gender.FEMALE);
 		//profileMaria.setPhone(3288338284L);
 
-		userService.addUser(marco, profileMarco, User.Type.EMPLOYEE);
-		userService.addUser(maria, profileMaria, User.Type.EMPLOYEE);
+		userService.addUser(marco, profileMarco);
+		userService.addUser(maria, profileMaria);
+		userService.addUser(chiara, profileChiara);
 		//categories
 		Category winter = new Category();
 		winter.setName("Winter");
@@ -228,7 +245,7 @@ public class StorehouseApplication {
 		table.setSize("100x120cm");
 		table.setPhoto("https://medias.maisonsdumonde.com/image/upload/q_auto,f_auto/w_1000/img/tavolo-per-sala-da-pranzo-in-massello-di-legno-di-sheesham-6-persone-130-cm-1000-7-19-121625_3.jpg");
 		table.setStock(5);
-		table.setPlace(placeDao.findById(1L).orElseThrow());
+		table.setPlace(placeDao.findById(1L).orElseThrow(()->new RuntimeException()));
 		table.setSubcategory(subcategoryDao.findByName("wood table").orElseThrow(() -> new RuntimeException("subcategory not found")));
 		table.setVendor(vendorDao.findById(Long.valueOf(1)).orElseThrow(() -> new RuntimeException("vendor not found")));
 
@@ -239,7 +256,7 @@ public class StorehouseApplication {
 		chair.setColor("black");
 		chair.setSize("50x60cm");
 		chair.setStock(10);
-		chair.setPlace(placeDao.findById(2L).orElseThrow());
+		chair.setPlace(placeDao.findById(2L).orElseThrow(()->new RuntimeException()));
 		chair.setSubcategory(subcategoryDao.findByName("wood chair").orElseThrow(() -> new RuntimeException("subcategory not found")));
 		chair.setVendor(vendorDao.findById(Long.valueOf(1)).orElseThrow(() -> new RuntimeException("vendor not found")));
 
@@ -250,7 +267,7 @@ public class StorehouseApplication {
 		wardrobe.setColor("white");
 		wardrobe.setSize("2000x1000cm");
 		wardrobe.setStock(3);
-		wardrobe.setPlace(placeDao.findById(3L).orElseThrow());
+		wardrobe.setPlace(placeDao.findById(3L).orElseThrow(()->new RuntimeException()));
 		wardrobe.setSubcategory(subcategoryDao.findByName("wood wardrobe").orElseThrow(() -> new RuntimeException("subcategory not found")));
 		wardrobe.setVendor(vendorDao.findById(Long.valueOf(1)).orElseThrow(() -> new RuntimeException("vendor not found")));
 
