@@ -26,7 +26,7 @@ public class InvoiceImpl implements InvoiceService {
     }
 
     @Override
-    public Invoice fromOrderToInvoice(CommandDto commandDto) {
+    public Invoice fromOrderToInvoice(CommandDto commandDto,String nameClient,String addressClient,String paymentMethod) {
         double totalOrder = 0.00;
         double iva = 0.22;
         double taxes = 0.0;
@@ -51,24 +51,19 @@ public class InvoiceImpl implements InvoiceService {
         invoice.setOrder_id(id);
         invoice.setProductList(products);
 
-        //vendor
-        invoice.setVendorName("Mario Rossi");
-        invoice.setVendorVATNumber("03183450232");
-        invoice.setVendorAddress("Via Romana 56");
-        invoice.setVendorCap(53100);
-        invoice.setVendorCity("Siena");
-        invoice.setVendorProvince("SI");
+
+
 
         //user
-        invoice.setUserName(commandDto.getUser().getProfile().getName());
-        invoice.setUserVATNumber("09032310154");
-        invoice.setUserAddress(commandDto.getUser().getProfile().getAddress());
-        invoice.setUserCap(commandDto.getUser().getProfile().getCap());
-        invoice.setUserCity(commandDto.getUser().getProfile().getCity());
-        invoice.setUserProvince(commandDto.getUser().getProfile().getProvince());
+        invoice.setUserName(nameClient);
+        //invoice.setUserVATNumber("09032310154");
+        invoice.setUserAddress(addressClient);
+       // invoice.setUserCap(commandDto.getUser().getProfile().getCap());
+        //invoice.setUserCity(commandDto.getUser().getProfile().getCity());
+        //invoice.setUserProvince(commandDto.getUser().getProfile().getProvince());
         //pagamento
-        invoice.setStatusPayment(Bill.Status.COMPLETED);
-        invoice.setMethodPayment(Bill.Method.PAYPAL);
+        invoice.setStatusPayment(Invoice.Status.COMPLETED);
+        invoice.setMethodPayment(Invoice.Method.CASH);
         invoice.setBankName("Banca dal Fucino2");
         invoice.setDate(LocalDate.now());
         invoice.setIban("IT19F031240321000000231647");

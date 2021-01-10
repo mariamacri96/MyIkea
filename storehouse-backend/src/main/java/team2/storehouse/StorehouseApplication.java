@@ -36,25 +36,18 @@ public class StorehouseApplication {
 
 		InvoiceDao invoiceDao=context.getBean(InvoiceDao.class);
 		Invoice invoice=new Invoice();
-		invoice.setVendorName("Mario Rossi");
-		invoice.setVendorVATNumber("09032310154");
-		invoice.setVendorAddress("Via Romana 56");
-		invoice.setVendorCap(53100);
-		invoice.setVendorCity("Siena");
-		invoice.setVendorProvince("SI");
+
 
 		invoice.setUserName("Sara Rinaldis");
 		invoice.setUserVATNumber("09032310154");
 		invoice.setUserAddress("Via pietro nenni 20");
-		invoice.setUserCap(89048);
-		invoice.setUserCity("Siderno");
-		invoice.setUserProvince("RC");
 
 
 
 
-		invoice.setStatusPayment(Bill.Status.COMPLETED);
-		invoice.setMethodPayment(Bill.Method.PAYPAL);
+
+		invoice.setStatusPayment(Invoice.Status.COMPLETED);
+		invoice.setMethodPayment(Invoice.Method.PAYPAL);
 		invoice.setBankName("Banca dal Fucino");
 		invoice.setDate(LocalDate.now());
 		invoice.setIban("IT19F031240321000000231647");

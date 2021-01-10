@@ -34,14 +34,14 @@ public class JasperController {
 
 
     @PostMapping()
-    public void getDocument(HttpServletResponse response, @RequestBody CommandDto commandDto) throws IOException, JRException, SQLException {
+    public void getDocument(HttpServletResponse response, @RequestBody CommandDto commandDto, @RequestParam String nameClient, @RequestParam String addressClient, @RequestParam String paymentMethodClient) throws IOException, JRException, SQLException {
         Connection con = null;
         try {
             //conn
             Class.forName("org.mariadb.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mariadb://localhost:3307/ikea", "root", "aSz1*x35");
 
-            Invoice invoice = invoiceService.fromOrderToInvoice(commandDto);
+            Invoice invoice = invoiceService.fromOrderToInvoice(commandDto,nameClient,addressClient,paymentMethodClient);
 
             JasperReport jasperReport = JasperCompileManager.compileReport(JasperFillManager.class.getClassLoader().getResourceAsStream("Invoice.jrxml"));
             HashMap<String, Object> parameters = new HashMap<String, Object>();

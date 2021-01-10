@@ -2,12 +2,18 @@ package team2.storehouse.data.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
+
 import java.util.Set;
 
 @Entity
 @Table(name="INVOICE")
 public class Invoice {
+    public enum Method {
+        VISA, POSTEPAY, MASTERCARD,AMERICAN_EXPRESS, PAYPAL,RATE,FINANCING,CASH
+    }
+    public enum Status {
+        COMPLETED, INCOMPLETED, FAILED, INITIAL
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,45 +24,12 @@ public class Invoice {
     private Long order_id;
 
 
-    public enum Method {
-        VISA, POSTEPAY, MASTERCARD,AMERICAN_EXPRESS, PAYPAL,RATE,FINANCING
-    }
-    public enum Status {
-        COMPLETED, INCOMPLETED, FAILED, INITIAL
-    }
-
-    //vendor
-    @Basic(optional = false)
-    @Column(name = "VENDOR_NAME")
-    private String vendorName;
-
-    @Basic(optional = false)
-    @Column(name = "VENDOR_VAT_NUMBER", length=11)
-    private String vendorVATNumber;
-
-    @Basic
-    @Column(name="VENDOR_ADDRESS")
-    private String vendorAddress;
-
-    @Basic
-    @Column(name="VENDOR_CAP")
-    private int vendorCap;
-
-    @Basic
-    @Column(name="VENDOR_CITY")
-    private String vendorCity;
-
-    @Basic
-    @Column(name="VENDOR_PROVINCE")
-    private String vendorProvince;
-
-
     //user
     @Basic(optional = false)
     @Column(name = "USER_NAME")
     private String userName;
 
-    @Basic(optional = false)
+
     @Column(name = "USER_VAT_NUMBER", length=11)
     private String userVATNumber;
 
@@ -64,7 +37,7 @@ public class Invoice {
     @Column(name="USER_ADDRESS")
     private String userAddress;
 
-    @Basic
+  /*  @Basic
     @Column(name="USER_CAP")
     private int userCap;
 
@@ -76,7 +49,7 @@ public class Invoice {
     @Column(name="USER_PROVINCE")
     private String userProvince;
 
-
+*/
     //product
     @OneToMany
     @JoinColumn(name = "invoice_id")
@@ -103,12 +76,12 @@ public class Invoice {
     @Basic(optional = false)
     @Enumerated(EnumType.STRING)
     @Column(name="METHOD_PAYMENT")
-    private Bill.Method methodPayment;
+    private Method methodPayment;
 
     @Basic(optional = false)
     @Enumerated(EnumType.STRING)
     @Column(name="STATUS_PAYMENT")
-    private Bill.Status statusPayment;
+    private Status statusPayment;
 
     @Basic(optional = false)
     @Column(name="IBAN")
@@ -127,53 +100,6 @@ public class Invoice {
         this.id = id;
     }
 
-    public String getVendorName() {
-        return vendorName;
-    }
-
-    public void setVendorName(String vendorName) {
-        this.vendorName = vendorName;
-    }
-
-    public String getVendorVATNumber() {
-        return vendorVATNumber;
-    }
-
-    public void setVendorVATNumber(String vendorVATNumber) {
-        this.vendorVATNumber = vendorVATNumber;
-    }
-
-    public String getVendorAddress() {
-        return vendorAddress;
-    }
-
-    public void setVendorAddress(String vendorAddress) {
-        this.vendorAddress = vendorAddress;
-    }
-
-    public int getVendorCap() {
-        return vendorCap;
-    }
-
-    public void setVendorCap(int vendorCap) {
-        this.vendorCap = vendorCap;
-    }
-
-    public String getVendorCity() {
-        return vendorCity;
-    }
-
-    public void setVendorCity(String vendorCity) {
-        this.vendorCity = vendorCity;
-    }
-
-    public String getVendorProvince() {
-        return vendorProvince;
-    }
-
-    public void setVendorProvince(String vendorProvince) {
-        this.vendorProvince = vendorProvince;
-    }
 
     public String getUserName() {
         return userName;
@@ -198,7 +124,7 @@ public class Invoice {
     public void setUserAddress(String userAddress) {
         this.userAddress = userAddress;
     }
-
+/*
     public int getUserCap() {
         return userCap;
     }
@@ -222,7 +148,7 @@ public class Invoice {
     public void setUserProvince(String userProvince) {
         this.userProvince = userProvince;
     }
-
+*/
     public Set<Product> getProductList() {
         return productList;
     }
@@ -271,19 +197,19 @@ public class Invoice {
         this.date = date;
     }
 
-    public Bill.Method getMethodPayment() {
+    public Method getMethodPayment() {
         return methodPayment;
     }
 
-    public void setMethodPayment(Bill.Method methodPayment) {
+    public void setMethodPayment(Method methodPayment) {
         this.methodPayment = methodPayment;
     }
 
-    public Bill.Status getStatusPayment() {
+    public Status getStatusPayment() {
         return statusPayment;
     }
 
-    public void setStatusPayment(Bill.Status statusPayment) {
+    public void setStatusPayment(Status statusPayment) {
         this.statusPayment = statusPayment;
     }
 

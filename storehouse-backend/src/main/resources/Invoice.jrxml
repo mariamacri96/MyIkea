@@ -107,7 +107,7 @@
 			<rightPen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
-	<style name="Table 3_TH" mode="Opaque" backcolor="#FFFFF0">
+	<style name="Table 3_TH" mode="Opaque" backcolor="#F2F8FC">
 		<box>
 			<pen lineWidth="0.5" lineColor="#000000"/>
 			<topPen lineWidth="0.5" lineColor="#000000"/>
@@ -116,7 +116,7 @@
 			<rightPen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
-	<style name="Table 3_CH" mode="Opaque" backcolor="#FFBFF9">
+	<style name="Table 3_CH" mode="Opaque" backcolor="#FFBFFE">
 		<box>
 			<pen lineWidth="0.5" lineColor="#000000"/>
 			<topPen lineWidth="0.5" lineColor="#000000"/>
@@ -135,13 +135,14 @@
 		</box>
 	</style>
 	<subDataset name="Dataset1" uuid="f4593c2b-f625-48f5-afe1-d8d54a83b29e">
-		<property name="com.jaspersoft.studio.data.sql.tables"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Nuovo Data Adapter "/>
 		<parameter name="order_id" class="java.lang.Long"/>
 		<queryString>
 			<![CDATA[SELECT p.id AS product_id,
 	p.name AS product_name,
 	p.color AS product_color,
+	o.quantity as product_quantity,
 	p.price AS product_price
 FROM ikea.command c
 	inner join ikea.ordered o ON
@@ -166,6 +167,11 @@ WHERE
 			<property name="com.jaspersoft.studio.field.label" value="product_color"/>
 			<property name="com.jaspersoft.studio.field.tree.path" value="product"/>
 		</field>
+		<field name="product_quantity" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.name" value="quantity"/>
+			<property name="com.jaspersoft.studio.field.label" value="product_quantity"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="ordered"/>
+		</field>
 		<field name="product_price" class="java.lang.Double">
 			<property name="com.jaspersoft.studio.field.name" value="price"/>
 			<property name="com.jaspersoft.studio.field.label" value="product_price"/>
@@ -185,21 +191,9 @@ WHERE
 		<property name="com.jaspersoft.studio.field.tree.path" value="invoice"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="bank" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="bank"/>
-		<property name="com.jaspersoft.studio.field.label" value="bank"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="invoice"/>
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
 	<field name="date" class="java.sql.Date">
 		<property name="com.jaspersoft.studio.field.name" value="date"/>
 		<property name="com.jaspersoft.studio.field.label" value="date"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="invoice"/>
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="iban" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="iban"/>
-		<property name="com.jaspersoft.studio.field.label" value="iban"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="invoice"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
@@ -251,84 +245,14 @@ WHERE
 		<property name="com.jaspersoft.studio.field.tree.path" value="invoice"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="user_cap" class="java.lang.Integer">
-		<property name="com.jaspersoft.studio.field.name" value="user_cap"/>
-		<property name="com.jaspersoft.studio.field.label" value="user_cap"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="invoice"/>
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="user_city" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="user_city"/>
-		<property name="com.jaspersoft.studio.field.label" value="user_city"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="invoice"/>
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
 	<field name="user_name" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="user_name"/>
 		<property name="com.jaspersoft.studio.field.label" value="user_name"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="invoice"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="user_province" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="user_province"/>
-		<property name="com.jaspersoft.studio.field.label" value="user_province"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="invoice"/>
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="user_vat_number" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="user_vat_number"/>
-		<property name="com.jaspersoft.studio.field.label" value="user_vat_number"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="invoice"/>
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="vendor_address" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="vendor_address"/>
-		<property name="com.jaspersoft.studio.field.label" value="vendor_address"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="invoice"/>
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="vendor_cap" class="java.lang.Integer">
-		<property name="com.jaspersoft.studio.field.name" value="vendor_cap"/>
-		<property name="com.jaspersoft.studio.field.label" value="vendor_cap"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="invoice"/>
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="vendor_city" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="vendor_city"/>
-		<property name="com.jaspersoft.studio.field.label" value="vendor_city"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="invoice"/>
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="vendor_name" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="vendor_name"/>
-		<property name="com.jaspersoft.studio.field.label" value="vendor_name"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="invoice"/>
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="vendor_province" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="vendor_province"/>
-		<property name="com.jaspersoft.studio.field.label" value="vendor_province"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="invoice"/>
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="vendor_vat_number" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="vendor_vat_number"/>
-		<property name="com.jaspersoft.studio.field.label" value="vendor_vat_number"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="invoice"/>
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
 	<title>
-		<band height="191" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="85" width="84" height="25" uuid="57aed2b1-4f4e-40a3-a6ad-54dae8dd4c5a">
-					<property name="local_mesure_unitheight" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement>
-					<font size="16" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Bill to:]]></text>
-			</staticText>
+		<band height="175" splitType="Stretch">
 			<line>
 				<reportElement x="0" y="80" width="556" height="1" uuid="806ce5df-1219-4876-ae0c-ca7405b1f246">
 					<property name="local_mesure_unitheight" value="pixel"/>
@@ -336,14 +260,14 @@ WHERE
 				</reportElement>
 			</line>
 			<staticText>
-				<reportElement x="315" y="85" width="84" height="25" uuid="139ebe8d-25b0-411e-986c-270015400874">
+				<reportElement x="5" y="110" width="84" height="25" uuid="139ebe8d-25b0-411e-986c-270015400874">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
 					<font size="16" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Ship to:]]></text>
+				<text><![CDATA[Bill to:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="415" y="10" width="50" height="20" uuid="0f86baff-6386-4f3f-b3fe-2388707babe8"/>
@@ -376,7 +300,7 @@ WHERE
 				<text><![CDATA[Mobilia S.R.L.]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement style="Detail" positionType="Float" x="315" y="150" width="180" height="20" uuid="0aecc9fc-32e9-445a-aa77-098597c50c2a">
+				<reportElement style="Detail" positionType="Float" x="5" y="155" width="180" height="20" uuid="0aecc9fc-32e9-445a-aa77-098597c50c2a">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="45617b6f-449a-4e21-a39f-cabbfa2043ac"/>
 				</reportElement>
 				<textElement>
@@ -385,25 +309,7 @@ WHERE
 				<textFieldExpression><![CDATA[$F{user_address}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement style="Detail" positionType="Float" x="315" y="171" width="42" height="20" uuid="5186f441-70cc-41e7-b11f-e41977a3cb2f">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0ad070e4-058b-49e8-8a2a-6bb742c8132b"/>
-				</reportElement>
-				<textElement>
-					<font fontName="Arial" size="12" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{user_cap}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement style="Detail" positionType="Float" x="357" y="171" width="52" height="20" uuid="9aa875ec-f2f9-4e91-b6db-74298f503d0d">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7d48122a-fcea-4b3f-a76f-2783dd272261"/>
-				</reportElement>
-				<textElement>
-					<font fontName="Arial" size="12" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{user_city}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement style="Detail" positionType="Float" x="315" y="110" width="84" height="20" uuid="e08db23d-d43a-42df-820e-5f1bbddc11ce">
+				<reportElement style="Detail" positionType="Float" x="5" y="135" width="84" height="20" uuid="e08db23d-d43a-42df-820e-5f1bbddc11ce">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="da13268c-fc08-4ce3-99ec-b17986be9320"/>
 				</reportElement>
 				<textElement>
@@ -411,92 +317,6 @@ WHERE
 				</textElement>
 				<textFieldExpression><![CDATA[$F{user_name}]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement style="Detail" positionType="Float" x="409" y="171" width="26" height="20" uuid="67059d55-7749-45dc-ade6-a9f51efa3602">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ea755fcc-ae3a-4331-8028-525bf59299c4"/>
-				</reportElement>
-				<textElement>
-					<font fontName="Arial" size="12" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{user_province}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement style="Detail" positionType="Float" x="395" y="130" width="179" height="20" uuid="eadc78b9-3b90-40eb-9687-0ed7b837794c">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a05b76c6-2e96-4857-8907-db659c7f3e7e"/>
-				</reportElement>
-				<textElement>
-					<font fontName="Arial" size="12" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{user_vat_number}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="315" y="130" width="94" height="20" uuid="bc517c48-867c-4fa8-9231-8eda62e0d7d4"/>
-				<textElement>
-					<font size="12" isBold="false"/>
-				</textElement>
-				<text><![CDATA[VAT number:]]></text>
-			</staticText>
-			<textField isBlankWhenNull="true">
-				<reportElement style="Detail" positionType="Float" x="-1" y="146" width="181" height="20" uuid="a9cc363e-1035-4be0-938c-8dca578f4ad4">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="55a09101-5c93-4763-836b-1eef762f8f5a"/>
-				</reportElement>
-				<textElement>
-					<font fontName="Arial" size="12" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{vendor_address}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement style="Detail" positionType="Float" x="-1" y="166" width="43" height="20" uuid="3c0c02f1-6e93-45bf-a36b-6be76d3f58f9">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8bde597b-f537-498d-ad12-9782ace3859b"/>
-				</reportElement>
-				<textElement>
-					<font fontName="Arial" size="12" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{vendor_cap}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement style="Detail" positionType="Float" x="42" y="166" width="42" height="20" uuid="75e85c5f-014e-4d36-b58f-d024e020efbf">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="41d63947-f338-445f-bdad-57ae7e65c324"/>
-				</reportElement>
-				<textElement>
-					<font fontName="Arial" size="12" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{vendor_city}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement style="Detail" positionType="Float" x="0" y="110" width="92" height="16" uuid="13c8153b-7cf3-471a-9de4-af5668ea1eaa">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5cfc7713-1d01-4785-8211-26192e3ad317"/>
-				</reportElement>
-				<textElement>
-					<font fontName="Arial" size="12" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{vendor_name}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement style="Detail" positionType="Float" x="84" y="166" width="20" height="20" uuid="262ae4e3-c55a-4644-8a4c-113921fd7c13">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9449357d-7716-4a97-8df0-407996cecf3a"/>
-				</reportElement>
-				<textElement>
-					<font fontName="Arial" size="12" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{vendor_province}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement style="Detail" positionType="Float" x="79" y="126" width="182" height="20" uuid="3f38627d-9342-4bff-a355-e4e884cb99ae">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="81163ffd-e2d1-439b-ba2f-1c42e0834dd7"/>
-				</reportElement>
-				<textElement>
-					<font fontName="Arial" size="12" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{vendor_vat_number}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="-1" y="126" width="80" height="20" uuid="9a001148-f119-47b4-8b8d-64543b41bddc"/>
-				<textElement>
-					<font size="12" isBold="false"/>
-				</textElement>
-				<text><![CDATA[VAT number:]]></text>
-			</staticText>
 			<image>
 				<reportElement x="0" y="0" width="79" height="80" uuid="06775d81-05a4-4dad-b64c-f7221df7f168"/>
 				<imageExpression><![CDATA["logo.png"]]></imageExpression>
@@ -629,15 +449,6 @@ WHERE
 				<textFieldExpression><![CDATA[$F{method_payment}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement style="Column header" positionType="Float" x="3" y="115" width="35" height="20" forecolor="#000000" uuid="fc0976e8-c51d-42e5-a63c-03fe598a3fdc">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="db7d2c77-f21e-4f8b-86f3-fa1d355cefaf"/>
-				</reportElement>
-				<textElement>
-					<font fontName="Arial" size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[IBAN:]]></text>
-			</staticText>
-			<staticText>
 				<reportElement style="Column header" positionType="Float" x="3" y="75" width="55" height="20" forecolor="#000000" uuid="5ee3c9c4-2da7-49e5-9dd6-e44635aae021">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f4631173-d476-4d78-b770-d9787792b914"/>
 				</reportElement>
@@ -654,33 +465,6 @@ WHERE
 					<font fontName="Arial" size="12" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{status_payment}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement style="Column header" positionType="Float" x="3" y="95" width="39" height="20" forecolor="#000000" uuid="07c155ed-aa12-49be-8511-593b0338b0da">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ee138136-0dff-4621-a827-434536735092"/>
-				</reportElement>
-				<textElement>
-					<font fontName="Arial" size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Bank:]]></text>
-			</staticText>
-			<textField isBlankWhenNull="true">
-				<reportElement style="Detail" positionType="Float" x="42" y="95" width="107" height="20" uuid="94ae308c-bb60-4a91-88d0-bec994acb83a">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ee138136-0dff-4621-a827-434536735092"/>
-				</reportElement>
-				<textElement>
-					<font fontName="Arial" size="12" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{bank}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement style="Detail" positionType="Float" x="38" y="115" width="230" height="20" uuid="4b1a0f48-7d4e-4c4e-b7c6-a3a89d03cac8">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="db7d2c77-f21e-4f8b-86f3-fa1d355cefaf"/>
-				</reportElement>
-				<textElement>
-					<font fontName="Arial" size="12" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{iban}]]></textFieldExpression>
 			</textField>
 		</band>
 	</lastPageFooter>
@@ -720,71 +504,92 @@ WHERE
 							</datasetParameter>
 							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 						</datasetRun>
-						<jr:column width="140" uuid="905b86f9-0840-47fc-9cfa-e4b8e7dc0cc1">
+						<jr:column width="120" uuid="905b86f9-0840-47fc-9cfa-e4b8e7dc0cc1">
 							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonna1"/>
 							<jr:columnHeader style="Table 3_CH" height="30" rowSpan="1">
 								<staticText>
-									<reportElement x="0" y="0" width="140" height="30" uuid="b1d7a39a-954a-4d19-bb03-8d2ef6455ac2"/>
+									<reportElement x="0" y="0" width="120" height="30" uuid="b1d7a39a-954a-4d19-bb03-8d2ef6455ac2"/>
 									<textElement textAlignment="Center"/>
-									<text><![CDATA[product_id]]></text>
+									<text><![CDATA[Nr]]></text>
 								</staticText>
 							</jr:columnHeader>
 							<jr:detailCell style="Table 3_TD" height="30">
 								<textField>
-									<reportElement x="0" y="0" width="140" height="30" uuid="0c48f734-c719-4440-a8fa-fb33cdf6bdd0"/>
+									<reportElement x="0" y="0" width="120" height="30" uuid="0c48f734-c719-4440-a8fa-fb33cdf6bdd0"/>
 									<textElement textAlignment="Center"/>
 									<textFieldExpression><![CDATA[$F{product_id}]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
 						</jr:column>
-						<jr:column width="135" uuid="5cbdfa3c-121b-4066-ae39-7a947d361af2">
+						<jr:column width="180" uuid="5cbdfa3c-121b-4066-ae39-7a947d361af2">
 							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonna2"/>
 							<jr:columnHeader style="Table 3_CH" height="30" rowSpan="1">
 								<staticText>
-									<reportElement x="0" y="0" width="135" height="30" uuid="c166b795-6da0-4421-a644-a1823725d79c"/>
+									<reportElement x="0" y="0" width="180" height="30" uuid="c166b795-6da0-4421-a644-a1823725d79c"/>
 									<textElement textAlignment="Center"/>
-									<text><![CDATA[product_name]]></text>
+									<text><![CDATA[Description]]></text>
 								</staticText>
 							</jr:columnHeader>
 							<jr:detailCell style="Table 3_TD" height="30">
 								<textField>
-									<reportElement x="0" y="0" width="135" height="30" uuid="579b235d-4f4e-48c9-a251-f146a96e2e31"/>
+									<reportElement x="0" y="0" width="180" height="30" uuid="579b235d-4f4e-48c9-a251-f146a96e2e31"/>
 									<textElement textAlignment="Center"/>
-									<textFieldExpression><![CDATA[$F{product_name}]]></textFieldExpression>
+									<textFieldExpression><![CDATA[$F{product_name}+","+$F{product_color}]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
 						</jr:column>
-						<jr:column width="140" uuid="eb833eb2-5cc6-40e8-9c10-4a192b950130">
+						<jr:column width="60" uuid="eb833eb2-5cc6-40e8-9c10-4a192b950130">
 							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonna3"/>
 							<jr:columnHeader style="Table 3_CH" height="30" rowSpan="1">
 								<staticText>
-									<reportElement x="0" y="0" width="140" height="30" uuid="4508a492-d503-4129-a0c2-a909799a79f7"/>
+									<reportElement x="0" y="0" width="60" height="30" uuid="19c69a8d-e32d-4880-8eb1-8bcf6936c9ff"/>
 									<textElement textAlignment="Center"/>
-									<text><![CDATA[product_color]]></text>
+									<text><![CDATA[Quantity]]></text>
 								</staticText>
 							</jr:columnHeader>
 							<jr:detailCell style="Table 3_TD" height="30">
 								<textField>
-									<reportElement x="0" y="0" width="140" height="30" uuid="d29b3e90-9566-4f2f-af0e-356dc4681531"/>
+									<reportElement x="0" y="0" width="60" height="30" uuid="48c04031-4443-4bef-84bf-e2c527309843"/>
 									<textElement textAlignment="Center"/>
-									<textFieldExpression><![CDATA[$F{product_color}]]></textFieldExpression>
+									<textFieldExpression><![CDATA[$F{product_quantity}]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
 						</jr:column>
-						<jr:column width="140" uuid="ca95c6aa-5554-433f-9d4b-58d28efb848e">
+						<jr:column width="90" uuid="ca95c6aa-5554-433f-9d4b-58d28efb848e">
 							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonna4"/>
 							<jr:columnHeader style="Table 3_CH" height="30" rowSpan="1">
 								<staticText>
-									<reportElement x="0" y="0" width="140" height="30" uuid="507795d1-d04d-47f7-93e5-6a50ee96d44b"/>
+									<reportElement x="0" y="0" width="90" height="30" uuid="d7fa77fd-3e7c-4b95-a235-ecd6dcc34eb5">
+										<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+									</reportElement>
 									<textElement textAlignment="Center"/>
-									<text><![CDATA[product_price]]></text>
+									<text><![CDATA[Unit Price]]></text>
 								</staticText>
 							</jr:columnHeader>
 							<jr:detailCell style="Table 3_TD" height="30">
 								<textField>
-									<reportElement x="0" y="0" width="140" height="30" uuid="fdf5fb62-9b48-4457-9e05-e63dfa724a6f"/>
+									<reportElement x="0" y="0" width="90" height="30" uuid="d8da8c39-9c2f-458b-aaeb-ba26e21530c4"/>
 									<textElement textAlignment="Center"/>
-									<textFieldExpression><![CDATA[$F{product_price}]]></textFieldExpression>
+									<textFieldExpression><![CDATA[$F{product_price}+"€"]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="100" uuid="512bd7d4-a26b-4d33-a84a-0aad1b8e2595">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonna5"/>
+							<jr:columnHeader style="Table 3_CH" height="30" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="100" height="30" uuid="7153f37f-f7d9-4604-9fab-2847c75a21c4">
+										<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+									</reportElement>
+									<textElement textAlignment="Center"/>
+									<text><![CDATA[Amount]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table 3_TD" height="30">
+								<textField>
+									<reportElement x="0" y="0" width="100" height="30" uuid="c0f4daa2-f4f3-4c0b-a679-24da502f3d74"/>
+									<textElement textAlignment="Center"/>
+									<textFieldExpression><![CDATA[$F{product_price}*$F{product_quantity}+"€"]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
 						</jr:column>
