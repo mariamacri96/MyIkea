@@ -23,6 +23,7 @@ public class PlaceController {
     @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<List<PlaceDto>> all() {
         List<PlaceDto> places = placeService.getPlaces();
+        System.out.println(places);
         return ResponseEntity.ok(places);
     }
 

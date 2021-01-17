@@ -59,11 +59,14 @@ public class StorehouseApplication {
 		invoiceDao.save(invoice);
 
 
-		for(int i=0; i<10; i++) {
-			Shelf shelf = shelfDao.save(new Shelf());
+		for(int i=0; i<4; i++) {
+			Shelf shelf = new Shelf();
+			shelf.setName("S-"+i);
+			shelfDao.save(shelf);
 			for(int j=0; j<10; j++) {
 				Place place = new Place();
 				place.setShelf(shelf);
+				place.setName("P-"+i+"-"+j);
 				placeDao.save(place);
 			}
 		}

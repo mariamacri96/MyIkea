@@ -13,6 +13,28 @@ public class Shelf {   // scaffale
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name= "NAME")
+    private String name;
+
+    @Column(name= "NOTE")
+    private String note;
+
+    public String setName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String setNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
     public Long getId() {
         return id;
     }
@@ -26,7 +48,9 @@ public class Shelf {   // scaffale
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Shelf shelf = (Shelf) o;
-        return Objects.equals(id, shelf.id);
+        return Objects.equals(id, shelf.id) &&
+                Objects.equals(name, shelf.name) &&
+                Objects.equals(note, shelf.note);
     }
 
     @Override
@@ -38,6 +62,8 @@ public class Shelf {   // scaffale
     public String toString() {
         return "Shelf{" +
                 "id=" + id +
+                ", name='" + name + '\'' +
+                ", note='" + note + '\'' +
                 '}';
     }
 }

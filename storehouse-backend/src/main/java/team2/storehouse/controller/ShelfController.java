@@ -23,4 +23,6 @@ public class ShelfController {
     public ResponseEntity<ShelfDto> createNewShelf(@RequestBody ShelfDto shelfDto) {
         return ResponseEntity.ok(shelfService.addShelf(shelfDto));
     }
+
+
 }
