@@ -1,6 +1,9 @@
 package team2.storehouse.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -43,5 +46,10 @@ public class CategoryController {
     public ResponseEntity<List<String>> getSubCategoriesName() {
         return ResponseEntity.ok(categoryService.getSubCategoriesName());
     }
+    @GetMapping
+    public Page<CategoryDto> list(@RequestParam(name = "page", defaultValue = "0") int page,
+                                        @RequestParam(name = "size", defaultValue = "10") int size) {
+        return categoryService.getCategoriesPageble(page,size);
 
+    }
 }

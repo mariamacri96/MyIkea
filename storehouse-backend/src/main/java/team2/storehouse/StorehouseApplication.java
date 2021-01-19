@@ -4,10 +4,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import team2.storehouse.data.dao.*;
+import team2.storehouse.data.dto.CategoryDto;
 import team2.storehouse.data.dto.ProductDto;
 import team2.storehouse.data.dto.ProfileDto;
 import team2.storehouse.data.dto.UserDto;
 import team2.storehouse.data.entities.*;
+import team2.storehouse.data.service.CategoryService;
 import team2.storehouse.data.service.ProductService;
 import team2.storehouse.data.service.UserService;
 
@@ -25,6 +27,8 @@ public class StorehouseApplication {
 		// Service
 		UserService userService = context.getBean(UserService.class);
 		ProductService productService = context.getBean(ProductService.class);
+		CategoryService categoryService=context.getBean(CategoryService.class);
+
 
 
 		// Dao
@@ -120,77 +124,112 @@ public class StorehouseApplication {
 		userService.addUser(chiara, profileChiara);
 		//categories
 
-		Category winter = new Category();
-		winter.setName("Winter");
-		winter = categoryDao.save(winter);
+		/*Category winter = new Category();
+		winter.setName("Christmas Decoration");
+		winter.setPhoto("");
+		winter = categoryDao.save(winter);*/
 
-		Category smartHome = new Category();
-		smartHome.setName("Smart Home");
-		smartHome = categoryDao.save(smartHome);
+
 
 		Category furniture = new Category();
 		furniture.setName("Furniture");
+		furniture.setPhoto("https://shop.static.ingka.ikea.com/category-images/Category_armchairs-and-chaise-longues.jpg?imwidth=400");
 		furniture = categoryDao.save(furniture);
 
-		Category beds = new Category();
-		beds.setName("Beds and mattresses");
-		beds = categoryDao.save(beds);
 
 		Category home = new Category();
 		home.setName("Home organization products");
+		home.setPhoto("https://shop.static.ingka.ikea.com/category-images/Category_wardrobe-250-cm-or-wider.jpg?imwidth=400");
 		home = categoryDao.save(home);
-
-		Category kitchens=new Category();
-		kitchens.setName("Kitchens and appliances");
-		kitchens= categoryDao.save(kitchens);
-
-		Category babies=new Category();
-		babies.setName("Babies and children");
-		babies= categoryDao.save(babies);
 
 		Category textiles=new Category();
 		textiles.setName("Textiles");
+		textiles.setPhoto("https://shop.static.ingka.ikea.com/revamp/bedspreads_20527.jpg?imwidth=400");
+
 		textiles= categoryDao.save(textiles);
 
-		Category decoration = new Category();
-		decoration.setName("Decoration");
-		decoration = categoryDao.save(decoration);
-
-		Category lighting = new Category();
-		lighting.setName("Lighting");
-		lighting = categoryDao.save(lighting);
+		Category kitchens=new Category();
+		kitchens.setName("Kitchens and appliances");
+		kitchens.setPhoto("https://shop.static.ingka.ikea.com/category-images/Category_ovens.jpg?imwidth=400");
+		kitchens= categoryDao.save(kitchens);
 
 		Category tables = new Category();
 		tables.setName("Products for the table");
+		tables.setPhoto("https://shop.static.ingka.ikea.com/revamp/kitchen-tableware_kt001-it.jpg?imwidth=400");
 		tables = categoryDao.save(tables);
+
+		Category decoration = new Category();
+		decoration.setName("Decoration");
+		decoration.setPhoto("https://shop.static.ingka.ikea.com/revamp/decorative-accessories_de001-it.jpg?imwidth=400");
+		decoration = categoryDao.save(decoration);
+
+
+		Category beds = new Category();
+		beds.setName("Beds and mattresses");
+		beds.setPhoto("https://shop.static.ingka.ikea.com/revamp/beds-and-mattresses_bm001.jpg?imwidth=400");
+		beds = categoryDao.save(beds);
+
+
+		Category lighting = new Category();
+		lighting.setName("Lighting");
+		lighting.setPhoto("https://shop.static.ingka.ikea.com/revamp/work-lamps_li001-it.jpg?imwidth=400");
+		lighting = categoryDao.save(lighting);
+
 
 		Category bath = new Category();
 		bath.setName("Bath products");
+		bath.setPhoto("https://shop.static.ingka.ikea.com/category-images/Category_wash-basins.jpg?imwidth=400");
 		bath = categoryDao.save(bath);
+
 
 		Category carpetsAndDoormats=new Category();
 		carpetsAndDoormats.setName("Carpets and doormats");
+		carpetsAndDoormats.setPhoto("https://shop.static.ingka.ikea.com/revamp/rugs-mats-flooring_rm001.jpg?imwidth=400");
 		carpetsAndDoormats= categoryDao.save(carpetsAndDoormats);
 
-		Category gardenFurniture= new Category();
-		gardenFurniture.setName("Garden Furniture");
-		gardenFurniture= categoryDao.save(gardenFurniture);
+
+		Category babies=new Category();
+		babies.setName("Babies and children");
+		babies.setPhoto("https://shop.static.ingka.ikea.com/revamp/baby-children_bc001-it.jpg?imwidth=400");
+		babies= categoryDao.save(babies);
 
 		Category potHolders=new Category();
 		potHolders.setName("Pot holders");
+		potHolders.setPhoto("https://shop.static.ingka.ikea.com/revamp/plants-and-plant-pots-pp001.jpg?imwidth=400");
 		potHolders= categoryDao.save(potHolders);
+
+
+		Category gardenFurniture= new Category();
+		gardenFurniture.setName("Garden Furniture");
+		gardenFurniture.setPhoto("https://shop.static.ingka.ikea.com/category-images/Category_outdoor-plant-pots.jpg?imwidth=400");
+		gardenFurniture= categoryDao.save(gardenFurniture);
+
+
+		Category animals=new Category();
+		animals.setName("Products for animals");
+		animals.setPhoto("https://shop.static.ingka.ikea.com/category-images/Category_cats.jpg?imwidth=400");
+		animals= categoryDao.save(animals);
+
+		Category smartHome = new Category();
+		smartHome.setName("Smart Home");
+		smartHome.setPhoto("https://shop.static.ingka.ikea.com/revamp/home-smart_hs001.jpg?imwidth=400");
+		smartHome = categoryDao.save(smartHome);
+
+
+
+
+
 
 		Category electronics=new Category();
 		electronics.setName("Electronics");
+		electronics.setPhoto("https://shop.static.ingka.ikea.com/revamp/home-electronics_he001-it.jpg?imwidth=400");
 		electronics= categoryDao.save(electronics);
 
 		Category travelandLeisureProducts=new Category();
 		travelandLeisureProducts.setName("Travel and leisure products");
+		travelandLeisureProducts.setPhoto("https://shop.static.ingka.ikea.com/category-images/Category_paper-shop.jpg?imwidth=400");
 		travelandLeisureProducts= categoryDao.save(travelandLeisureProducts);
 
-		Category animals=new Category();
-		animals.setName("Products for animals");
-		animals= categoryDao.save(animals);
 
 		Long place = 1L;
 
@@ -210,14 +249,14 @@ public class StorehouseApplication {
 
 		// subcategories of winter
 
-		Subcategory christmas = new Subcategory();
+		/*Subcategory christmas = new Subcategory();
 		christmas.setName("Christmas decorations");
 		christmas.setCategory(winter);
-		christmas = subcategoryDao.save(christmas);
+		christmas = subcategoryDao.save(christmas);*/
 
 		// products of christmas
 
-		ProductDto treeBalls = new ProductDto();
+		/*ProductDto treeBalls = new ProductDto();
 		treeBalls.setName("tree balls");
 		treeBalls.setBrand("ikea");
 		treeBalls.setPrice(12.95);
@@ -228,16 +267,16 @@ public class StorehouseApplication {
 		treeBalls.setPlace(placeDao.findById(place++).orElseThrow());
 		treeBalls.setSubcategory(christmas);
 		treeBalls.setVendor(ikea);
-		productService.save(treeBalls);
+		productService.save(treeBalls);*/
 
-		Subcategory paper = new Subcategory();
+		/*Subcategory paper = new Subcategory();
 		paper.setName("Paper, gift bags and accessories");
 		paper.setCategory(winter);
-		paper = subcategoryDao.save(paper);
+		paper = subcategoryDao.save(paper);*/
 
 		// products of paper
 
-		ProductDto winterPaper = new ProductDto();
+		/*ProductDto winterPaper = new ProductDto();
 		winterPaper.setName("winter paper");
 		winterPaper.setBrand("ikea");
 		winterPaper.setPrice(5.95);
@@ -248,15 +287,15 @@ public class StorehouseApplication {
 		winterPaper.setPlace(placeDao.findById(place++).orElseThrow());
 		winterPaper.setSubcategory(paper);
 		winterPaper.setVendor(ikea);
-		productService.save(winterPaper);
-
+		productService.save(winterPaper);*/
+/*
 		Subcategory illuminations = new Subcategory();
 		illuminations.setName("Christmas illuminations");
 		illuminations.setCategory(winter);
-		illuminations = subcategoryDao.save(illuminations);
+		illuminations = subcategoryDao.save(illuminations);*/
 
 		// products of illuminations
-
+/*
 		ProductDto indoorLight = new ProductDto();
 		indoorLight.setName("indoor light");
 		indoorLight.setBrand("ikea");
@@ -266,15 +305,16 @@ public class StorehouseApplication {
 		indoorLight.setPhoto("https://www.ikea.com/ch/en/images/products/bloetsnoe-led-lighting-chain-with-24-lights-indoor-black__0884789_PE717319_S5.JPG?f=l");
 		indoorLight.setStock(15);
 		indoorLight.setPlace(placeDao.findById(place++).orElseThrow());
-		indoorLight.setSubcategory(illuminations);
+		indoorLight.setSubcategory();
 		indoorLight.setVendor(ikea);
-		productService.save(indoorLight);
+		productService.save(indoorLight);*/
 
 		// subcategory smart home
 
 		Subcategory smartLighting = new Subcategory();
 		smartLighting.setName("Smart Lighting");
 		smartLighting.setCategory(smartHome);
+		smartLighting.setPhoto("https://shop.static.ingka.ikea.com/category-images/Category_smart-lighting.jpg?imwidth=300");
 		smartLighting = subcategoryDao.save(smartLighting);
 
 		// products of smartLighting
@@ -295,6 +335,7 @@ public class StorehouseApplication {
 		Subcategory speakers = new Subcategory();
 		speakers.setName("Wi-Fi speakers");
 		speakers.setCategory(smartHome);
+		speakers.setPhoto("https://shop.static.ingka.ikea.com/revamp/wi-fi-speakers_46194.jpg?imwidth=300");
 		speakers = subcategoryDao.save(speakers);
 
 		// products of speakers
@@ -315,6 +356,7 @@ public class StorehouseApplication {
 		Subcategory remoteControls = new Subcategory();
 		remoteControls.setName("Remote controls for lights and wireless devices");
 		remoteControls.setCategory(smartHome);
+		remoteControls.setPhoto("https://shop.static.ingka.ikea.com/revamp/remote-controls-for-lights-and-wireless-devices_53250.jpg?imwidth=500");
 		remoteControls = subcategoryDao.save(remoteControls);
 
 		// products of remote control
@@ -337,6 +379,7 @@ public class StorehouseApplication {
 		Subcategory sofa = new Subcategory();
 		sofa.setName("Sofas and sofa beds");
 		sofa.setCategory(furniture);
+		sofa.setPhoto("https://shop.static.ingka.ikea.com/category-images/Category_sofas-and-armchairs.jpg?imwidth=300");
 		sofa = subcategoryDao.save(sofa);
 
 		// products of sofa
@@ -370,6 +413,7 @@ public class StorehouseApplication {
 		Subcategory armchairs = new Subcategory();
 		armchairs.setName("Armchairs, chaise-longue and footrest");
 		armchairs.setCategory(furniture);
+		armchairs.setPhoto("https://shop.static.ingka.ikea.com/revamp/armchairs-and-chaise-longues_fu006.jpg?imwidth=300");
 		armchairs = subcategoryDao.save(armchairs);
 
 		// products of armchair
@@ -390,6 +434,7 @@ public class StorehouseApplication {
 		Subcategory tablesDesks = new Subcategory();
 		tablesDesks.setName("Tables and desks");
 		tablesDesks.setCategory(furniture);
+		tablesDesks.setPhoto("https://shop.static.ingka.ikea.com/category-images/Category_tables-and-desks.jpg?imwidth=300");
 		tablesDesks = subcategoryDao.save(tablesDesks);
 
 		// products of table desk
@@ -412,6 +457,7 @@ public class StorehouseApplication {
 		Subcategory bed = new Subcategory();
 		bed.setName("Beds");
 		bed.setCategory(beds);
+		bed.setPhoto("https://shop.static.ingka.ikea.com/revamp/beds_bm003.jpg?imwidth=300");
 		bed = subcategoryDao.save(bed);
 
 		// products of beds
@@ -432,6 +478,7 @@ public class StorehouseApplication {
 		Subcategory wardrobes = new Subcategory();
 		wardrobes.setName("Wardrobes");
 		wardrobes.setCategory(home);
+		wardrobes.setPhoto("https://shop.static.ingka.ikea.com/revamp/hinged-wardrobes_48005.jpg?imwidth=300");
 		wardrobes = subcategoryDao.save(wardrobes);
 
 		ProductDto wardrobe = new ProductDto();
@@ -450,6 +497,7 @@ public class StorehouseApplication {
 		Subcategory kitchen = new Subcategory();
 		kitchen.setName("Kitchens");
 		kitchen.setCategory(kitchens);
+		kitchen.setPhoto("https://shop.static.ingka.ikea.com/revamp/kitchen_ka003-ru.jpg?imwidth=300");
 		kitchen = subcategoryDao.save(kitchen);
 
 		ProductDto kitchenComplete = new ProductDto();
@@ -468,6 +516,7 @@ public class StorehouseApplication {
 		Subcategory baby = new Subcategory();
 		baby.setName("Baby");
 		baby.setCategory(babies);
+		baby.setPhoto("https://shop.static.ingka.ikea.com/revamp/baby_bc002.jpg?imwidth=300");
 		baby = subcategoryDao.save(baby);
 
 		ProductDto cot = new ProductDto();
@@ -486,6 +535,7 @@ public class StorehouseApplication {
 		Subcategory bathTextiles = new Subcategory();
 		bathTextiles.setName("Bath Textiles");
 		bathTextiles.setCategory(textiles);
+		bathTextiles.setPhoto("https://shop.static.ingka.ikea.com/category-images/Category_bath-textiles.jpg?imwidth=300");
 		bathTextiles = subcategoryDao.save(bathTextiles);
 
 		ProductDto towel = new ProductDto();
@@ -504,6 +554,7 @@ public class StorehouseApplication {
 		Subcategory mirrors = new Subcategory();
 		mirrors.setName("Mirrors");
 		mirrors.setCategory(decoration);
+		mirrors.setPhoto("https://shop.static.ingka.ikea.com/revamp/mirrors_20489.jpg?imwidth=300");
 		mirrors = subcategoryDao.save(mirrors);
 
 		ProductDto wallMirror = new ProductDto();
@@ -522,6 +573,7 @@ public class StorehouseApplication {
 		Subcategory lamps = new Subcategory();
 		lamps.setName("Lamps");
 		lamps.setCategory(lighting);
+		lamps.setPhoto("https://shop.static.ingka.ikea.com/category-images/Category_decorative_lighting.jpg?imwidth=300");
 		lamps = subcategoryDao.save(lamps);
 
 		ProductDto lamp = new ProductDto();
@@ -540,6 +592,7 @@ public class StorehouseApplication {
 		Subcategory knives = new Subcategory();
 		knives.setName("Knives");
 		knives.setCategory(tables);
+		knives.setPhoto("https://shop.static.ingka.ikea.com/category-images/Category_knives-and-chopping-boards.jpg?imwidth=300");
 		knives = subcategoryDao.save(knives);
 
 		ProductDto knivesSet = new ProductDto();
@@ -553,10 +606,12 @@ public class StorehouseApplication {
 		knivesSet.setPlace(placeDao.findById(place++).orElseThrow());
 		knivesSet.setSubcategory(knives);
 		knivesSet.setVendor(ikea);
+		productService.save(knivesSet);
 
 		Subcategory showers = new Subcategory();
 		showers.setName("Showers");
 		showers.setCategory(bath);
+		showers.setPhoto("https://shop.static.ingka.ikea.com/category-images/Category_showers.jpg?imwidth=300");
 		showers = subcategoryDao.save(showers);
 
 		ProductDto shower = new ProductDto();
@@ -575,6 +630,7 @@ public class StorehouseApplication {
 		Subcategory rugs = new Subcategory();
 		rugs.setName("Rugs");
 		rugs.setCategory(carpetsAndDoormats);
+		rugs.setPhoto("https://shop.static.ingka.ikea.com/revamp/rugs_10653.jpg?imwidth=500");
 		subcategoryDao.save(rugs);
 
 		ProductDto roundRug = new ProductDto();
@@ -593,6 +649,7 @@ public class StorehouseApplication {
 		Subcategory plants = new Subcategory();
 		plants.setName("Plants");
 		plants.setCategory(gardenFurniture);
+		plants.setPhoto("https://shop.static.ingka.ikea.com/category-images/Category_plants.jpg?imwidth=300");
 		plants = subcategoryDao.save(plants);
 
 		ProductDto aloeVera = new ProductDto();
@@ -611,6 +668,7 @@ public class StorehouseApplication {
 		Subcategory indoorPots = new Subcategory();
 		indoorPots.setName("Indoor pots");
 		indoorPots.setCategory(potHolders);
+		indoorPots.setPhoto("https://shop.static.ingka.ikea.com/revamp/growing-accessories_24887.jpg?imwidth=300");
 		indoorPots = subcategoryDao.save(indoorPots);
 
 		ProductDto pot = new ProductDto();
@@ -629,6 +687,7 @@ public class StorehouseApplication {
 		Subcategory fridges = new Subcategory();
 		fridges.setName("Fridges");
 		fridges.setCategory(electronics);
+		fridges.setPhoto("https://shop.static.ingka.ikea.com/category-images/Category_fridges-and-freezers.jpg?imwidth=300");
 		fridges = subcategoryDao.save(fridges);
 
 		ProductDto fridge = new ProductDto();
@@ -647,6 +706,7 @@ public class StorehouseApplication {
 		Subcategory bags = new Subcategory();
 		bags.setName("Bags");
 		bags.setCategory(travelandLeisureProducts);
+		bags.setPhoto("https://shop.static.ingka.ikea.com/revamp/bags_16248.jpg?imwidth=300");
 		bags = subcategoryDao.save(bags);
 
 		ProductDto backpack = new ProductDto();
@@ -665,6 +725,7 @@ public class StorehouseApplication {
 		Subcategory cats = new Subcategory();
 		cats.setName("Cats");
 		cats.setCategory(animals);
+		cats.setPhoto("https://shop.static.ingka.ikea.com/category-images/Category_cats.jpg?imwidth=500");
 		cats = subcategoryDao.save(cats);
 
 		ProductDto catHouse = new ProductDto();
@@ -689,7 +750,10 @@ public class StorehouseApplication {
 			System.out.println(p);
 		}
 
-
+		for (CategoryDto p:categoryService.getCategoriesPageble(1,4).toList()
+		) {
+			System.out.println(p);
+		}
 	}
 }
 

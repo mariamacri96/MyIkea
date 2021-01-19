@@ -2,6 +2,9 @@ package team2.storehouse.data.service.impl;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import team2.storehouse.data.dao.CategoryDao;
 import team2.storehouse.data.dao.SubcategoryDao;
@@ -61,6 +64,17 @@ public class CategoryServiceImpl implements CategoryService {
         return names;
     }
 
+    public Page<CategoryDto> getCategoriesPageble(int page, int size) {
 
+        PageRequest pageRequest = PageRequest.of(page, size);
+        Page<Category> pageResult = categoryDao.findAll(pageRequest);
+        List<CategoryDto> categories = pageResult
+                .stream()
+                .map(category -> modelMapper
+                        .map(category, CategoryDto.class))
+                .collect(Collectors.toList());
+
+        return new PageImpl<CategoryDto>(categories, pageRequest, pageResult.getTotalElements());
+    }
 
 }

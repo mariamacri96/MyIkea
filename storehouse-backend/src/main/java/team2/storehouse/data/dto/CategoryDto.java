@@ -12,6 +12,8 @@ public class CategoryDto implements Serializable {
 
     private String name;
 
+    private String photo;
+
     public Long getId() {
         return id;
     }
@@ -22,6 +24,22 @@ public class CategoryDto implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+    @Override
+    public String toString() {
+        return "CategoryDto{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 
     public void setName(String name) {
