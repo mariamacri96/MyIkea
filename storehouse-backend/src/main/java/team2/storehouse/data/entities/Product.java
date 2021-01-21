@@ -51,10 +51,6 @@ public class Product {
     @JoinColumn(name = "VENDOR", referencedColumnName = "ID")
     private Vendor vendor;
 
-    @ManyToOne
-    @JoinColumn(name="invoice_id",insertable = false, updatable = false)
-    private Invoice invoice;
-
 
     public Long getId() {
         return id;

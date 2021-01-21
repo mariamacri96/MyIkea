@@ -5,12 +5,14 @@ import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRAbstractBeanDataSource;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 import team2.storehouse.data.dao.ProductDao;
 import team2.storehouse.data.dto.CommandDto;
 import team2.storehouse.data.dto.ElementDto;
+import team2.storehouse.data.dto.ProductDto;
 import team2.storehouse.data.entities.Bill;
 import team2.storehouse.data.entities.Category;
 import team2.storehouse.data.entities.Invoice;
@@ -33,15 +35,15 @@ public class JasperController {
     InvoiceService invoiceService;
 
 
-    @PostMapping()
-    public void getDocument(HttpServletResponse response, @RequestBody CommandDto commandDto, @RequestParam String nameClient, @RequestParam String addressClient, @RequestParam String paymentMethodClient) throws IOException, JRException, SQLException {
+    @PostMapping
+    public void getDocument(HttpServletResponse response, @RequestBody Invoice invoiceInitial)throws IOException, JRException, SQLException {
         Connection con = null;
         try {
             //conn
             Class.forName("org.mariadb.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mariadb://localhost:3307/ikea", "root", "aSz1*x35");
 
-            Invoice invoice = invoiceService.fromOrderToInvoice(commandDto,nameClient,addressClient,paymentMethodClient);
+            Invoice invoice = invoiceService.fromOrderToInvoice(invoiceInitial);
 
             JasperReport jasperReport = JasperCompileManager.compileReport(JasperFillManager.class.getClassLoader().getResourceAsStream("Invoice.jrxml"));
             HashMap<String, Object> parameters = new HashMap<String, Object>();
@@ -63,6 +65,15 @@ public class JasperController {
                 con.close();
             }
         }
+    }
+
+
+
+    @GetMapping("/invoice")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public ResponseEntity<List< Invoice >> all() {
+        List<Invoice> invoices = invoiceService.all();
+        return ResponseEntity.ok(invoices);
     }
 
 

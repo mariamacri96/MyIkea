@@ -199,4 +199,15 @@ public class CommandServiceImpl implements CommandService {
         }
         return commandDto;
     }
+
+    @Override
+    public CommandDto findCommandById(Long id) {
+        Command command = commandDao.findById(id).orElseThrow(
+                () -> new RuntimeException("command " + id + " not found"));
+        CommandDto commandDto = modelMapper.map(command, CommandDto.class);
+        for(Ordered ordered : orderedDao.findAllByCommand(command)) {
+            commandDto.getElements().add(new ElementDto(ordered.getProduct(), ordered.getQuantity()));
+        }
+        return commandDto;
+    }
 }

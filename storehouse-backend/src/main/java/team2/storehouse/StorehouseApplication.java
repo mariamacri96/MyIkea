@@ -43,7 +43,6 @@ public class StorehouseApplication {
 
 
 		invoice.setUserName("Sara Rinaldis");
-		invoice.setUserVATNumber("09032310154");
 		invoice.setUserAddress("Via pietro nenni 20");
 
 
@@ -53,11 +52,9 @@ public class StorehouseApplication {
 		invoice.setStatusPayment(Invoice.Status.COMPLETED);
 		invoice.setMethodPayment(Invoice.Method.PAYPAL);
 		invoice.setBankName("Banca dal Fucino");
-		invoice.setDate(LocalDate.now());
 		invoice.setIban("IT19F031240321000000231647");
 
-		invoice.setTotal(3200.00);
-		invoice.setTaxes(128.00);
+
 		invoice.setTotalTaxable(3328);
 		invoice.setNetToPay(3328);
 		invoiceDao.save(invoice);

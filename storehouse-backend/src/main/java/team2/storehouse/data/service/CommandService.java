@@ -2,6 +2,7 @@ package team2.storehouse.data.service;
 
 import team2.storehouse.data.dto.BillDto;
 import team2.storehouse.data.dto.CommandDto;
+import team2.storehouse.data.dto.ProductDto;
 import team2.storehouse.data.dto.ShoppingCartDto;
 
 import java.util.List;
@@ -17,4 +18,6 @@ public interface CommandService {
     List<CommandDto> getCommands();
     void deleteCommand(Long commandId);
     CommandDto closeCommand(Long commandId);
+    CommandDto findCommandById(Long id);
+
 }
