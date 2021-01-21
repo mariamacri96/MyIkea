@@ -9,37 +9,10 @@ public class PlaceDto implements Serializable {
 
     private Shelf shelf;
 
-    private String name;
+    private String nome;
 
     private String note;
 
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String setNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
-    @Override
-    public String toString() {
-        return "PlaceDto{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", note='" + note + '\'' +
-                ", shelf=" + shelf +
-
-                '}';
-    }
 
     public Long getId() {
         return id;
@@ -55,5 +28,21 @@ public class PlaceDto implements Serializable {
 
     public void setShelf(Shelf shelf) {
         this.shelf = shelf;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 }

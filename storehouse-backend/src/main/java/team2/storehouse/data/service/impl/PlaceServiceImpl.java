@@ -33,7 +33,6 @@ public class PlaceServiceImpl implements PlaceService {
     @Override
     public List<PlaceDto> getPlaces() {
         List<Place> places = placeDao.findAll();
-        System.out.println(places.toString());
         return places.stream()
                 .map(place -> modelMapper
                         .map(place, PlaceDto.class))

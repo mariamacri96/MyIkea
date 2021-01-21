@@ -62,12 +62,12 @@ public class StorehouseApplication {
 
 		for(int i=0; i<4; i++) {
 			Shelf shelf = new Shelf();
-			shelf.setName("S-"+i);
+			shelf.setNome("S-"+i);
 			shelfDao.save(shelf);
 			for(int j=0; j<10; j++) {
 				Place place = new Place();
 				place.setShelf(shelf);
-				place.setName("P-"+i+"-"+j);
+				place.setNome("P-"+i+"-"+j);
 				placeDao.save(place);
 			}
 		}

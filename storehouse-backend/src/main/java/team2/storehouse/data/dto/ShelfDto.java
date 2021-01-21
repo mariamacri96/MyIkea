@@ -5,27 +5,9 @@ import java.io.Serializable;
 public class ShelfDto implements Serializable {
     private Long id;
 
-    private String name;
+    private String nome;
 
     private String note;
-
-    public String setName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String setNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
-
 
     public Long getId() {
         return id;
@@ -35,12 +17,19 @@ public class ShelfDto implements Serializable {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return "ShelfDto{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", note='" + note + '\'' +
-                '}';
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 }

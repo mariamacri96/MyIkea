@@ -12,6 +12,8 @@ import team2.storehouse.data.dto.ProductDto;
 import team2.storehouse.data.service.PlaceService;
 import team2.storehouse.data.service.ShelfService;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("storehouse")
 public class ShelfController {
@@ -24,5 +26,9 @@ public class ShelfController {
         return ResponseEntity.ok(shelfService.addShelf(shelfDto));
     }
 
-
+    @GetMapping("/shelf/getAll")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public ResponseEntity<List<ShelfDto>> getAll(){
+        return ResponseEntity.ok(shelfService.getAll());
+    }
 }
