@@ -29,7 +29,7 @@ public class ShelfServiceImpl implements ShelfService {
 
     @Override
     public ShelfDto addShelf(ShelfDto shelf) {
-        Shelf shelf1 = new Shelf();
+        Shelf shelf1 = modelMapper.map(shelf,Shelf.class);
         return modelMapper.map(shelfDao.save(shelf1), ShelfDto.class);
 
     }

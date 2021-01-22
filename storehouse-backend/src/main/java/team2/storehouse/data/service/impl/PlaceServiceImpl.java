@@ -46,8 +46,8 @@ public class PlaceServiceImpl implements PlaceService {
 
     @Override
     public PlaceDto addPlace(PlaceDto place) {
-        Place place1 = new Place();
-        place1.setShelf(place.getShelf());
+        Place place1 = modelMapper.map(place,Place.class);
+
         return modelMapper.map(placeDao.save(place1), PlaceDto.class);
 
     }
